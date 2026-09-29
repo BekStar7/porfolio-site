@@ -3,6 +3,14 @@
 Ordering follows `design.md` — Migration Plan: the suite lands first against current code, so
 each of the four fixes in group 6 is demonstrated by a test that was red beforehand.
 
+## Verification checkpoint (2026-09-29)
+
+- The existing `structure.spec.ts` and `names.spec.ts` cover parts of group 4, but their browser verification remains pending.
+- The focused Playwright run built the site, then failed to start the preview. A direct preview launch confirmed `listen EPERM: operation not permitted 0.0.0.0:3100` in this sandbox; no browser assertions ran.
+- `corepack pnpm typecheck` exited zero with `PNPM_CONFIG_VERIFY_DEPS_BEFORE_RUN=false`, but reported `ERR_PACKAGE_PATH_NOT_EXPORTED` for `vue-router/volar/sfc-route-blocks`. The same environment setting allows checking the existing dependencies without triggering reinstallation.
+- `corepack pnpm check:contrast` passed with that environment setting. The failed run left the working tree clean; Playwright reports and results are ignored.
+- Keep group 4 and integration tasks unchecked until verification can run in an environment permitting a local preview server. Task 7.4 must be repeated after the remaining tests and source fixes are in place.
+
 ## 1. Test tooling setup
 
 - [x] 1.1 Add `@playwright/test` and `@axe-core/playwright` as devDependencies and verify `pnpm install` succeeds and `pnpm exec playwright --version` prints a version
