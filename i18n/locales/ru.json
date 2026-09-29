@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "title": "Бексултан Карабаев — Senior Frontend Engineer",
+    "description": "Senior Frontend Engineer с 9 годами опыта: Vue 3 / Nuxt, React / TypeScript, высоконагруженные продукты, Feature-Sliced Design, дизайн-системы. Алматы, удалённо.",
+    "ogImageAlt": "Бексултан Карабаев — Senior Frontend Engineer, Vue 3 / Nuxt и React / TypeScript"
+  },
+  "a11y": {
+    "skipToContent": "Перейти к основному содержимому",
+    "opensInNewTab": "откроется в новой вкладке",
+    "mainNav": "Основная навигация",
+    "socialLinks": "Профили и контакты",
+    "backToTop": "Наверх, к началу страницы",
+    "sectionsNav": "Разделы страницы"
+  },
+  "nav": {
+    "about": "Обо мне",
+    "experience": "Опыт",
+    "projects": "Проекты",
+    "skills": "Навыки",
+    "contact": "Контакты",
+    "openMenu": "Открыть меню",
+    "closeMenu": "Закрыть меню",
+    "top": "Наверх"
+  },
+  "theme": {
+    "toLight": "Включить светлую тему",
+    "toDark": "Включить тёмную тему"
+  },
+  "locale": {
+    "label": "Язык сайта",
+    "current": "Текущий язык"
+  },
+  "hero": {
+    "greeting": "Привет, меня зовут",
+    "ctaContact": "Связаться",
+    "ctaProjects": "Посмотреть проекты",
+    "statsLabel": "Ключевые цифры"
+  },
+  "sections": {
+    "about": "Обо мне",
+    "experience": "Опыт работы",
+    "projects": "Проекты",
+    "skills": "Навыки",
+    "education": "Образование и языки",
+    "contact": "Контакты"
+  },
+  "about": {
+    "pressTitle": "Обо мне писали"
+  },
+  "experience": {
+    "present": "по настоящее время",
+    "presentShort": "сейчас",
+    "duration": "{years} г. {months} мес.",
+    "durationYears": "{years} г.",
+    "durationMonths": "{months} мес.",
+    "achievements": "Ключевые результаты",
+    "earlyTitle": "До фронтенда",
+    "earlyNote": "Системное администрирование и поддержка — с них начинался путь в IT"
+  },
+  "projects": {
+    "impact": "Результат",
+    "stack": "Стек",
+    "noLinks": "Внутренний проект компании — исходный код закрыт"
+  },
+  "education": {
+    "degrees": "Образование",
+    "languages": "Языки",
+    "levelOf": "Уровень владения: {level}"
+  },
+  "contact": {
+    "lead": "Открыт к предложениям и просто к хорошему разговору о фронтенде. Пишите на почту или в LinkedIn — отвечаю в течение дня.",
+    "emailLabel": "Написать на почту",
+    "copy": "Скопировать адрес",
+    "copied": "Адрес скопирован"
+  },
+  "footer": {
+    "builtWith": "Сделано на Nuxt {version} · Vue 3 · статическая генерация",
+    "rights": "© {year} {name}"
+  }
+}

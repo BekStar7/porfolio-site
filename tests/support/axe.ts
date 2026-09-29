@@ -1,0 +1,133 @@
+import AxeBuilder from '@axe-core/playwright'
+import type { Page, TestInfo } from '@playwright/test'
+import { expect } from '@playwright/test'
+
+/**
+ * Теги axe, покрывающие WCAG 2.2 уровней A и AA. 2.2 добавила критерии
+ * поверх 2.1, поэтому нужны все предыдущие наборы, а не только последний.
+ */
+export const WCAG_22_AA_TAGS = [
+  'wcag2a',
+  'wcag2aa',
+  'wcag21a',
+  'wcag21aa',
+  'wcag22aa',
+] as const
+
+export interface AxeNode {
+  target: string[]
+  html: string
+  failureSummary?: string
+}
+
+export interface AxeResult {
+  id: string
+  impact?: string | null
+  help: string
+  helpUrl: string
+  nodes: AxeNode[]
+}
+
+/**
+ * Прогоняет axe по всему документу. Ничего не исключаем: ни элементов,
+ * ни правил — иначе проверка перестала бы отвечать на вопрос «есть ли
+ * нарушения на странице».
+ */
+export async function analyze(page: Page) {
+  return new AxeBuilder({ page }).withTags([...WCAG_22_AA_TAGS]).analyze()
+}
+
+/**
+ * Разворачивает нарушения в сообщение, по которому можно починить проблему,
+ * не перезапуская сканирование руками: правило, его серьёзность, ссылка на
+ * описание и селектор каждого виновного элемента.
+ */
+export function formatViolations(violations: AxeResult[], label: string): string {
+  const lines = [`${violations.length} accessibility violation(s) on ${label}:`]
+
+  for (const violation of violations) {
+    lines.push('')
+    lines.push(`  [${violation.impact ?? 'unknown'}] ${violation.id} — ${violation.help}`)
+    lines.push(`  ${violation.helpUrl}`)
+    for (const node of violation.nodes) {
+      lines.push(`    selector: ${node.target.join(' ')}`)
+      lines.push(`    html:     ${node.html.slice(0, 200)}`)
+      if (node.failureSummary) {
+        lines.push(`    why:      ${node.failureSummary.replace(/\n/g, ' ')}`)
+      }
+    }
+  }
+
+  return lines.join('\n')
+}
+
+/**
+ * Сканирует страницу и падает при любом нарушении. `label` описывает
+ * поверхность (локаль · тема · ширина) и попадает и в имя теста, и в текст
+ * ошибки — без него непонятно, какая из комбинаций сломалась.
+ *
+ * Результаты `incomplete` прикладываются к отчёту, но не валят прогон:
+ * axe не умеет считать контраст поверх полупрозрачных слоёв, и именно для
+ * них существует `pnpm check:contrast`. Рост этого списка проверяется
+ * отдельно — см. `tests/a11y/contrast-baseline.spec.ts`.
+ */
+export async function expectNoViolations(
+  page: Page,
+  label: string,
+  testInfo: TestInfo,
+): Promise<void> {
+  const results = await analyze(page)
+
+  if (results.incomplete.length) {
+    await testInfo.attach(`axe-incomplete-${label}.json`, {
+      body: JSON.stringify(results.incomplete, null, 2),
+      contentType: 'application/json',
+    })
+  }
+
+  expect(
+    results.violations,
+    formatViolations(results.violations as AxeResult[], label),
+  ).toEqual([])
+}
+
+/**
+ * Компоненты, по которым axe не смог посчитать контраст.
+ *
+ * Селекторы самого axe в качестве ключа непригодны: в них попадают хеши
+ * scoped-стилей (`data-v-…`), позиции `:nth-child` и значения контента —
+ * даты, адрес почты. Любая правка текста или пересборка стилей ломала бы
+ * такую базу. Поэтому каждый узел сводится к ближайшему предку с
+ * BEM-классом: новая вакансия переиспользует `.role__title`, а не добавляет
+ * ещё один селектор.
+ */
+export async function incompleteContrastComponents(page: Page): Promise<string[]> {
+  const results = await analyze(page)
+  const selectors = results.incomplete
+    .filter(result => result.id === 'color-contrast')
+    .flatMap(result => result.nodes.map(node => node.target[0]))
+    .filter((selector): selector is string => typeof selector === 'string')
+
+  const components = await page.evaluate((list: string[]) => {
+    const keyFor = (start: Element): string => {
+      for (let el: Element | null = start; el; el = el.parentElement) {
+        const classes = [...el.classList]
+        // Класс-элемент BEM (`block__element`) описывает роль узла точнее,
+        // чем класс блока, поэтому он в приоритете.
+        const bem = classes.find(name => name.includes('__'))
+        if (bem) return `.${bem}`
+        if (classes.length) return `.${classes[0]}`
+      }
+      return start.id ? `#${start.id}` : start.tagName.toLowerCase()
+    }
+
+    const keys = new Set<string>()
+    for (const selector of list) {
+      const el = document.querySelector(selector)
+      if (el) keys.add(keyFor(el))
+    }
+    return [...keys]
+  }, selectors)
+
+  return components.sort()
+}

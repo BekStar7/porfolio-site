@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "title": "Bexultan Karabayev — Senior Frontend Engineer",
+    "description": "Senior Frontend Engineer with 9 years of experience: Vue 3 / Nuxt, React / TypeScript, high-load products, Feature-Sliced Design, design systems. Almaty, open to remote.",
+    "ogImageAlt": "Bexultan Karabayev — Senior Frontend Engineer, Vue 3 / Nuxt and React / TypeScript"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "opensInNewTab": "opens in a new tab",
+    "mainNav": "Main navigation",
+    "socialLinks": "Profiles and contacts",
+    "backToTop": "Back to top of page",
+    "sectionsNav": "Page sections"
+  },
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "top": "Top"
+  },
+  "theme": {
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme"
+  },
+  "locale": {
+    "label": "Site language",
+    "current": "Current language"
+  },
+  "hero": {
+    "greeting": "Hi, my name is",
+    "ctaContact": "Get in touch",
+    "ctaProjects": "See projects",
+    "statsLabel": "Key numbers"
+  },
+  "sections": {
+    "about": "About me",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "education": "Education & languages",
+    "contact": "Contact"
+  },
+  "about": {
+    "pressTitle": "In the press"
+  },
+  "experience": {
+    "present": "Present",
+    "presentShort": "now",
+    "duration": "{years} yr {months} mo",
+    "durationYears": "{years} yr",
+    "durationMonths": "{months} mo",
+    "achievements": "Key results",
+    "earlyTitle": "Before frontend",
+    "earlyNote": "System administration and support — where the path into IT started"
+  },
+  "projects": {
+    "impact": "Impact",
+    "stack": "Stack",
+    "noLinks": "Internal company project — source code is private"
+  },
+  "education": {
+    "degrees": "Education",
+    "languages": "Languages",
+    "levelOf": "Proficiency: {level}"
+  },
+  "contact": {
+    "lead": "Open to new opportunities — and to a good conversation about frontend. Email me or reach out on LinkedIn; I usually reply the same day.",
+    "emailLabel": "Send an email",
+    "copy": "Copy address",
+    "copied": "Address copied"
+  },
+  "footer": {
+    "builtWith": "Built with Nuxt {version} · Vue 3 · statically generated",
+    "rights": "© {year} {name}"
+  }
+}

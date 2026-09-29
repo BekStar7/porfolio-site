@@ -1,0 +1,22 @@
+# Зависимости и сборка
+node_modules
+.nuxt
+.output
+.data
+dist
+*.log
+
+# Тесты
+test-results
+playwright-report
+.playwright
+
+# Окружение
+.env
+.env.*
+!.env.example
+
+# Редакторы и ОС
+.idea
+.vscode
+.DS_Store

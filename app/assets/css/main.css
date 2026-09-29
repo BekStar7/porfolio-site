@@ -1,0 +1,443 @@
+/* =========================================================================
+   Дизайн-токены и базовые стили
+   Все пары «текст / фон» проверены на контраст WCAG 2.2 AA (см. README).
+   ========================================================================= */
+
+:root {
+  /* ---- Типографика ---- */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Плавная шкала: min на 360px, max на 1280px */
+  --step--1: clamp(0.833rem, 0.80rem + 0.16vw, 0.917rem);
+  --step-0:  clamp(1rem, 0.96rem + 0.20vw, 1.125rem);
+  --step-1:  clamp(1.20rem, 1.13rem + 0.34vw, 1.42rem);
+  --step-2:  clamp(1.44rem, 1.32rem + 0.58vw, 1.80rem);
+  --step-3:  clamp(1.73rem, 1.53rem + 0.95vw, 2.27rem);
+  --step-4:  clamp(2.07rem, 1.77rem + 1.50vw, 2.87rem);
+  --step-5:  clamp(2.49rem, 2.02rem + 2.31vw, 3.62rem);
+
+  /* ---- Ритм ---- */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-s: 0.75rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: clamp(3rem, 2rem + 5vw, 5rem);
+  --space-3xl: clamp(4.5rem, 3rem + 7vw, 8rem);
+
+  --container: 68rem;
+  --measure: 68ch;
+
+  --radius-s: 8px;
+  --radius-m: 14px;
+  --radius-l: 22px;
+  --radius-pill: 999px;
+
+  --header-height: 4rem;
+
+  --transition: 180ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ---- Тёмная тема (по умолчанию) ---- */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0b0f14;
+  --bg-veil: rgb(11 15 20 / 0.72);
+  --surface: #131a24;
+  --surface-2: #18212d;
+
+  --border: #26313f;
+  --border-strong: #3a4657;
+  /* Границы интерактивных элементов: контраст ≥ 3:1 к фону (WCAG 1.4.11) */
+  --border-interactive: #6e7d89;
+
+  --text: #e9eff7;
+  --text-muted: #a8b8cb;
+  --text-subtle: #8a9cb1;
+
+  --accent: #5cc8ff;
+  --accent-hover: #8ad8ff;
+  --accent-contrast: #05131c;
+  --accent-veil: rgb(92 200 255 / 0.12);
+
+  --ring: #5cc8ff;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -12px rgb(0 0 0 / 0.65);
+  --glow: radial-gradient(60% 55% at 50% 0%, rgb(92 200 255 / 0.14), transparent 70%);
+}
+
+/* ---- Светлая тема ---- */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #fbfcfd;
+  --bg-veil: rgb(251 252 253 / 0.78);
+  --surface: #ffffff;
+  --surface-2: #f3f6f9;
+
+  --border: #dfe6ee;
+  --border-strong: #c3cfdb;
+  --border-interactive: #6f808f;
+
+  --text: #0e1621;
+  --text-muted: #4a5b6e;
+  --text-subtle: #586979;
+
+  --accent: #0a6e9e;
+  --accent-hover: #075780;
+  --accent-contrast: #ffffff;
+  --accent-veil: rgb(10 110 158 / 0.09);
+
+  --ring: #0a6e9e;
+  --shadow: 0 1px 2px rgb(14 22 33 / 0.06), 0 12px 30px -14px rgb(14 22 33 / 0.22);
+  --glow: radial-gradient(60% 55% at 50% 0%, rgb(10 110 158 / 0.08), transparent 70%);
+}
+
+/* Если пользователь не выбирал тему вручную — идём за системной */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --bg: #fbfcfd;
+    --bg-veil: rgb(251 252 253 / 0.78);
+    --surface: #ffffff;
+    --surface-2: #f3f6f9;
+    --border: #dfe6ee;
+    --border-strong: #c3cfdb;
+    --border-interactive: #6f808f;
+    --text: #0e1621;
+    --text-muted: #4a5b6e;
+    --text-subtle: #586979;
+    --accent: #0a6e9e;
+    --accent-hover: #075780;
+    --accent-contrast: #ffffff;
+    --accent-veil: rgb(10 110 158 / 0.09);
+    --ring: #0a6e9e;
+    --shadow: 0 1px 2px rgb(14 22 33 / 0.06), 0 12px 30px -14px rgb(14 22 33 / 0.22);
+    --glow: radial-gradient(60% 55% at 50% 0%, rgb(10 110 158 / 0.08), transparent 70%);
+  }
+}
+
+/* =========================================================================
+   Сброс
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-synthesis-weight: none;
+}
+
+img,
+svg,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+/* =========================================================================
+   Типографика
+   ========================================================================= */
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--step-5); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-1); }
+h4 { font-size: var(--step-0); }
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+strong,
+b {
+  font-weight: 650;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+/* =========================================================================
+   Фокус
+   Клавиатурный фокус виден всегда и никогда не убирается без замены.
+   ========================================================================= */
+
+:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-s);
+}
+
+/* Safari/старые браузеры без :focus-visible — оставляем системный фокус */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* =========================================================================
+   Утилиты
+   ========================================================================= */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 0.4rem + 2.6vw, 2rem);
+}
+
+/* Видно только скринридеру */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+.prose > * + * {
+  margin-top: 1em;
+}
+
+.text-muted { color: var(--text-muted); }
+.text-subtle { color: var(--text-subtle); }
+
+/* =========================================================================
+   Секции
+   ========================================================================= */
+
+.section {
+  padding-block: var(--space-3xl);
+  /* Якорь не уезжает под липкую шапку */
+  scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
+/*
+ * Секции получают tabindex="-1", чтобы переход по якорю переносил фокус,
+ * а не только прокручивал страницу. Но рамку вокруг целого раздела не рисуем:
+ * это контейнер, а не управляющий элемент, и ориентир здесь — сама прокрутка.
+ * У ссылок и кнопок внутри фокус остаётся видимым.
+ */
+.section:focus {
+  outline: none;
+}
+
+.section + .section {
+  padding-block-start: 0;
+}
+
+.section__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-block-end: var(--space-xl);
+}
+
+.section__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6ch;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section__eyebrow::before {
+  content: '';
+  width: 1.75rem;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+/* =========================================================================
+   Примитивы
+   ========================================================================= */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  /* Цель нажатия не меньше 44×44 CSS-пикселей */
+  min-height: 2.875rem;
+  padding: 0.6rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--step-0);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  transition: background-color var(--transition), border-color var(--transition),
+    color var(--transition), transform var(--transition);
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.btn--primary:hover {
+  background: var(--accent-hover);
+  color: var(--accent-contrast);
+}
+
+.btn--ghost {
+  border-color: var(--border-interactive);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-veil);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  list-style: none;
+  padding: 0;
+}
+
+/* =========================================================================
+   Уважение к настройкам пользователя
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Режим высокой контрастности Windows: границы не должны исчезать */
+@media (forced-colors: active) {
+  .card,
+  .tag,
+  .btn {
+    border: 1px solid CanvasText;
+  }
+
+  :focus-visible {
+    outline: 3px solid Highlight;
+  }
+}
+
+/* =========================================================================
+   Показ элементов по активной теме — только на CSS.
+   Так разметка сервера и клиента совпадает: состояние темы не участвует
+   в рендере, поэтому при гидратации нечему расходиться.
+   ========================================================================= */
+
+.theme-light-only { display: none; }
+.theme-dark-only { display: inline-flex; }
+
+:root[data-theme='light'] .theme-light-only { display: inline-flex; }
+:root[data-theme='light'] .theme-dark-only { display: none; }
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .theme-light-only { display: inline-flex; }
+  :root:not([data-theme]) .theme-dark-only { display: none; }
+}
