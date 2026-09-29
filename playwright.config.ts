@@ -50,7 +50,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: `pnpm build && pnpm preview -- --port ${PORT}`,
+    command: `pnpm build && pnpm preview --port ${PORT}`,
     url: BASE_URL,
     // Локально переиспользуем preview, оставшийся от прошлого прогона на этом
     // же порту — иначе каждый запуск платит полной сборкой. В CI собираем
