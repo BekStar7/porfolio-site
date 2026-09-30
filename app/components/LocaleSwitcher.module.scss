@@ -1,0 +1,17 @@
+@layer components {
+  // Цвет и его состояния в одном слое: утилита `text-muted` перебила бы модуль
+  // и наведение с текущим языком перестали бы срабатывать.
+  .link {
+    color: var(--text-muted);
+
+    &:hover {
+      color: var(--text);
+      background: var(--surface-2);
+    }
+
+    &[aria-current='true'] {
+      background: var(--accent);
+      color: var(--accent-contrast);
+    }
+  }
+}

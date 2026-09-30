@@ -1,0 +1,12 @@
+@layer components {
+  // Прозрачность и наведение лежат в одном слое: правило утилиты перебило бы
+  // модуль, и иконка не становилась бы ярче.
+  .icon {
+    opacity: 0.7;
+    transition: opacity var(--transition);
+  }
+
+  .link:hover .icon {
+    opacity: 1;
+  }
+}

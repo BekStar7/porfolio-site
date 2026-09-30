@@ -53,8 +53,7 @@ const isFilled = computed(() => FILLED.has(name))
 
 <template>
   <svg
-    class="icon"
-    :class="{ 'icon--filled': isFilled }"
+    class="flex-none"
     :width="size"
     :height="size"
     viewBox="0 0 24 24"
@@ -68,9 +67,3 @@ const isFilled = computed(() => FILLED.has(name))
     v-html="ICONS[name]"
   />
 </template>
-
-<style scoped>
-.icon {
-  flex: none;
-}
-</style>

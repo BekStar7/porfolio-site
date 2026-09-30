@@ -1,0 +1,11 @@
+@layer components {
+  // Прячем за краем экрана, но оставляем в потоке фокуса
+  .skip {
+    transform: translateY(calc(-100% - var(--space-m) - 4px));
+    transition: transform var(--transition);
+
+    &:focus-visible {
+      transform: translateY(0);
+    }
+  }
+}

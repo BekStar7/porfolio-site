@@ -15,32 +15,17 @@ const isExternal = computed(() => /^https?:\/\//i.test(href))
 
 <template>
   <a
-    class="app-link"
+    :class="[$style.link, 'inline-flex items-center gap-[0.35em]']"
     :href="href"
     :target="isExternal ? '_blank' : undefined"
     :rel="isExternal ? 'noopener noreferrer' : undefined"
   >
     <slot />
     <template v-if="isExternal">
-      <AppIcon v-if="showIcon" name="external" :size="14" class="app-link__icon" />
+      <AppIcon v-if="showIcon" name="external" :size="14" :class="$style.icon" />
       <span class="sr-only"> ({{ t('a11y.opensInNewTab') }})</span>
     </template>
   </a>
 </template>
 
-<style scoped>
-.app-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35em;
-}
-
-.app-link__icon {
-  opacity: 0.7;
-  transition: opacity var(--transition);
-}
-
-.app-link:hover .app-link__icon {
-  opacity: 1;
-}
-</style>
+<style module lang="scss" src="./AppLink.module.scss"></style>

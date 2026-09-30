@@ -53,6 +53,17 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
       ],
+      style: [
+        {
+          // Порядок каскадных слоёв задаётся первым, до любого другого CSS. Слои
+          // упорядочены по первому упоминанию в документе, а Nuxt вставляет стили
+          // компонентов в HTML раньше подключаемого стиля Tailwind. Без этой строки
+          // первый же `@layer components` из модуля встал бы ниже `base`, и правила
+          // модулей проигрывали бы базовым. Список — тот же, что объявляет Tailwind.
+          innerHTML: '@layer properties, theme, base, components, utilities;',
+          tagPriority: 'critical',
+        },
+      ],
       script: [
         {
           // Тема применяется до первой отрисовки, иначе при тёмной теме
