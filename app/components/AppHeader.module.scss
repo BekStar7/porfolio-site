@@ -1,0 +1,84 @@
+@layer components {
+  // Ниже 62rem имя убирается визуально, но остаётся в дереве доступности:
+  // display: none лишил бы ссылку-логотип доступного имени, и она стала бы для
+  // скринридера безымянной.
+  //
+  // Порог — `max-width: 62rem`, то есть включительно 992px. Вариант `max-*` у
+  // Tailwind строгий (`width < 62rem`) и на этой ширине отработал бы иначе.
+  .name {
+    @media (max-width: 62rem) {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+
+  // Закрытое меню скрыто через display: none — значит, его нет ни в порядке
+  // табуляции, ни в дереве доступности. Открытым его делает `data-open`,
+  // который ставится от того же состояния, что и `aria-expanded` у кнопки.
+  .nav {
+    @media (max-width: 62rem) {
+      display: none;
+
+      &[data-open] {
+        display: block;
+        position: absolute;
+        inset-inline: 0;
+        top: 100%;
+        padding: var(--space-xs);
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+    }
+  }
+
+  .list {
+    align-items: center;
+    gap: var(--space-2xs);
+
+    @media (max-width: 62rem) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 2px;
+    }
+  }
+
+  // Размеры, форма и кегль меняются на узком экране, поэтому лежат здесь вместе
+  // с состояниями: утилита перебила бы правило модуля.
+  .link {
+    min-height: 2.5rem;
+    padding-inline: 0.75rem;
+    border-radius: var(--radius-pill);
+    color: var(--text-muted);
+    font-size: var(--step--1);
+
+    &:hover {
+      color: var(--text);
+      background: var(--surface-2);
+    }
+
+    &[aria-current='location'] {
+      color: var(--accent);
+      background: var(--accent-veil);
+    }
+
+    @media (max-width: 62rem) {
+      min-height: 3rem;
+      padding-inline: var(--space-m);
+      border-radius: var(--radius-s);
+      font-size: var(--step-0);
+    }
+  }
+
+  .burger {
+    display: none;
+
+    @media (max-width: 62rem) {
+      display: inline-flex;
+    }
+  }
+}

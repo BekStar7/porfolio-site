@@ -10,53 +10,22 @@ const { buildYear } = useRuntimeConfig().public
 </script>
 
 <template>
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p class="footer__rights">
+  <footer class="border-t border-border py-xl">
+    <div class="container flex flex-wrap items-center justify-between gap-x-l gap-y-s text-sm text-subtle">
+      <p>
         {{ t('footer.rights', { year: buildYear, name: tx(profile.name) }) }}
       </p>
 
-      <p class="footer__built">{{ t('footer.builtWith', { version: '4' }) }}</p>
+      <p>{{ t('footer.builtWith', { version: '4' }) }}</p>
 
-      <a class="footer__top" href="#top" :aria-label="t('a11y.backToTop')">
+      <a
+        class="inline-flex min-h-11 items-center gap-2 rounded-pill border border-border-interactive px-m text-muted no-underline transition-colors hover:border-accent hover:text-accent"
+        href="#top"
+        :aria-label="t('a11y.backToTop')"
+      >
         <AppIcon name="arrowUp" :size="16" />
         {{ t('nav.top') }}
       </a>
     </div>
   </footer>
 </template>
-
-<style scoped>
-.footer {
-  border-block-start: 1px solid var(--border);
-  padding-block: var(--space-xl);
-}
-
-.footer__inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-s) var(--space-l);
-  color: var(--text-subtle);
-  font-size: var(--step--1);
-}
-
-.footer__top {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 2.75rem;
-  padding-inline: var(--space-m);
-  border: 1px solid var(--border-interactive);
-  border-radius: var(--radius-pill);
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color var(--transition), border-color var(--transition);
-}
-
-.footer__top:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-</style>
