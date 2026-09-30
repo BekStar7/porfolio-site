@@ -1,0 +1,12 @@
+@layer components {
+  // Отступ растёт вместе с экраном, а подложка — полупрозрачный градиент поверх
+  // цвета карточки (`card` задаёт только `background-color`)
+  .contact {
+    padding: clamp(1.5rem, 1rem + 3vw, 3rem);
+    background-image: radial-gradient(90% 120% at 100% 0%, var(--accent-veil), transparent 60%);
+  }
+
+  .socials {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  }
+}
