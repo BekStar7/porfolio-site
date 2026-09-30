@@ -1,12 +1,19 @@
 /* =========================================================================
-   Сброс: то, чего нет в Preflight или что там устроено иначе
-   Подключается в слой base сразу после Tailwind, поэтому переопределяет
-   Preflight, но не может перебить ни стили компонентов, ни утилиты.
-
-   Preflight уже даёт: border-box, нулевые отступы, блочные медиа, наследование
-   шрифта, цвета и межбуквенного интервала в полях и кнопках. Дублировать это
-   не нужно.
+   Сброс
+   Подключается в слой base, поэтому не может перебить ни стили компонентов, ни
+   утилиты. Preflight от Tailwind не используется (см. main.css): здесь ровно то,
+   на что рассчитаны компоненты.
    ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -27,26 +34,24 @@ body {
   font-synthesis-weight: none;
 }
 
-/* Preflight убирает маркеры у любого списка, а раньше их терял только список с
-   классом. `revert-layer` возвращает браузерные маркеры и отступ, так что
-   обычный список в тексте выглядит как прежде. */
-ul:not([class]),
-ol:not([class]) {
-  list-style: revert-layer;
-  padding-inline-start: revert-layer;
-}
-
-/* Preflight обнуляет `text-decoration` у ссылок, а без него они не подчёркнуты */
-a {
-  text-decoration: underline;
-}
-
-/* Preflight ограничивает по ширине только `img` и `video`; раньше — и `svg` с `picture` */
+img,
 svg,
 picture {
+  display: block;
   max-width: 100%;
 }
 
-picture {
-  display: block;
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Маркеры и отступ теряет только список с классом; обычный список в тексте — как в браузере */
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
 }

@@ -3,8 +3,12 @@
    Все пары «текст / фон» проверены на контраст WCAG 2.2 AA (см. README).
    ========================================================================= */
 
-@import "tailwindcss" source(none);
+/* Tailwind подключён по частям, без Preflight: он сбрасывает больше, чем нужно сайту, и
+   весил больше килобайта gzip. Сброс проекта — в reset.css. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
 @import "./reset.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
 
 /* Классы ищутся только в шаблонах. Без этого Tailwind читал бы и `.scss`-модули, и
    данные, и текст README: слово `flex` в `display: flex` стало бы утилитой `.flex`. */

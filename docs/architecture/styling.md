@@ -99,7 +99,7 @@
 
 Порядок слоёв: `properties, theme, base, components, utilities`.
 
-- `base` — Preflight, [`reset.css`](../../app/assets/css/reset.css), типографика, ссылки, фокус;
+- `base` — [`reset.css`](../../app/assets/css/reset.css) (сброс проекта; Preflight от Tailwind не подключён), типографика, ссылки, фокус;
 - `components` — все модули;
 - `utilities` — утилиты Tailwind и примитивы проекта.
 
