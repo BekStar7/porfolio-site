@@ -13,35 +13,46 @@ const { tx } = useLocalized()
         <h2 id="about-title">{{ t('sections.about') }}</h2>
       </div>
 
-      <div class="about">
-        <div class="about__text prose">
-          <p v-for="(paragraph, index) in tx(profile.about)" :key="index">
+      <div :class="[$style.about, 'grid gap-xl md:items-start md:gap-2xl']">
+        <div class="prose text-base text-muted">
+          <p
+            v-for="(paragraph, index) in tx(profile.about)"
+            :key="index"
+            :class="{ 'text-lg leading-[1.55] text-fg': index === 0 }"
+          >
             {{ paragraph }}
           </p>
         </div>
 
-        <div class="about__aside">
-          <figure class="quote card">
-            <AppIcon name="quote" :size="22" class="quote__mark" />
-            <blockquote class="quote__text" :cite="profile.quote.href">
+        <div class="grid gap-l">
+          <figure class="card relative grid gap-s p-l">
+            <AppIcon name="quote" :size="22" class="text-accent opacity-85" />
+            <blockquote
+              class="text-lg leading-[1.45] font-emphasis tracking-[-0.01em] text-pretty"
+              :cite="profile.quote.href"
+            >
               {{ tx(profile.quote.text) }}
             </blockquote>
-            <figcaption class="quote__source">
+            <figcaption class="text-sm text-subtle">
               {{ tx(profile.quote.context) }}
             </figcaption>
           </figure>
 
-          <div class="press">
-            <h3 class="press__title">{{ t('about.pressTitle') }}</h3>
-            <article v-for="item in profile.press" :key="item.id" class="press__item">
-              <h4 class="press__heading">
+          <div>
+            <h3 class="text-sm font-semibold tracking-[0.08em] text-subtle uppercase">{{ t('about.pressTitle') }}</h3>
+            <article
+              v-for="item in profile.press"
+              :key="item.id"
+              class="mt-s border-s-2 border-border-strong ps-m"
+            >
+              <h4 class="text-base leading-[1.35] font-semibold">
                 <AppLink :href="item.href">{{ tx(item.title) }}</AppLink>
               </h4>
-              <p class="press__meta">
+              <p class="mt-1 text-sm text-subtle">
                 {{ item.outlet }} ·
                 <time :datetime="item.date">{{ item.date.slice(0, 4) }}</time>
               </p>
-              <p v-if="item.quote" class="press__quote">«{{ tx(item.quote) }}»</p>
+              <p v-if="item.quote" class="mt-xs text-sm leading-[1.5] text-muted">«{{ tx(item.quote) }}»</p>
             </article>
           </div>
         </div>
@@ -50,93 +61,4 @@ const { tx } = useLocalized()
   </section>
 </template>
 
-<style scoped>
-.about {
-  display: grid;
-  gap: var(--space-xl);
-}
-
-@media (min-width: 56rem) {
-  .about {
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-    gap: var(--space-2xl);
-    align-items: start;
-  }
-}
-
-.about__text {
-  font-size: var(--step-0);
-  color: var(--text-muted);
-}
-
-.about__text > p:first-child {
-  color: var(--text);
-  font-size: var(--step-1);
-  line-height: 1.55;
-}
-
-.about__aside {
-  display: grid;
-  gap: var(--space-l);
-}
-
-.quote {
-  position: relative;
-  margin: 0;
-  padding: var(--space-l);
-  display: grid;
-  gap: var(--space-s);
-}
-
-.quote__mark {
-  color: var(--accent);
-  opacity: 0.85;
-}
-
-.quote__text {
-  margin: 0;
-  font-size: var(--step-1);
-  line-height: 1.45;
-  font-weight: 550;
-  letter-spacing: -0.01em;
-  text-wrap: pretty;
-}
-
-.quote__source {
-  color: var(--text-subtle);
-  font-size: var(--step--1);
-}
-
-.press__title {
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-subtle);
-}
-
-.press__item {
-  margin-block-start: var(--space-s);
-  padding-inline-start: var(--space-m);
-  border-inline-start: 2px solid var(--border-strong);
-}
-
-.press__heading {
-  font-size: var(--step-0);
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-.press__meta {
-  margin-block-start: 0.25rem;
-  color: var(--text-subtle);
-  font-size: var(--step--1);
-}
-
-.press__quote {
-  margin-block-start: var(--space-xs);
-  color: var(--text-muted);
-  font-size: var(--step--1);
-  line-height: 1.5;
-}
-</style>
+<style module lang="scss" src="./AboutSection.module.scss"></style>

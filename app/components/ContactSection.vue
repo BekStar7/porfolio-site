@@ -35,12 +35,12 @@ onBeforeUnmount(() => clearTimeout(resetTimer))
         <p class="contact__lead prose">{{ t('contact.lead') }}</p>
 
         <div class="contact__actions">
-          <a class="btn btn-primary" :href="`mailto:${profile.email}`">
+          <a class="btn btn-primary gap-2" :href="`mailto:${profile.email}`">
             <AppIcon name="mail" :size="18" />
             {{ profile.email }}
           </a>
 
-          <button type="button" class="btn btn-ghost" @click="copyEmail">
+          <button type="button" class="btn btn-ghost gap-2" @click="copyEmail">
             <AppIcon :name="isCopied ? 'check' : 'copy'" :size="17" />
             {{ isCopied ? t('contact.copied') : t('contact.copy') }}
           </button>

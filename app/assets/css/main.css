@@ -380,7 +380,9 @@
 }
 
 @utility card {
-  background: var(--surface);
+  /* `background-color`, а не шорткат: градиент выделенной карточки и карточки
+     контактов ложится поверх цвета и не перебивается утилитой */
+  background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-m);
   box-shadow: var(--shadow);
@@ -390,11 +392,12 @@
   }
 }
 
+/* Промежуток между иконкой и текстом задан не здесь, а `gap-2` на самой кнопке:
+   у ссылки-кнопки он приходит из AppLink, и `gap` в примитиве перебил бы его. */
 @utility btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   /* Цель нажатия не меньше 44×44 CSS-пикселей */
   min-height: 3rem;
   padding: 0.5rem 1.25rem;

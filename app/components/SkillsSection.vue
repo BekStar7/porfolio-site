@@ -13,11 +13,11 @@ const { tx } = useLocalized()
         <h2 id="skills-title">{{ t('sections.skills') }}</h2>
       </div>
 
-      <div class="skills">
+      <div :class="[$style.groups, 'grid gap-m']">
         <!-- Каждая группа — заголовок третьего уровня со своим списком:
              скринридер объявляет и название группы, и число навыков в ней. -->
-        <section v-for="group in profile.skills" :key="group.id" class="skills__group card">
-          <h3 class="skills__title">{{ tx(group.title) }}</h3>
+        <section v-for="group in profile.skills" :key="group.id" class="card grid content-start gap-m p-l">
+          <h3 class="text-base font-strong">{{ tx(group.title) }}</h3>
           <ul class="tag-list">
             <li v-for="item in group.items" :key="item" class="tag">{{ item }}</li>
           </ul>
@@ -27,23 +27,4 @@ const { tx } = useLocalized()
   </section>
 </template>
 
-<style scoped>
-.skills {
-  display: grid;
-  gap: var(--space-m);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
-}
-
-.skills__group {
-  display: grid;
-  gap: var(--space-m);
-  align-content: start;
-  padding: var(--space-l);
-}
-
-.skills__title {
-  font-size: var(--step-0);
-  font-weight: 650;
-  color: var(--text);
-}
-</style>
+<style module lang="scss" src="./SkillsSection.module.scss"></style>

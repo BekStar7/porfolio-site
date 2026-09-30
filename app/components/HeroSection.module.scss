@@ -1,0 +1,19 @@
+@layer components {
+  // Нижний отступ даёт следующая секция — иначе просвет удваивается
+  .hero {
+    padding-block: clamp(3.5rem, 2rem + 8vw, 7rem) 0;
+  }
+
+  // Свечение — полупрозрачный слой поверх текста hero
+  .glow {
+    position: absolute;
+    inset: -20% 0 auto;
+    height: 42rem;
+    background: var(--glow);
+    pointer-events: none;
+  }
+
+  .stats {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+}

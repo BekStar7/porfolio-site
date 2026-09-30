@@ -15,7 +15,7 @@ const isExternal = computed(() => /^https?:\/\//i.test(href))
 
 <template>
   <a
-    :class="[$style.link, 'inline-flex items-center gap-[0.35em]']"
+    :class="[$style.link, 'inline-flex items-center']"
     :href="href"
     :target="isExternal ? '_blank' : undefined"
     :rel="isExternal ? 'noopener noreferrer' : undefined"

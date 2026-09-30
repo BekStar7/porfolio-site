@@ -1,0 +1,5 @@
+@layer components {
+  .groups {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  }
+}
