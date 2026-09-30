@@ -12,7 +12,7 @@
     "typecheck": "nuxt typecheck",
     "check:contrast": "node scripts/check-contrast.mjs",
     "measure:css": "node scripts/measure-css.mjs",
-    "test:a11y": "playwright test"
+    "test:a11y": "node scripts/check-test-selectors.mjs && playwright test"
   },
   "dependencies": {
     "nuxt": "^4.5.2",
