@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
-import type { Page } from '@playwright/test'
-import { DESKTOP, LOCALES, MOBILE, THEMES, allSurfaces, localeByCode, surfaceLabel } from '../../tests/support/surfaces'
+import type { Locator, Page } from '@playwright/test'
+import { DESKTOP, LOCALES, MOBILE, THEMES, VIEWPORTS, allSurfaces, localeByCode, surfaceLabel } from '../../tests/support/surfaces'
 import type { Surface, ThemeName } from '../../tests/support/surfaces'
 import { openSurface, pinLocale, seedTheme, waitForHydration } from '../../tests/support/harness'
 import { messages } from '../../tests/support/messages'
@@ -169,3 +169,120 @@ test.describe('forced colors', () => {
     await expect(page).toHaveScreenshot('forced-colors-ru-desktop.png', { fullPage: true })
   })
 })
+
+/**
+ * 7. Вычисленные стили базовых элементов.
+ *
+ *    Сброс и типографика переезжают из `main.css` в базовый слой, и скриншоты
+ *    не заметят, если, например, у неразмеченного списка пропадут маркеры или
+ *    у `strong` изменится вес. Поэтому у базовых элементов снимаются сами
+ *    вычисленные значения. В разметке нет `strong`, `b`, `img` и списков без
+ *    класса, поэтому их создаёт тест, а остальное находится по роли и тексту.
+ *    Вес 550 и 650 не входит в шкалу Tailwind по умолчанию: проверяем и его.
+ */
+const PROBED = [
+  'boxSizing',
+  'marginTop',
+  'marginRight',
+  'marginBottom',
+  'marginLeft',
+  'display',
+  'listStyleType',
+  'listStylePosition',
+  'maxWidth',
+  'fontFamily',
+  'fontSize',
+  'fontWeight',
+  'lineHeight',
+  'letterSpacing',
+  'color',
+] as const
+
+/** У списков дополнительно смотрим отступ: без класса он обязан остаться. */
+const LIST_PROBED = [...PROBED, 'paddingInlineStart'] as const
+
+/** Настройки документа, которые сброс обязан сохранить. */
+const DOCUMENT_PROBED = [
+  'webkitTextSizeAdjust',
+  'scrollBehavior',
+  'scrollPaddingTop',
+  'fontSynthesisWeight',
+  'minHeight',
+  'textRendering',
+  'backgroundColor',
+] as const
+
+async function stylesOf(locator: Locator, props: readonly string[]) {
+  return locator.first().evaluate((el, list) => {
+    const computed = getComputedStyle(el) as unknown as Record<string, string>
+    return Object.fromEntries(list.map(name => [name, computed[name]]))
+  }, props)
+}
+
+async function injectProbeElements(page: Page) {
+  await page.evaluate(() => {
+    const box = document.createElement('div')
+    box.innerHTML = [
+      '<p data-probe="paragraph">plain</p>',
+      '<p><strong data-probe="strong">s</strong> <b data-probe="b">b</b></p>',
+      '<img data-probe="img" alt="" width="8" height="8" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">',
+      '<button data-probe="button" type="button">button</button>',
+      '<ul data-probe="list-unclassed"><li>u</li></ul>',
+      '<ol data-probe="ordered-unclassed"><li>o</li></ol>',
+    ].join('')
+    document.querySelector('main')!.append(box)
+  })
+}
+
+for (const viewport of VIEWPORTS) {
+  test.describe(`computed styles · ${viewport.name}`, () => {
+    test.use({ locale: RU.language })
+
+    test('base elements keep their computed styles', async ({ page, baseURL }) => {
+      await openSurface(page, { locale: RU, theme: 'dark', viewport }, baseURL!)
+      await injectProbeElements(page)
+
+      const probe = (name: string) => page.locator(`[data-probe="${name}"]`)
+      const nav = page.getByRole('navigation', { name: messages(RU).a11y.sectionsNav, includeHidden: true })
+
+      const elements: Record<string, Locator> = {
+        body: page.locator('body'),
+        h1: page.getByRole('heading', { level: 1 }),
+        h2: page.getByRole('heading', { level: 2 }),
+        h3: page.getByRole('heading', { level: 3 }),
+        h4: page.getByRole('heading', { level: 4 }),
+        paragraph: probe('paragraph'),
+        'about-paragraph': page.locator('#about p').first(),
+        img: probe('img'),
+        svg: page.locator('svg').first(),
+        button: probe('button'),
+        'page-button': page.locator('main button').first(),
+        'list-classed': page.getByRole('list', { name: messages(RU).a11y.socialLinks }).first(),
+        'list-unclassed': probe('list-unclassed'),
+        'ordered-unclassed': probe('ordered-unclassed'),
+        strong: probe('strong'),
+        b: probe('b'),
+        // Вес 550
+        'nav-link': nav.getByRole('link', { includeHidden: true }).first(),
+        'project-summary': page.locator('#projects article p').nth(1),
+        'about-quote': page.locator('#about blockquote'),
+        // Вес 650
+        'brand-link': page.getByRole('banner').getByRole('link').first(),
+        'skill-group-title': page.locator('#skills h3').first(),
+        'role-title': page.locator('#experience h4').first(),
+      }
+
+      const snapshot: Record<string, Record<string, string>> = {
+        html: await stylesOf(page.locator('html'), DOCUMENT_PROBED),
+        body: await stylesOf(elements.body!, [...PROBED, ...DOCUMENT_PROBED]),
+      }
+      for (const [name, locator] of Object.entries(elements)) {
+        if (name === 'body') continue
+        await expect(locator.first(), `${name} was not found`).toBeAttached()
+        snapshot[name] = await stylesOf(locator, name.startsWith('list') || name.startsWith('ordered') ? LIST_PROBED : PROBED)
+      }
+
+      expect(JSON.stringify(snapshot, null, 2)).toMatchSnapshot(`computed-styles-${viewport.name}.json`)
+    })
+  })
+}
