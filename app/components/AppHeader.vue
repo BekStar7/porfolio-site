@@ -9,8 +9,11 @@ const NAV_IDS = ['about', 'experience', 'projects', 'skills', 'contact'] as cons
 
 const { active } = useActiveSection([...NAV_IDS])
 
+const route = useRoute()
+
 const isMenuOpen = ref(false)
 const burger = useTemplateRef<HTMLButtonElement>('burger')
+const nav = useTemplateRef<HTMLElement>('nav')
 
 function closeMenu(returnFocus = false) {
   if (!isMenuOpen.value) return
@@ -23,8 +26,26 @@ function onKeydown(event: KeyboardEvent) {
   if (event.key === 'Escape') closeMenu(true)
 }
 
-onMounted(() => document.addEventListener('keydown', onKeydown))
-onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
+// Меню — не модальное: фокус не перехватываем. Но раз внимание ушло за его
+// пределы, оставлять `aria-expanded="true"` значит врать о состоянии.
+// pointerdown, а не click — меню закрывается раньше, чем клик доберётся
+// до содержимого под ним.
+function onPointerdown(event: PointerEvent) {
+  const target = event.target as Node | null
+  if (target && (nav.value?.contains(target) || burger.value?.contains(target))) return
+  closeMenu()
+}
+
+watch(() => route.fullPath, () => closeMenu())
+
+onMounted(() => {
+  document.addEventListener('keydown', onKeydown)
+  document.addEventListener('pointerdown', onPointerdown)
+})
+onBeforeUnmount(() => {
+  document.removeEventListener('keydown', onKeydown)
+  document.removeEventListener('pointerdown', onPointerdown)
+})
 </script>
 
 <template>
@@ -37,16 +58,17 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
 
       <nav
         id="site-menu"
+        ref="nav"
         class="header__nav"
         :class="{ 'is-open': isMenuOpen }"
-        :aria-label="t('a11y.mainNav')"
+        :aria-label="t('a11y.sectionsNav')"
       >
         <ul class="header__list">
           <li v-for="id in NAV_IDS" :key="id">
             <a
               class="header__link"
               :href="`#${id}`"
-              :aria-current="active === id ? 'true' : undefined"
+              :aria-current="active === id ? 'location' : undefined"
               @click="closeMenu()"
             >
               {{ t(`nav.${id}`) }}
@@ -147,7 +169,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
   background: var(--surface-2);
 }
 
-.header__link[aria-current='true'] {
+.header__link[aria-current='location'] {
   color: var(--accent);
   background: var(--accent-veil);
 }

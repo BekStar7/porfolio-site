@@ -181,6 +181,30 @@ for (const locale of LOCALES) {
 }
 
 /**
+ * 6.5 — WCAG 2.5.3 Label in Name: голосовой ввод произносит видимый текст
+ * ссылки, и он должен входить в её доступное имя. Имя («Наверх, к началу
+ * страницы») уточняет видимый текст («Наверх»), но не заменяет его.
+ */
+for (const locale of LOCALES) {
+  test.describe(`back-to-top link name · ${locale.code}`, () => {
+    test.use({ locale: locale.language })
+
+    test('accessible name contains the visible text', async ({ page, baseURL }) => {
+      await openSurface(page, { locale, theme: 'light', viewport: DESKTOP }, baseURL!)
+
+      const link = page.locator('.footer__top')
+      await link.scrollIntoViewIfNeeded()
+
+      const visible = messages(locale).nav.top
+      const node = await ariaNodeOf(link)
+
+      expect(node?.name?.toLowerCase(), 'the accessible name must contain the visible label')
+        .toContain(visible.toLowerCase())
+    })
+  })
+}
+
+/**
  * 4.7 — иконки и полоска владения языком ничего не добавляют к тексту рядом.
  * В дереве доступности их быть не должно: иначе скринридер читает одно и то
  * же дважды, а по полоске вообще нечего прочитать.

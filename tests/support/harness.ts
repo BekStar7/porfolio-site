@@ -47,8 +47,14 @@ export async function pinLocale(
  */
 export async function waitForHydration(page: Page): Promise<void> {
   await page.waitForFunction(() => {
-    const root = document.querySelector('#__nuxt')
-    return !!root && '__vue_app__' in root
+    const root = document.querySelector('#__nuxt') as (HTMLElement & {
+      __vue_app__?: { $nuxt?: { isHydrating?: boolean } }
+    }) | null
+    const app = root?.__vue_app__
+    // Layout и страница гидратируются внутри Suspense уже после `mount()`, и
+    // на холодном сервере клик успевал прийти раньше, чем навесились
+    // обработчики. Nuxt сообщает о конце этого этапа флагом `isHydrating`.
+    return !!app && app.$nuxt?.isHydrating === false
   })
 }
 

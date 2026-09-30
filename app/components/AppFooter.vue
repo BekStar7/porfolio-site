@@ -18,7 +18,7 @@ const { buildYear } = useRuntimeConfig().public
 
       <p class="footer__built">{{ t('footer.builtWith', { version: '4' }) }}</p>
 
-      <a class="footer__top" href="#top">
+      <a class="footer__top" href="#top" :aria-label="t('a11y.backToTop')">
         <AppIcon name="arrowUp" :size="16" />
         {{ t('nav.top') }}
       </a>
