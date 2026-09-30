@@ -1,0 +1,112 @@
+{
+  "sha": "2161a2522cf1af2492cc0c2133abe42aab033158",
+  "pages": {
+    "/": {
+      "linked": {
+        "raw": 12026,
+        "gzip": 2987,
+        "brotli": 2613,
+        "files": [
+          {
+            "href": "/_nuxt/entry.DlWApFlZ.css",
+            "raw": 11992,
+            "gzip": 2933,
+            "brotli": 2575
+          },
+          {
+            "href": "/_nuxt/profile.nyuWPvWG.css",
+            "raw": 34,
+            "gzip": 54,
+            "brotli": 38
+          }
+        ]
+      },
+      "inlined": {
+        "raw": 17925,
+        "gzip": 3377,
+        "brotli": 2990,
+        "blocks": 15
+      },
+      "total": {
+        "raw": 29951,
+        "gzip": 6364,
+        "brotli": 5603
+      }
+    },
+    "/en": {
+      "linked": {
+        "raw": 12026,
+        "gzip": 2987,
+        "brotli": 2613,
+        "files": [
+          {
+            "href": "/_nuxt/entry.DlWApFlZ.css",
+            "raw": 11992,
+            "gzip": 2933,
+            "brotli": 2575
+          },
+          {
+            "href": "/_nuxt/profile.nyuWPvWG.css",
+            "raw": 34,
+            "gzip": 54,
+            "brotli": 38
+          }
+        ]
+      },
+      "inlined": {
+        "raw": 17925,
+        "gzip": 3377,
+        "brotli": 2990,
+        "blocks": 15
+      },
+      "total": {
+        "raw": 29951,
+        "gzip": 6364,
+        "brotli": 5603
+      }
+    }
+  },
+  "emitted": {
+    "raw": 34241,
+    "gzip": 8280,
+    "brotli": 7181,
+    "files": [
+      {
+        "file": "_nuxt/default.BpK0qj1n.css",
+        "raw": 5055,
+        "gzip": 1199,
+        "brotli": 1020
+      },
+      {
+        "file": "_nuxt/entry.DlWApFlZ.css",
+        "raw": 11992,
+        "gzip": 2933,
+        "brotli": 2575
+      },
+      {
+        "file": "_nuxt/error-404.ByByAvZ4.css",
+        "raw": 2429,
+        "gzip": 851,
+        "brotli": 723
+      },
+      {
+        "file": "_nuxt/error-500.BBb5nPPK.css",
+        "raw": 1906,
+        "gzip": 725,
+        "brotli": 618
+      },
+      {
+        "file": "_nuxt/pages.Gb_Xv-NE.css",
+        "raw": 12825,
+        "gzip": 2518,
+        "brotli": 2207
+      },
+      {
+        "file": "_nuxt/profile.nyuWPvWG.css",
+        "raw": 34,
+        "gzip": 54,
+        "brotli": 38
+      }
+    ]
+  }
+}

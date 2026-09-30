@@ -11,6 +11,7 @@
     "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
     "check:contrast": "node scripts/check-contrast.mjs",
+    "measure:css": "node scripts/measure-css.mjs",
     "test:a11y": "playwright test"
   },
   "dependencies": {
