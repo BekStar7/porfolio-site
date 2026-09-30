@@ -1,0 +1,94 @@
+{
+  "sha": "701104dc9fa57985b0014c46edd6bbde57f9a358",
+  "pages": {
+    "/": {
+      "linked": {
+        "raw": 24273,
+        "gzip": 5548,
+        "brotli": 4847,
+        "files": [
+          {
+            "href": "/_nuxt/entry.WW0F2UmK.css",
+            "raw": 24273,
+            "gzip": 5548,
+            "brotli": 4847
+          }
+        ]
+      },
+      "inlined": {
+        "raw": 3056,
+        "gzip": 1174,
+        "brotli": 1008,
+        "blocks": 12
+      },
+      "total": {
+        "raw": 27329,
+        "gzip": 6722,
+        "brotli": 5855
+      }
+    },
+    "/en": {
+      "linked": {
+        "raw": 24273,
+        "gzip": 5548,
+        "brotli": 4847,
+        "files": [
+          {
+            "href": "/_nuxt/entry.WW0F2UmK.css",
+            "raw": 24273,
+            "gzip": 5548,
+            "brotli": 4847
+          }
+        ]
+      },
+      "inlined": {
+        "raw": 3056,
+        "gzip": 1174,
+        "brotli": 1008,
+        "blocks": 12
+      },
+      "total": {
+        "raw": 27329,
+        "gzip": 6722,
+        "brotli": 5855
+      }
+    }
+  },
+  "emitted": {
+    "raw": 31430,
+    "gzip": 8409,
+    "brotli": 7277,
+    "files": [
+      {
+        "file": "_nuxt/default.CBEC5bhR.css",
+        "raw": 1285,
+        "gzip": 580,
+        "brotli": 458
+      },
+      {
+        "file": "_nuxt/entry.WW0F2UmK.css",
+        "raw": 24273,
+        "gzip": 5548,
+        "brotli": 4847
+      },
+      {
+        "file": "_nuxt/error-404.K9BDkAFH.css",
+        "raw": 2429,
+        "gzip": 853,
+        "brotli": 725
+      },
+      {
+        "file": "_nuxt/error-500.BMfhecvL.css",
+        "raw": 1906,
+        "gzip": 725,
+        "brotli": 618
+      },
+      {
+        "file": "_nuxt/pages.aQvHxFAA.css",
+        "raw": 1537,
+        "gzip": 703,
+        "brotli": 629
+      }
+    ]
+  }
+}
