@@ -24,11 +24,11 @@ const { tx } = useLocalized()
             :data-testid="index === 0 ? 'project-featured' : undefined"
           >
             <div class="flex flex-wrap items-baseline justify-between gap-xs">
-              <h3 :class="index === 0 ? 'text-lg md:text-xl' : 'text-lg'">{{ tx(project.title) }}</h3>
+              <h3 :class="{ 'md:text-xl': index === 0 }">{{ tx(project.title) }}</h3>
               <p class="text-sm whitespace-nowrap text-subtle tabular-nums">{{ project.period }}</p>
             </div>
 
-            <p class="leading-[1.5] font-emphasis text-fg">{{ tx(project.summary) }}</p>
+            <p class="leading-[1.5] font-emphasis">{{ tx(project.summary) }}</p>
             <p class="max-w-(--measure) text-sm leading-[1.65] text-muted">{{ tx(project.description) }}</p>
 
             <p
