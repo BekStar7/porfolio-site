@@ -13,43 +13,49 @@ const { tx } = useLocalized()
         <h2 id="projects-title">{{ t('sections.projects') }}</h2>
       </div>
 
-      <ul class="projects">
-        <li v-for="(project, index) in profile.projects" :key="project.id">
+      <ul :class="[$style.projects, 'grid gap-m']">
+        <li v-for="(project, index) in profile.projects" :key="project.id" :class="{ 'md:col-span-full': index === 0 }">
+          <!-- Выделенный проект от 56rem: граница и градиент поверх цвета карточки -->
           <article
-            class="project card"
-            :class="{ 'project--featured': index === 0 }"
+            :class="[
+              'card flex h-full flex-col gap-s p-l transition-colors hover:border-border-strong',
+              { [`${$style.featured} md:border-border-strong`]: index === 0 },
+            ]"
             :data-testid="index === 0 ? 'project-featured' : undefined"
           >
-            <div class="project__head">
-              <h3 class="project__title">{{ tx(project.title) }}</h3>
-              <p class="project__period">{{ project.period }}</p>
+            <div class="flex flex-wrap items-baseline justify-between gap-xs">
+              <h3 :class="index === 0 ? 'text-lg md:text-xl' : 'text-lg'">{{ tx(project.title) }}</h3>
+              <p class="text-sm whitespace-nowrap text-subtle tabular-nums">{{ project.period }}</p>
             </div>
 
-            <p class="project__summary">{{ tx(project.summary) }}</p>
-            <p class="project__description">{{ tx(project.description) }}</p>
+            <p class="leading-[1.5] font-emphasis text-fg">{{ tx(project.summary) }}</p>
+            <p class="max-w-(--measure) text-sm leading-[1.65] text-muted">{{ tx(project.description) }}</p>
 
-            <p v-if="project.impact" class="project__impact">
+            <p
+              v-if="project.impact"
+              class="max-w-(--measure) border-s-2 border-accent ps-m text-sm leading-[1.55] text-muted"
+            >
               <!-- Подпись читается скринридером, визуально её заменяет акцентная рамка -->
               <span class="sr-only">{{ t('projects.impact') }}: </span>
               {{ tx(project.impact) }}
             </p>
 
-            <ul class="tag-list project__tags" :aria-label="t('projects.stack')">
+            <ul class="tag-list mt-auto pt-xs" :aria-label="t('projects.stack')">
               <li v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</li>
             </ul>
 
-            <div v-if="project.links.length" class="project__links">
+            <div v-if="project.links.length" class="flex flex-wrap gap-xs pt-2xs">
               <AppLink
                 v-for="link in project.links"
                 :key="link.href"
-                class="btn"
+                class="btn text-sm"
                 :class="link.primary ? 'btn-primary' : 'btn-ghost'"
                 :href="link.href"
               >
                 {{ tx(link.label) }}
               </AppLink>
             </div>
-            <p v-else class="project__note">{{ t('projects.noLinks') }}</p>
+            <p v-else class="pt-2xs text-sm text-subtle">{{ t('projects.noLinks') }}</p>
           </article>
         </li>
       </ul>
@@ -57,105 +63,4 @@ const { tx } = useLocalized()
   </section>
 </template>
 
-<style scoped>
-.projects {
-  display: grid;
-  gap: var(--space-m);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.project {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-s);
-  height: 100%;
-  padding: var(--space-l);
-  transition: border-color var(--transition), transform var(--transition);
-}
-
-.project:hover {
-  border-color: var(--border-strong);
-}
-
-@media (min-width: 56rem) {
-  .projects > li:first-child {
-    grid-column: 1 / -1;
-  }
-
-  .project--featured {
-    border-color: var(--border-strong);
-    background: linear-gradient(180deg, var(--accent-veil), transparent 45%), var(--surface);
-  }
-
-  .project--featured .project__title {
-    font-size: var(--step-2);
-  }
-}
-
-.project__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-xs);
-}
-
-.project__title {
-  font-size: var(--step-1);
-}
-
-.project__period {
-  color: var(--text-subtle);
-  font-size: var(--step--1);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.project__summary {
-  color: var(--text);
-  font-weight: 550;
-  line-height: 1.5;
-}
-
-.project__description {
-  max-width: var(--measure);
-  color: var(--text-muted);
-  font-size: var(--step--1);
-  line-height: 1.65;
-}
-
-.project__impact {
-  max-width: var(--measure);
-  padding-inline-start: var(--space-m);
-  border-inline-start: 2px solid var(--accent);
-  color: var(--text-muted);
-  font-size: var(--step--1);
-  line-height: 1.55;
-}
-
-.project__tags {
-  margin-block-start: auto;
-  padding-block-start: var(--space-xs);
-}
-
-.project__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-  padding-block-start: var(--space-2xs);
-}
-
-.project__links .btn {
-  font-size: var(--step--1);
-  text-decoration: none;
-}
-
-.project__note {
-  padding-block-start: var(--space-2xs);
-  color: var(--text-subtle);
-  font-size: var(--step--1);
-}
-</style>
+<style module lang="scss" src="./ProjectsSection.module.scss"></style>

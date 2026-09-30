@@ -1,0 +1,13 @@
+@layer components {
+  .projects {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  }
+
+  // Полупрозрачный градиент поверх цвета карточки (`card` задаёт только
+  // `background-color`, поэтому картинка не перебивается)
+  .featured {
+    @media (min-width: 56rem) {
+      background-image: linear-gradient(180deg, var(--accent-veil), transparent 45%);
+    }
+  }
+}

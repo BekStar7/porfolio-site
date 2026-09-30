@@ -1,0 +1,11 @@
+@layer components {
+  .education {
+    @media (min-width: 56rem) {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    }
+  }
+
+  .language {
+    grid-template-columns: 1fr auto;
+  }
+}
