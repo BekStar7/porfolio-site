@@ -12,7 +12,7 @@ and user-preference handling that every page must uphold in both locales and bot
 
 Every rendered page SHALL satisfy WCAG 2.2 Level AA. No automatically detectable violation
 of a Level A or AA success criterion may be present in any supported combination of locale
-(`ru`, `en`), theme (light, dark), and viewport (desktop, m obile).
+(`ru`, `en`), theme (light, dark), and viewport (desktop, mobile).
 
 #### Scenario: No detectable violations on the default locale
 
