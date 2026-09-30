@@ -18,8 +18,8 @@ function durationLabel(role: Role): string {
 <template>
   <section id="experience" class="section" tabindex="-1" aria-labelledby="experience-title">
     <div class="container">
-      <div class="section__head">
-        <p class="section__eyebrow" aria-hidden="true">02</p>
+      <div class="section-head">
+        <p class="eyebrow" aria-hidden="true">02</p>
         <h2 id="experience-title">{{ t('sections.experience') }}</h2>
       </div>
 

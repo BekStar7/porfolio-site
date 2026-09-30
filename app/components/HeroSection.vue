@@ -31,11 +31,11 @@ const { tx } = useLocalized()
       </p>
 
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#contact">
+        <a class="btn btn-primary" href="#contact">
           {{ t('hero.ctaContact') }}
           <AppIcon name="arrowRight" :size="18" />
         </a>
-        <a class="btn btn--ghost" href="#projects">{{ t('hero.ctaProjects') }}</a>
+        <a class="btn btn-ghost" href="#projects">{{ t('hero.ctaProjects') }}</a>
       </div>
 
       <ul class="hero__socials" :aria-label="t('a11y.socialLinks')">

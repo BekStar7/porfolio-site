@@ -27,20 +27,20 @@ onBeforeUnmount(() => clearTimeout(resetTimer))
   <section id="contact" class="section" tabindex="-1" aria-labelledby="contact-title">
     <div class="container">
       <div class="contact card">
-        <div class="section__head">
-          <p class="section__eyebrow" aria-hidden="true">06</p>
+        <div class="section-head">
+          <p class="eyebrow" aria-hidden="true">06</p>
           <h2 id="contact-title">{{ t('sections.contact') }}</h2>
         </div>
 
         <p class="contact__lead prose">{{ t('contact.lead') }}</p>
 
         <div class="contact__actions">
-          <a class="btn btn--primary" :href="`mailto:${profile.email}`">
+          <a class="btn btn-primary" :href="`mailto:${profile.email}`">
             <AppIcon name="mail" :size="18" />
             {{ profile.email }}
           </a>
 
-          <button type="button" class="btn btn--ghost" @click="copyEmail">
+          <button type="button" class="btn btn-ghost" @click="copyEmail">
             <AppIcon :name="isCopied ? 'check' : 'copy'" :size="17" />
             {{ isCopied ? t('contact.copied') : t('contact.copy') }}
           </button>

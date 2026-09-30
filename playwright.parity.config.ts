@@ -37,8 +37,10 @@ export default defineConfig({
 
   expect: {
     toHaveScreenshot: {
-      // Допуск на сглаживание шрифтов, но не на сдвиг раскладки
-      maxDiffPixelRatio: 0.001,
+      // Допуск на сглаживание шрифтов, но не на сдвиг раскладки. На одной машине и
+      // одном Chromium сборки одного кода дают одни и те же пиксели, поэтому для
+      // строгой сверки допуск можно занулить: PARITY_TOLERANCE=0
+      maxDiffPixelRatio: Number(process.env.PARITY_TOLERANCE ?? 0.001),
       animations: 'disabled',
     },
   },

@@ -8,8 +8,8 @@ const { tx } = useLocalized()
 <template>
   <section id="education" class="section" tabindex="-1" aria-labelledby="education-title">
     <div class="container">
-      <div class="section__head">
-        <p class="section__eyebrow" aria-hidden="true">05</p>
+      <div class="section-head">
+        <p class="eyebrow" aria-hidden="true">05</p>
         <h2 id="education-title">{{ t('sections.education') }}</h2>
       </div>
 

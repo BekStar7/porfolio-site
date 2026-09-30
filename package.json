@@ -26,7 +26,10 @@
     "@nuxtjs/robots": "^6.2.3",
     "@nuxtjs/sitemap": "^8.5.1",
     "@playwright/test": "^1.63.0",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.6.3",
+    "sass": "^1.105.0",
+    "tailwindcss": "^4.3.3",
     "typescript": "^5.9.0",
     "vue-tsc": "^3.0.0"
   }

@@ -8,8 +8,8 @@ const { tx } = useLocalized()
 <template>
   <section id="projects" class="section" tabindex="-1" aria-labelledby="projects-title">
     <div class="container">
-      <div class="section__head">
-        <p class="section__eyebrow" aria-hidden="true">03</p>
+      <div class="section-head">
+        <p class="eyebrow" aria-hidden="true">03</p>
         <h2 id="projects-title">{{ t('sections.projects') }}</h2>
       </div>
 
@@ -43,7 +43,7 @@ const { tx } = useLocalized()
                 v-for="link in project.links"
                 :key="link.href"
                 class="btn"
-                :class="link.primary ? 'btn--primary' : 'btn--ghost'"
+                :class="link.primary ? 'btn-primary' : 'btn-ghost'"
                 :href="link.href"
               >
                 {{ tx(link.label) }}

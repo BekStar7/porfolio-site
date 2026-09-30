@@ -1,3 +1,5 @@
+import tailwindcss from '@tailwindcss/vite'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-09-01',
@@ -11,6 +13,27 @@ export default defineNuxtConfig({
   ],
 
   css: ['~/assets/css/main.css'],
+
+  vite: {
+    plugins: [tailwindcss()],
+    css: {
+      modules: {
+        // Имя класса из модуля — хеш от пути файла и локального имени, а не от
+        // содержимого: сборка остаётся детерминированной, а хеши не меняются
+        // от правки стилей.
+        generateScopedName: '[hash:base64:6]',
+      },
+    },
+  },
+
+  // В dev имена читаются в devtools: `HeroSection-module_glow`
+  $development: {
+    vite: {
+      css: {
+        modules: { generateScopedName: '[name]_[local]' },
+      },
+    },
+  },
 
   // Базовый URL сайта. Переопределяется переменной NUXT_PUBLIC_SITE_URL.
   site: {
