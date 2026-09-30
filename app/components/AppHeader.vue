@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
     <div class="container header__inner">
       <NuxtLink class="header__brand" :to="localePath('index')">
         <span class="header__mark" aria-hidden="true">BK</span>
-        <span class="header__name">{{ tx(profile.name) }}</span>
+        <span class="header__name" data-testid="brand-name">{{ tx(profile.name) }}</span>
       </NuxtLink>
 
       <nav

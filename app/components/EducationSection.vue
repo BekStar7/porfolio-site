@@ -36,7 +36,7 @@ const { tx } = useLocalized()
               <span class="language__name">{{ tx(language.name) }}</span>
               <span class="language__level">{{ tx(language.level) }}</span>
               <!-- Шкала дублирует текст уровня, поэтому скрыта от скринридера -->
-              <span class="language__meter" aria-hidden="true">
+              <span class="language__meter" data-testid="language-meter" aria-hidden="true">
                 <span
                   v-for="step in 5"
                   :key="step"

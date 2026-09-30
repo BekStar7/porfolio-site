@@ -15,7 +15,11 @@ const { tx } = useLocalized()
 
       <ul class="projects">
         <li v-for="(project, index) in profile.projects" :key="project.id">
-          <article class="project card" :class="{ 'project--featured': index === 0 }">
+          <article
+            class="project card"
+            :class="{ 'project--featured': index === 0 }"
+            :data-testid="index === 0 ? 'project-featured' : undefined"
+          >
             <div class="project__head">
               <h3 class="project__title">{{ tx(project.title) }}</h3>
               <p class="project__period">{{ project.period }}</p>
