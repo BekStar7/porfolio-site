@@ -19,6 +19,7 @@ pnpm dev          # http://localhost:3000
 | `pnpm preview` | Посмотреть собранный сайт локально |
 | `pnpm typecheck` | Проверка типов (`vue-tsc`) |
 | `pnpm check:contrast` | Проверка палитры на соответствие WCAG 2.2 AA |
+| `pnpm measure:css` | Собрать сайт и замерить CSS (`--no-build` — по готовой сборке) |
 
 ---
 
@@ -210,6 +211,21 @@ document.head.appendChild(s)
 // после загрузки:
 await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] } })
 ```
+
+---
+
+## Стили
+
+Правила вёрстки — в [`docs/architecture/styling.md`](docs/architecture/styling.md).
+
+Размер CSS сгенерированного сайта (файлы и `<style>` в HTML, по каждой странице) считает
+
+```bash
+pnpm measure:css
+```
+
+Команда собирает сайт и печатает таблицу в stderr, а JSON — в stdout; `--out файл.json`
+пишет JSON в файл.
 
 ---
 
