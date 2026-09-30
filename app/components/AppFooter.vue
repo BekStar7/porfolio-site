@@ -45,7 +45,7 @@ const { buildYear } = useRuntimeConfig().public
 .footer__top {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   min-height: 2.75rem;
   padding-inline: var(--space-m);
   border: 1px solid var(--border-interactive);

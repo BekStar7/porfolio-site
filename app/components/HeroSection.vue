@@ -80,8 +80,8 @@ const { tx } = useLocalized()
 .hero__status {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.35rem 0.9rem 0.35rem 0.7rem;
+  gap: 0.5rem;
+  padding: 0.25rem 1rem 0.25rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
   background: var(--surface);
@@ -106,7 +106,7 @@ const { tx } = useLocalized()
 .hero__title {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.25rem;
   margin-block-start: var(--space-2xs);
 }
 
@@ -132,7 +132,7 @@ const { tx } = useLocalized()
 .hero__location {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
   margin-block-start: var(--space-m);
   color: var(--text-subtle);
   font-size: var(--step--1);
@@ -181,7 +181,7 @@ const { tx } = useLocalized()
 .stats__item {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.25rem;
   padding: var(--space-l) var(--space-m);
   background: var(--surface);
 }

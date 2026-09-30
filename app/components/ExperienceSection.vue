@@ -116,8 +116,8 @@ function durationLabel(role: Role): string {
 .timeline__item::before {
   content: '';
   position: absolute;
-  inset-inline-start: 5px;
-  inset-block: 0.85rem -2.5rem;
+  inset-inline-start: 4px;
+  inset-block: 0.75rem -2.5rem;
   width: 2px;
   background: var(--border);
 }
@@ -129,7 +129,7 @@ function durationLabel(role: Role): string {
 .timeline__dot {
   position: absolute;
   inset-inline-start: 0;
-  top: 0.55rem;
+  top: 0.5rem;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -141,7 +141,7 @@ function durationLabel(role: Role): string {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.35rem var(--space-m);
+  gap: 0.25rem var(--space-m);
 }
 
 .job__company {
@@ -188,7 +188,7 @@ function durationLabel(role: Role): string {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4ch;
-  margin-block-start: 0.2rem;
+  margin-block-start: 0.25rem;
   color: var(--text-subtle);
   font-size: var(--step--1);
   font-variant-numeric: tabular-nums;
@@ -220,8 +220,8 @@ function durationLabel(role: Role): string {
   position: absolute;
   inset-inline-start: 0.25rem;
   top: 0.68em;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--accent);
   opacity: 0.75;
@@ -261,7 +261,7 @@ function durationLabel(role: Role): string {
 .early__item {
   position: relative;
   display: grid;
-  gap: 0.2rem;
+  gap: 0.25rem;
   padding-inline-start: var(--space-xl);
 }
 
@@ -270,8 +270,8 @@ function durationLabel(role: Role): string {
   position: absolute;
   inset-inline-start: 1px;
   top: 0.5rem;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border: 2px solid var(--border-interactive);
   border-radius: 50%;
 }

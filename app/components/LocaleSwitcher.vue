@@ -32,7 +32,7 @@ const switchLocalePath = useSwitchLocalePath()
   display: flex;
   align-items: center;
   gap: 2px;
-  padding: 3px;
+  padding: 4px;
   margin: 0;
   list-style: none;
   border: 1px solid var(--border-interactive);
@@ -44,7 +44,7 @@ const switchLocalePath = useSwitchLocalePath()
   align-items: center;
   justify-content: center;
   min-width: 2.5rem;
-  min-height: 2.125rem;
+  min-height: 2.25rem;
   padding-inline: 0.5rem;
   border-radius: var(--radius-pill);
   color: var(--text-muted);

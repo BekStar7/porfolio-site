@@ -117,7 +117,7 @@ onBeforeUnmount(() => {
 .header__brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   margin-inline-end: auto;
   color: var(--text);
   font-weight: 650;
@@ -155,7 +155,7 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   min-height: 2.5rem;
-  padding-inline: 0.8rem;
+  padding-inline: 0.75rem;
   border-radius: var(--radius-pill);
   color: var(--text-muted);
   font-size: var(--step--1);
@@ -241,7 +241,7 @@ onBeforeUnmount(() => {
   }
 
   .header__link {
-    min-height: 2.875rem;
+    min-height: 3rem;
     padding-inline: var(--space-m);
     border-radius: var(--radius-s);
     font-size: var(--step-0);

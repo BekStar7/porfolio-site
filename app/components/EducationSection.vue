@@ -92,7 +92,7 @@ const { tx } = useLocalized()
 }
 
 .degree__place {
-  margin-block-start: 0.15rem;
+  margin-block-start: 0.25rem;
   color: var(--text-muted);
   font-size: var(--step--1);
 }
@@ -100,7 +100,7 @@ const { tx } = useLocalized()
 .degree__years {
   display: flex;
   gap: 0.4ch;
-  margin-block-start: 0.35rem;
+  margin-block-start: 0.25rem;
   color: var(--text-subtle);
   font-size: var(--step--1);
   font-variant-numeric: tabular-nums;
@@ -117,7 +117,7 @@ const { tx } = useLocalized()
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  gap: 0.15rem var(--space-m);
+  gap: 0.25rem var(--space-m);
   padding-block: var(--space-m);
 }
 
@@ -143,8 +143,8 @@ const { tx } = useLocalized()
 }
 
 .language__step {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--border-strong);
 }

@@ -142,7 +142,7 @@ onBeforeUnmount(() => clearTimeout(resetTimer))
 .contact__where {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
   margin-block-start: var(--space-l);
   color: var(--text-subtle);
   font-size: var(--step--1);
