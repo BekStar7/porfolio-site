@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test'
 import { DESKTOP, LOCALES, MOBILE, VIEWPORTS, localeByCode } from '../support/surfaces'
 import { FOCUSABLE_SELECTOR } from '../support/aria'
 import { openSurface } from '../support/harness'
+import { menuButton, siteMenu, siteNavLinks, skipLink as skipLinkOf, themeToggle } from '../support/locators'
 import { messages } from '../support/messages'
 
 /**
@@ -17,7 +18,7 @@ for (const locale of LOCALES) {
       await openSurface(page, { locale, theme: 'light', viewport: DESKTOP }, baseURL!)
 
       await page.keyboard.press('Tab')
-      const skipLink = page.locator('.skip-link')
+      const skipLink = skipLinkOf(page, locale)
       await expect(skipLink).toBeFocused()
 
       // Появление анимировано (`transition: transform`) — ждём конца, а не
@@ -92,7 +93,7 @@ for (const theme of ['light', 'dark'] as const) {
     test('is visible on a keyboard-focused control', async ({ page, baseURL }) => {
       await openSurface(page, { locale, theme, viewport: DESKTOP }, baseURL!)
 
-      const control = page.locator('.theme-toggle')
+      const control = themeToggle(page, locale)
       await control.focus()
 
       const outline = await control.evaluate((el) => {
@@ -118,13 +119,13 @@ for (const locale of LOCALES) {
     test('expands, collapses on Escape with focus return, and collapses on link activation', async ({ page, baseURL }) => {
       await openSurface(page, { locale, theme: 'light', viewport: MOBILE }, baseURL!)
 
-      const burger = page.locator('.header__burger')
+      const burger = menuButton(page)
       await expect(burger).toHaveAttribute('aria-expanded', 'false')
       await expect(burger).toHaveAttribute('aria-controls', 'site-menu')
 
       await burger.click()
       await expect(burger).toHaveAttribute('aria-expanded', 'true')
-      await expect(page.locator('#site-menu')).toBeVisible()
+      await expect(siteMenu(page)).toBeVisible()
 
       await page.keyboard.press('Escape')
       await expect(burger).toHaveAttribute('aria-expanded', 'false')
@@ -133,7 +134,7 @@ for (const locale of LOCALES) {
       await burger.click()
       await expect(burger).toHaveAttribute('aria-expanded', 'true')
 
-      await page.locator('.header__link').first().click()
+      await siteNavLinks(page, locale).first().click()
       await expect(burger).toHaveAttribute('aria-expanded', 'false')
     })
   })
@@ -151,7 +152,7 @@ for (const locale of LOCALES) {
     test('does not move focus into the menu on open', async ({ page, baseURL }) => {
       await openSurface(page, { locale, theme: 'light', viewport: MOBILE }, baseURL!)
 
-      const burger = page.locator('.header__burger')
+      const burger = menuButton(page)
       await burger.focus()
       await page.keyboard.press('Enter')
       await expect(burger).toHaveAttribute('aria-expanded', 'true')
@@ -161,12 +162,12 @@ for (const locale of LOCALES) {
     test('collapses on pointer interaction outside the menu and its trigger', async ({ page, baseURL }) => {
       await openSurface(page, { locale, theme: 'light', viewport: MOBILE }, baseURL!)
 
-      const burger = page.locator('.header__burger')
+      const burger = menuButton(page)
       await burger.click()
       await expect(burger).toHaveAttribute('aria-expanded', 'true')
 
       // Клик внутри меню, но не по ссылке, меню не закрывает
-      const menu = page.locator('#site-menu')
+      const menu = siteMenu(page)
       const box = (await menu.boundingBox())!
       await page.mouse.click(box.x + 2, box.y + 2)
       await expect(burger).toHaveAttribute('aria-expanded', 'true')
@@ -180,7 +181,7 @@ for (const locale of LOCALES) {
     test('collapses when the active route changes', async ({ page, baseURL }) => {
       await openSurface(page, { locale, theme: 'light', viewport: MOBILE }, baseURL!)
 
-      const burger = page.locator('.header__burger')
+      const burger = menuButton(page)
       await burger.click()
       await expect(burger).toHaveAttribute('aria-expanded', 'true')
 
@@ -213,14 +214,14 @@ for (const viewport of VIEWPORTS) {
       await openSurface(page, { locale, theme: 'light', viewport }, baseURL!)
 
       if (viewport.headerCollapsed) {
-        await expect(page.locator('.header__link').first()).toBeHidden()
-        const focusableLinks = await page.$$eval('.header__link', els =>
+        await expect(siteNavLinks(page, locale).first()).toBeHidden()
+        const focusableLinks = await siteNavLinks(page, locale).evaluateAll(els =>
           els.filter(el => !!(el as HTMLElement).offsetWidth || !!(el as HTMLElement).offsetHeight).length,
         )
         expect(focusableLinks, 'collapsed menu links must not be focusable').toBe(0)
       }
       else {
-        await expect(page.locator('.header__burger')).toBeHidden()
+        await expect(menuButton(page)).toBeHidden()
       }
     })
   })

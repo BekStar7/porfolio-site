@@ -92,42 +92,19 @@ export async function expectNoViolations(
 }
 
 /**
- * Компоненты, по которым axe не смог посчитать контраст.
+ * Селекторы axe для узлов, по которым он не смог посчитать контраст.
  *
- * Селекторы самого axe в качестве ключа непригодны: в них попадают хеши
- * scoped-стилей (`data-v-…`), позиции `:nth-child` и значения контента —
- * даты, адрес почты. Любая правка текста или пересборка стилей ломала бы
- * такую базу. Поэтому каждый узел сводится к ближайшему предку с
- * BEM-классом: новая вакансия переиспользует `.role__title`, а не добавляет
- * ещё один селектор.
+ * Сами по себе они непригодны как ключ базы: в них попадают хеши стилей
+ * компонентов, позиции `:nth-child` и значения содержимого — даты, адрес
+ * почты. Поэтому здесь они только возвращаются как есть, а тест сам находит
+ * элемент по селектору и смотрит, в какой области страницы он лежит. Причина
+ * «incomplete» — полупрозрачный слой под узлом, а не сам узел, и области
+ * страницы соответствуют слоям, а не классам, которые их рисуют.
  */
-export async function incompleteContrastComponents(page: Page): Promise<string[]> {
+export async function incompleteContrastTargets(page: Page): Promise<string[]> {
   const results = await analyze(page)
-  const selectors = results.incomplete
+  return results.incomplete
     .filter(result => result.id === 'color-contrast')
     .flatMap(result => result.nodes.map(node => node.target[0]))
     .filter((selector): selector is string => typeof selector === 'string')
-
-  const components = await page.evaluate((list: string[]) => {
-    const keyFor = (start: Element): string => {
-      for (let el: Element | null = start; el; el = el.parentElement) {
-        const classes = [...el.classList]
-        // Класс-элемент BEM (`block__element`) описывает роль узла точнее,
-        // чем класс блока, поэтому он в приоритете.
-        const bem = classes.find(name => name.includes('__'))
-        if (bem) return `.${bem}`
-        if (classes.length) return `.${classes[0]}`
-      }
-      return start.id ? `#${start.id}` : start.tagName.toLowerCase()
-    }
-
-    const keys = new Set<string>()
-    for (const selector of list) {
-      const el = document.querySelector(selector)
-      if (el) keys.add(keyFor(el))
-    }
-    return [...keys]
-  }, selectors)
-
-  return components.sort()
 }

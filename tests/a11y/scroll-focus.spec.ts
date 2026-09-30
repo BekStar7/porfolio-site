@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { DESKTOP, LOCALES } from '../support/surfaces'
 import { headerBox, intersects, openSurface, waitForScrollToSettle } from '../support/harness'
+import { projectCards, siteNavLink } from '../support/locators'
 
 const NAV_IDS = ['about', 'experience', 'projects', 'skills', 'contact'] as const
 
@@ -26,7 +27,7 @@ for (const locale of LOCALES) {
       // прямо под залипающую шапку. (Если элемент целиком вне экрана,
       // браузер вместо этого центрирует его — тот случай шапку не задевает,
       // поэтому здесь важно воспроизвести именно частичную обрезку.)
-      const target = page.locator('.project__links .btn').first()
+      const target = projectCards(page, locale).first().getByRole('link').first()
       const natural = await target.boundingBox()
       if (!natural) throw new Error('the target element has no bounding box')
 
@@ -61,7 +62,7 @@ for (const locale of LOCALES) {
       test(`"${id}" heading lands visible and clear of the header`, async ({ page, baseURL }) => {
         await openSurface(page, { locale, theme: 'light', viewport: DESKTOP }, baseURL!)
 
-        await page.locator(`.header__link[href="#${id}"]`).click()
+        await siteNavLink(page, locale, id).click()
         await waitForScrollToSettle(page)
 
         const heading = page.locator(`#${id}-title`)

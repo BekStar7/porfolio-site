@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { DESKTOP, LOCALES } from '../support/surfaces'
 import { openSurface, pinLocale, seedTheme, waitForHydration } from '../support/harness'
+import { currentNavLink } from '../support/locators'
 
 /**
  * 5.7 — В любой момент отмеченным «текущим» может быть не больше одного
@@ -17,9 +18,9 @@ for (const locale of LOCALES) {
       await openSurface(page, { locale, theme: 'light', viewport: DESKTOP }, baseURL!)
 
       await page.evaluate(() => document.getElementById('experience')?.scrollIntoView({ block: 'center' }))
-      await page.waitForFunction(() => document.querySelectorAll('.header__link[aria-current]').length > 0)
+      await page.waitForFunction(() => document.querySelectorAll('#site-menu a[aria-current]').length > 0)
 
-      const current = page.locator('.header__link[aria-current]')
+      const current = currentNavLink(page, locale)
       await expect(current).toHaveCount(1)
       await expect(current).toHaveAttribute('href', '#experience')
       await expect(current).toHaveAttribute('aria-current', 'location')

@@ -24,6 +24,8 @@ export interface Messages {
     sectionsNav: string
   }
   nav: Record<string, string>
+  /** Заголовки разделов: по ним находятся регионы страницы. */
+  sections: Record<'about' | 'experience' | 'projects' | 'skills' | 'education' | 'contact', string>
   theme: { toLight: string, toDark: string }
   locale: { label: string, current: string }
   contact: Record<string, string>

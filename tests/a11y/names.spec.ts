@@ -2,6 +2,15 @@ import { expect, test } from '@playwright/test'
 import { DESKTOP, LOCALES, MOBILE, THEMES, VIEWPORTS, localeByCode } from '../support/surfaces'
 import { openSurface } from '../support/harness'
 import {
+  backToTop,
+  banner,
+  brandLink,
+  brandName,
+  icons,
+  languageMeters,
+  themeToggle,
+} from '../support/locators'
+import {
   FOCUSABLE_SELECTOR,
   INTERACTIVE_ROLES,
   ariaNodeOf,
@@ -15,7 +24,7 @@ import { messages } from '../support/messages'
  * Доступное имя — единственное, что скринридер сообщает про управляющий
  * элемент. Все проверки ниже спрашивают имя у дерева доступности, а не у
  * `textContent`: у иконочной кнопки текста нет вовсе, а подпись лежит
- * в `.sr-only`.
+ * в визуально скрытом тексте.
  */
 
 for (const locale of LOCALES) {
@@ -57,17 +66,19 @@ for (const locale of LOCALES) {
         await openSurface(page, surface, baseURL!)
 
         // Ровно те элементы, у которых нет видимого текста: имя может прийти
-        // только из `.sr-only`. Бургер существует лишь на узкой ширине.
-        const iconOnly = viewport.headerCollapsed
-          ? ['.theme-toggle', '.header__burger']
-          : ['.theme-toggle']
+        // только из визуально скрытого текста. Это кнопки шапки: переключатель
+        // темы, а на узкой ширине ещё и бургер, которого выше точки перелома нет.
+        const buttons = banner(page).getByRole('button')
+        await expect(buttons, 'the header must hold the theme toggle, plus the menu button when collapsed')
+          .toHaveCount(viewport.headerCollapsed ? 2 : 1)
 
-        for (const selector of iconOnly) {
-          const control = page.locator(selector)
+        const total = await buttons.count()
+        for (let index = 0; index < total; index++) {
+          const control = buttons.nth(index)
           await expect(control).toBeVisible()
 
           const node = await ariaNodeOf(control)
-          expect(node?.name?.trim(), `${selector} has no accessible name`).toBeTruthy()
+          expect(node?.name?.trim(), `header button #${index + 1} has no accessible name`).toBeTruthy()
         }
       })
     })
@@ -75,7 +86,7 @@ for (const locale of LOCALES) {
 }
 
 /**
- * 4.4 — ниже 62rem `.header__name` скрыт визуально (clip-path), а не
+ * 4.4 — ниже 62rem имя в шапке скрыто визуально (clip-path), а не
  * `display: none`. Разница невидима глазом и решающая для скринридера:
  * `display: none` выбросил бы текст из дерева, и ссылка-логотип осталась бы
  * без имени — внутри неё только `aria-hidden` монограмма.
@@ -87,19 +98,19 @@ for (const locale of LOCALES) {
     test('survives the collapsed header', async ({ page, baseURL }) => {
       await openSurface(page, { locale, theme: 'light', viewport: MOBILE }, baseURL!)
 
-      const name = page.locator('.header__name')
+      const name = brandName(page)
 
       // Текст берём из самой разметки намеренно: `textContent` виден даже у
       // элемента с `display: none`, а доступное имя — нет. Именно на этом
       // расхождении тест и ловит подмену clip-path на display:none.
       const expected = (await name.textContent())?.trim()
-      expect(expected, '.header__name must carry the name in markup').toBeTruthy()
+      expect(expected, 'the brand name must be carried in the markup').toBeTruthy()
 
       await expect(name).toBeAttached()
       await expect(name).not.toHaveCSS('display', 'none')
       await expect(name).not.toHaveCSS('visibility', 'hidden')
 
-      const brand = await ariaNodeOf(page.locator('.header__brand'))
+      const brand = await ariaNodeOf(brandLink(page))
       expect(brand?.name, 'the brand link must still announce whose site this is')
         .toContain(expected!)
     })
@@ -107,7 +118,7 @@ for (const locale of LOCALES) {
     test('is plainly visible above the breakpoint', async ({ page, baseURL }) => {
       await openSurface(page, { locale, theme: 'light', viewport: DESKTOP }, baseURL!)
 
-      await expect(page.locator('.header__name')).toBeVisible()
+      await expect(brandName(page)).toBeVisible()
     })
   })
 }
@@ -132,7 +143,7 @@ for (const theme of THEMES) {
       const expected = theme === 'light' ? messages(locale).theme.toDark : messages(locale).theme.toLight
       const unexpected = both.find(label => label !== expected)!
 
-      const node = await ariaNodeOf(page.locator('.theme-toggle'))
+      const node = await ariaNodeOf(themeToggle(page, locale))
       const name = node?.name ?? ''
 
       expect(name, `in the ${theme} theme the toggle must offer the other theme`).toContain(expected)
@@ -192,7 +203,7 @@ for (const locale of LOCALES) {
     test('accessible name contains the visible text', async ({ page, baseURL }) => {
       await openSurface(page, { locale, theme: 'light', viewport: DESKTOP }, baseURL!)
 
-      const link = page.locator('.footer__top')
+      const link = backToTop(page)
       await link.scrollIntoViewIfNeeded()
 
       const visible = messages(locale).nav.top
@@ -218,8 +229,8 @@ for (const viewport of VIEWPORTS) {
     test('stays out of the accessibility tree and out of tab order', async ({ page, baseURL }) => {
       await openSurface(page, { locale, theme: 'light', viewport }, baseURL!)
 
-      const icons = page.locator('svg.icon')
-      expect(await icons.count(), 'no icons found — the check would be vacuous')
+      const decorative = icons(page)
+      expect(await decorative.count(), 'no icons found — the check would be vacuous')
         .toBeGreaterThan(0)
 
       // Ни одной графической роли в дереве: значит, ни одна иконка не
@@ -231,15 +242,15 @@ for (const viewport of VIEWPORTS) {
       // Каждая иконка помечена скрытой и невыводима из фокуса: в SVG за это
       // отвечает focusable="false", иначе IE-подобное поведение делает её
       // остановкой табуляции.
-      const count = await icons.count()
+      const count = await decorative.count()
       for (let index = 0; index < count; index++) {
-        const icon = icons.nth(index)
+        const icon = decorative.nth(index)
         await expect(icon).toHaveAttribute('aria-hidden', 'true')
         await expect(icon).toHaveAttribute('focusable', 'false')
       }
       await expect(page.locator('svg[tabindex]')).toHaveCount(0)
 
-      const meters = page.locator('.language__meter')
+      const meters = languageMeters(page)
       expect(await meters.count(), 'no language meters found').toBeGreaterThan(0)
       const meterCount = await meters.count()
       for (let index = 0; index < meterCount; index++) {

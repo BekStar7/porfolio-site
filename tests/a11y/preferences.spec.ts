@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { DESKTOP, localeByCode } from '../support/surfaces'
 import { pinLocale, seedTheme, waitForHydration } from '../support/harness'
+import { projectCards, siteNavLink, themeToggle } from '../support/locators'
 
 const locale = localeByCode('ru')
 
@@ -23,7 +24,7 @@ test.describe('reduced motion', () => {
     const scrollBehavior = await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)
     expect(scrollBehavior, 'reduced motion must force instant scrolling').toBe('auto')
 
-    await page.locator('.header__link[href="#projects"]').click()
+    await siteNavLink(page, locale, 'projects').click()
     // Плавная прокрутка заняла бы сотни миллисекунд; мгновенная — уже здесь.
     await page.waitForFunction(() => {
       const target = document.getElementById('projects')
@@ -44,7 +45,9 @@ test.describe('forced colors', () => {
     await page.goto(locale.path)
     await waitForHydration(page)
 
-    const card = page.locator('.contact.card')
+    // Карточка проекта — `<article>`: у неё есть роль, а правило границы в
+    // forced-colors общее для всех карточек.
+    const card = projectCards(page, locale).first()
     const border = await card.evaluate((el) => {
       const style = getComputedStyle(el)
       return { style: style.borderStyle, width: Number.parseFloat(style.borderWidth) }
@@ -52,7 +55,7 @@ test.describe('forced colors', () => {
     expect(border.style, 'forced-colors mode must not remove the card border').not.toBe('none')
     expect(border.width, 'forced-colors mode must keep a non-zero border width').toBeGreaterThan(0)
 
-    const toggle = page.locator('.theme-toggle')
+    const toggle = themeToggle(page, locale)
     await toggle.focus()
     const outline = await toggle.evaluate((el) => {
       const style = getComputedStyle(el)

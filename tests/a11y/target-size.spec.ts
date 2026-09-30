@@ -1,6 +1,15 @@
 import { expect, test } from '@playwright/test'
+import type { Locator, Page } from '@playwright/test'
 import { LOCALES, VIEWPORTS } from '../support/surfaces'
+import type { LocaleSurface } from '../support/surfaces'
 import { intersects, openSurface } from '../support/harness'
+import {
+  callToActionControls,
+  localeLinks,
+  menuButton,
+  siteNavLinks,
+  themeToggle,
+} from '../support/locators'
 import { describeElement } from '../support/aria'
 
 /**
@@ -10,12 +19,12 @@ import { describeElement } from '../support/aria'
  * а не заявленные `min-width`/`min-height`: реальный размер зависит ещё и от
  * содержимого и `padding`.
  */
-const TARGET_SELECTORS = [
-  '.header__link',
-  '.header__burger',
-  '.locale-switcher__link',
-  '.theme-toggle',
-  '.btn',
+const TARGETS: { name: string, locate: (page: Page, locale: LocaleSurface) => Locator }[] = [
+  { name: 'section menu links', locate: siteNavLinks },
+  { name: 'menu button', locate: page => menuButton(page) },
+  { name: 'language links', locate: localeLinks },
+  { name: 'theme toggle', locate: themeToggle },
+  { name: 'call-to-action controls', locate: callToActionControls },
 ]
 
 for (const locale of LOCALES) {
@@ -31,15 +40,15 @@ for (const locale of LOCALES) {
         // Ссылки меню на узкой ширине скрыты, пока меню не раскрыто — их
         // тоже нужно измерить, а не только бургер, который их раскрывает.
         if (viewport.headerCollapsed) {
-          const burger = page.locator('.header__burger')
+          const burger = menuButton(page)
           await burger.click()
           await expect(burger).toHaveAttribute('aria-expanded', 'true')
         }
 
         const boxes: { label: string, box: { x: number, y: number, width: number, height: number } }[] = []
 
-        for (const selector of TARGET_SELECTORS) {
-          const locatorAll = page.locator(selector)
+        for (const { locate } of TARGETS) {
+          const locatorAll = locate(page, locale)
           const total = await locatorAll.count()
 
           for (let index = 0; index < total; index++) {
