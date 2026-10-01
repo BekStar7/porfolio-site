@@ -22,17 +22,15 @@ pnpm dev          # http://localhost:3000
 
 ---
 
-## ⚠️ Перед публикацией: задайте адрес сайта
+## Адрес сайта
 
-Пока адрес не задан, используется заглушка `https://example.com` — и canonical,
-hreflang, sitemap и Open Graph будут указывать в никуда.
+По умолчанию сборка считает адресом сайта `https://bekstar.tech` — он попадает
+в canonical, hreflang, sitemap и Open Graph. Для другого домена задайте
+переменную окружения:
 
 ```bash
-NUXT_PUBLIC_SITE_URL="https://ваш-домен.ru" pnpm generate
+NUXT_PUBLIC_SITE_URL="https://другой-домен.ru" pnpm generate
 ```
-
-На хостинге пропишите ту же переменную окружения (`NUXT_PUBLIC_SITE_URL`)
-в настройках проекта.
 
 ---
 
@@ -222,16 +220,21 @@ await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 
 
 ## Публикация
 
-После `pnpm generate` в `.output/public` лежит обычная статика — подойдёт
-любой хостинг:
+Сайт развёрнут на **Cloudflare Workers**: репозиторий подключён через Git,
+каждый push в `main` запускает `pnpm build` и деплой. Конфига Cloudflare в
+репозитории нет — он не нужен:
 
-```bash
-pnpm dlx vercel deploy --prebuilt     # Vercel
-pnpm dlx netlify deploy --prod --dir=.output/public
-```
+- В окружении Cloudflare Nitro сам выбирает пресет `cloudflare-module` и
+  генерирует конфиг wrangler в `.output/server/wrangler.json`.
+- Страницы `/` и `/en` пререндерятся и отдаются как статика вместе с `_headers`
+  (годовой кэш для `/_nuxt/` и `/_fonts/`). Worker отвечает только на остальное:
+  `robots.txt` и страницу 404.
+- Домен `bekstar.tech` привязывается в настройках Worker (Domains & Routes →
+  Custom domain); редирект с `www` настраивается правилом в Cloudflare, а не в
+  репозитории.
 
-Для GitHub Pages, S3 или nginx просто выложите содержимое `.output/public`.
-Не забудьте задать `NUXT_PUBLIC_SITE_URL`.
+На любой другой статический хостинг достаточно выложить содержимое
+`.output/public` после `pnpm generate`.
 
 ---
 

@@ -14,7 +14,7 @@ export default defineNuxtConfig({
 
   // Базовый URL сайта. Переопределяется переменной NUXT_PUBLIC_SITE_URL.
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://bekstar.tech',
     name: 'Portfolio',
   },
 
@@ -44,7 +44,7 @@ export default defineNuxtConfig({
 
   i18n: {
     // Нужен, чтобы canonical и hreflang были абсолютными URL
-    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://bekstar.tech',
     strategy: 'prefix_except_default',
     defaultLocale: 'ru',
     locales: [
