@@ -113,6 +113,11 @@ export const profile: Profile = {
       items: ['Vue 3', 'Nuxt', 'React', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'SCSS Modules', 'Tailwind CSS'],
     },
     {
+      id: 'state',
+      title: { ru: 'Управление состоянием', en: 'State management' },
+      items: ['Pinia', 'Vuex', 'Redux Toolkit', 'MobX'],
+    },
+    {
       id: 'architecture',
       title: { ru: 'Архитектура', en: 'Architecture' },
       items: ['Feature-Sliced Design', 'SSR / SSG', 'Design Systems', 'Component Libraries', 'Storybook'],
@@ -307,7 +312,7 @@ export const profile: Profile = {
         ru: 'Личный проект: от идеи до авто-деплоя на Fly.io через GitHub Actions.',
         en: 'A personal project taken from idea to automated Fly.io deploys via GitHub Actions.',
       },
-      tags: ['TypeScript', 'Node 22', 'grammY', 'Claude Vision', 'SQLite', 'Drizzle ORM', 'Docker', 'Fly.io'],
+      tags: ['TypeScript', 'Node 24', 'grammY', 'Claude Vision', 'SQLite', 'Drizzle ORM', 'Docker', 'Fly.io'],
       links: [
         { label: { ru: 'Открыть код', en: 'View source' }, href: 'https://github.com/BekStar7/split-bill-bot', primary: true },
         { label: { ru: 'Бот в Telegram', en: 'Bot on Telegram' }, href: 'https://t.me/billspliter_bot' },
