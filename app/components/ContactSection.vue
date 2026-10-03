@@ -108,6 +108,10 @@ onBeforeUnmount(() => clearTimeout(resetTimer))
 }
 
 .contact__social {
+  /* Карточка занимает всю ячейку сетки: иначе ширина идёт от длины текста,
+     и между карточками остаются неравные просветы */
+  display: flex;
+  height: 100%;
   gap: var(--space-s);
   padding: var(--space-s) var(--space-m);
   border: 1px solid var(--border);

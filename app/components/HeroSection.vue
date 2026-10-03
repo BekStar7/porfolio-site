@@ -38,15 +38,6 @@ const { tx } = useLocalized()
         <a class="btn btn--ghost" href="#projects">{{ t('hero.ctaProjects') }}</a>
       </div>
 
-      <ul class="hero__socials" :aria-label="t('a11y.socialLinks')">
-        <li v-for="social in profile.socials" :key="social.id">
-          <AppLink class="hero__social" :href="social.href" :show-icon="false">
-            <AppIcon :name="social.icon as never" :size="18" />
-            <span>{{ social.handle }}</span>
-          </AppLink>
-        </li>
-      </ul>
-
       <ul class="stats" :aria-label="t('hero.statsLabel')">
         <li v-for="stat in profile.stats" :key="stat.id" class="stats__item">
           <span class="stats__value">{{ tx(stat.value) }}</span>
@@ -143,26 +134,6 @@ const { tx } = useLocalized()
   flex-wrap: wrap;
   gap: var(--space-s);
   margin-block-start: var(--space-xl);
-}
-
-.hero__socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-s) var(--space-l);
-  margin-block-start: var(--space-l);
-  padding: 0;
-  list-style: none;
-}
-
-.hero__social {
-  min-height: 2.75rem;
-  color: var(--text-muted);
-  font-size: var(--step--1);
-  text-decoration: none;
-}
-
-.hero__social:hover {
-  color: var(--accent);
 }
 
 .stats {
