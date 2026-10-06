@@ -149,6 +149,7 @@ export const profile: Profile = {
       id: 'zimran',
       company: 'Zimran',
       note: 'EdTech',
+      logo: '/logos/zimran.svg',
       location: { ru: 'Удалённо', en: 'Remote' },
       roles: [
         {
@@ -197,7 +198,9 @@ export const profile: Profile = {
       id: 'kolesa',
       company: 'Kolesa Group',
       note: 'Krisha.kz',
-      href: 'https://krisha.kz',
+      noteHref: 'https://krisha.kz',
+      href: 'https://kolesa.group',
+      logo: '/logos/kolesa.svg',
       location: { ru: 'Алматы, Казахстан', en: 'Almaty, Kazakhstan' },
       roles: [
         {
@@ -245,6 +248,7 @@ export const profile: Profile = {
     {
       id: 'alexandrov',
       company: 'Alexandrov.co',
+      logo: '/logos/alexandrov.svg',
       location: { ru: 'Алматы, Казахстан', en: 'Almaty, Kazakhstan' },
       roles: [
         {

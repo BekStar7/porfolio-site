@@ -52,7 +52,11 @@ export interface Job {
   company: string
   /** Уточнение в скобках: «EdTech», «Krisha.kz» */
   note?: string
+  /** Ссылка для уточнения, если это отдельный продукт: Krisha.kz → krisha.kz */
+  noteHref?: string
   href?: string
+  /** Квадратный логотип из `public/`: «/logos/zimran.svg». Без него — буква-монограмма */
+  logo?: string
   location: Localized
   roles: Role[]
 }
