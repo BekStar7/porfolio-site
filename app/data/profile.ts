@@ -138,6 +138,11 @@ export const profile: Profile = {
       items: ['A/B Testing (Statsig)', 'Amplitude', 'REST', 'WebSockets'],
     },
     {
+      id: 'compliance',
+      title: { ru: 'Комплаенс', en: 'Compliance' },
+      items: ['GDPR', 'CCPA', 'Consent Management (TrustArc)'],
+    },
+    {
       id: 'ai',
       title: { ru: 'AI-инструменты', en: 'AI tooling' },
       items: ['Claude Code', 'OpenAI API'],
@@ -180,6 +185,7 @@ export const profile: Profile = {
               'Возглавил перевод React-кодовой базы на 433 тыс. строк со смешанными подходами на строгий Feature-Sliced Design поверх Vite — выбрал распространённый стандарт, чтобы новые инженеры разбирались в проекте без долгого онбординга.',
               'Собрал на Node.js и OpenAI API инструмент локализации для 13 языков: перевод одной задачи сократился с 30 минут до 2.',
               'Выбрал Statsig вместо GrowthBook и внедрил как платформу экспериментов — это дало 100+ A/B-тестов на апсейл-сценариях, а дашборды Amplitude подтверждали корректность данных.',
+              'Вместе с юристами вёл внедрение требований GDPR и CCPA на рынках ЕС и США: выбрал TrustArc из 5 платформ управления согласиями, чтобы покрыть веб и мобильное приложение, и внедрил его во всех регионах; в ЕС аналитика отправлялась только после согласия (при отказе события удалялись), поэтому сессии согласившихся сохранялись полностью.',
               'Покрыл критичные для бизнеса сценарии E2E-тестами на Playwright, блокирующими релиз в CI: два релиза с поломанным апсейлом так и не доехали до прода.',
               'Перевёл мониторинг ошибок с Bugsnag на Sentry и ускорил обнаружение регрессий в ключевых функциях.',
             ],
@@ -187,6 +193,7 @@ export const profile: Profile = {
               'Led the migration of a 433K-line mixed-paradigm React codebase to strict Feature-Sliced Design on Vite, choosing a widely adopted standard so new engineers could navigate and extend it with minimal ramp-up.',
               'Built a Node.js + OpenAI API localization tool for 13 languages, cutting per-task translation time from 30 minutes to 2.',
               'Selected Statsig over GrowthBook and integrated it as the experimentation platform, enabling 100+ A/B tests on upsell flows, with Amplitude dashboards validating data integrity.',
+              'Drove GDPR and CCPA compliance with the legal team across EU and US markets: picked TrustArc out of 5 consent management platforms to cover web and mobile, rolled it out in all regions, and gated EU analytics on consent (sent on opt-in, discarded on decline), so opt-in sessions were captured in full.',
               'Covered business-critical flows with Playwright E2E tests gating every release in CI — blocking 2 releases that would have broken the revenue-critical upsell flow.',
               'Migrated error monitoring from Bugsnag to Sentry, speeding up detection of regressions in core features.',
             ],
@@ -213,6 +220,7 @@ export const profile: Profile = {
               'Собрал общекорпоративную UI-библиотеку на Vue и Storybook по дизайн-системе из Figma — она до сих пор единый источник правды для Krisha.kz и Kolesa.kz.',
               'Сократил онбординг нового разработчика с двух дней до ~10 минут набором bash-скриптов вокруг Docker, Nginx и LDAP.',
               'В одиночку сделал webview для цифрового подписания договоров на недвижимость, встроенный в приложения iOS и Android; проект помог Kolesa стать первой продуктовой компанией Казахстана с аккредитованным удостоверяющим центром.',
+              'Участвовал в product discovery и вместе с продактами и дизайнерами приоритизировал фичи по фреймворку RICE.',
               'Признан «Top Frontend 2023».',
             ],
             en: [
@@ -220,6 +228,7 @@ export const profile: Profile = {
               'Built the company-wide Vue + Storybook UI library from the Figma design system — still the single source of truth for Krisha.kz and Kolesa.kz.',
               'Cut new-developer onboarding from 2 days to ~10 minutes with a bash automation suite covering Docker, Nginx and LDAP.',
               'Sole developer on the digital real-estate contract-signing webview embedded in the iOS and Android apps — a project that helped Kolesa become the first product company in Kazakhstan to operate an accredited Certificate Authority.',
+              'Took part in product discovery and prioritized features with the RICE framework alongside product and design.',
               'Recognized as “Top Frontend 2023”.',
             ],
           },
