@@ -156,7 +156,7 @@ export const profile: Profile = {
       company: 'Zimran',
       note: 'EdTech',
       logo: '/logos/zimran.svg',
-      location: { ru: 'Удалённо', en: 'Remote' },
+      location: { ru: 'Лимасол, Кипр · On-site', en: 'Limassol, Cyprus · On-site' },
       roles: [
         {
           title: { ru: 'Web Team Lead', en: 'Web Team Lead' },
