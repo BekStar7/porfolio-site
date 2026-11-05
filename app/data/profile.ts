@@ -81,15 +81,15 @@ export const profile: Profile = {
 
   about: {
     ru: [
-      'Senior Frontend Engineer с девятью годами опыта. Делаю высоконагруженные веб-продукты — от крупнейшего в Казахстане маркетплейса недвижимости Krisha.kz (~1,5 млн MAU) до мультиязычной EdTech-платформы.',
+      'Senior Frontend Engineer и играющий тимлид с девятью годами опыта. Делаю высоконагруженные веб-продукты — от крупнейшего в Казахстане маркетплейса недвижимости Krisha.kz (~1,5 млн MAU) до EdTech-платформы на 13 языков для рынков ЕС и США.',
       'В разработку пришёл не сразу: начинал эникейщиком в турфирме, потом работал в Service Desk «Казпочты» и собирался стать системным администратором. На курсах понял, что визуальная часть веба интересует меня сильнее, — и ушёл во frontend.',
-      'Сейчас специализируюсь на Vue 3 / Nuxt и React / TypeScript: перевожу легаси на масштабируемые архитектуры (Feature-Sliced Design, SSR), собираю дизайн-системы уровня компании и выстраиваю процесс вокруг данных — A/B-тесты, мониторинг ошибок, E2E-тесты в CI.',
+      'Сейчас специализируюсь на Vue 3 / Nuxt и React / TypeScript: перевожу легаси на масштабируемые архитектуры (Feature-Sliced Design, SSR), собираю дизайн-системы уровня компании и выстраиваю процесс вокруг данных — A/B-тесты, мониторинг ошибок, E2E-тесты в CI, согласия GDPR/CCPA. Последнее время вёл команду из 4 инженеров и делал AI-инструменты, сократившие локализацию с 30 до 2 минут.',
       'Люблю владеть архитектурой фронтенда целиком, а не отдельным экраном, и растить команду вокруг неё.',
     ],
     en: [
-      'Senior Frontend Engineer with nine years of experience building high-load web products — from Kazakhstan’s largest real-estate marketplace, Krisha.kz (~1.5M MAU), to a multi-language EdTech platform.',
+      'Senior Frontend Engineer and hands-on team lead with nine years of experience building high-load web products — from Kazakhstan’s largest real-estate marketplace, Krisha.kz (~1.5M MAU), to a 13-language EdTech platform for EU and US markets.',
       'I did not start out in engineering. I was the IT generalist at a travel agency, then worked Service Desk at Kazpost, heading for a sysadmin career. A course along the way showed me I cared far more about the visual side of the web — so I moved into frontend.',
-      'Today I work in Vue 3 / Nuxt and React / TypeScript: migrating legacy codebases to scalable architectures (Feature-Sliced Design, SSR), building company-wide design systems, and wiring the process around data — A/B tests, error monitoring and E2E tests in CI.',
+      'Today I work in Vue 3 / Nuxt and React / TypeScript: migrating legacy codebases to scalable architectures (Feature-Sliced Design, SSR), building company-wide design systems, and wiring the process around data — A/B tests, error monitoring, E2E tests in CI and GDPR/CCPA consent. Most recently I led a team of 4 engineers and built AI tooling that cut localization from 30 minutes to 2.',
       'I like owning frontend architecture end to end rather than a single screen, and growing the team around it.',
     ],
   },
@@ -110,12 +110,12 @@ export const profile: Profile = {
     {
       id: 'frontend',
       title: { ru: 'Frontend', en: 'Frontend' },
-      items: ['Vue 3', 'Nuxt', 'React', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'SCSS Modules', 'Tailwind CSS'],
+      items: ['Vue 3', 'Nuxt 3', 'React', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'SCSS Modules', 'Tailwind CSS'],
     },
     {
       id: 'state',
       title: { ru: 'Управление состоянием', en: 'State management' },
-      items: ['Pinia', 'Vuex', 'Redux Toolkit', 'MobX'],
+      items: ['Redux Toolkit', 'MobX', 'Recoil', 'Pinia', 'Vuex'],
     },
     {
       id: 'architecture',
@@ -130,7 +130,7 @@ export const profile: Profile = {
     {
       id: 'tooling',
       title: { ru: 'Инструменты и инфраструктура', en: 'Tooling & infrastructure' },
-      items: ['Vite', 'Webpack', 'Node.js', 'Docker', 'Nginx', 'GitHub Actions', 'Vercel', 'AWS Route 53'],
+      items: ['Vite', 'Webpack', 'Node.js', 'Docker', 'Nginx', 'OpenResty', 'GitHub Actions', 'Vercel', 'AWS Route 53'],
     },
     {
       id: 'product',
@@ -182,7 +182,7 @@ export const profile: Profile = {
           end: '2026-02',
           highlights: {
             ru: [
-              'Возглавил перевод React-кодовой базы на 433 тыс. строк со смешанными подходами на строгий Feature-Sliced Design поверх Vite — выбрал распространённый стандарт, чтобы новые инженеры разбирались в проекте без долгого онбординга.',
+              'В одиночку перевёл React-кодовую базу на 433 тыс. строк со смешанными подходами на строгий Feature-Sliced Design поверх Vite — выбрал распространённый стандарт, чтобы новые инженеры разбирались в проекте без долгого онбординга.',
               'Собрал на Node.js и OpenAI API инструмент локализации для 13 языков: перевод одной задачи сократился с 30 минут до 2.',
               'Выбрал Statsig вместо GrowthBook и внедрил как платформу экспериментов — это дало 100+ A/B-тестов на апсейл-сценариях, а дашборды Amplitude подтверждали корректность данных.',
               'Вместе с юристами вёл внедрение требований GDPR и CCPA на рынках ЕС и США: выбрал TrustArc из 5 платформ управления согласиями, чтобы покрыть веб и мобильное приложение, и внедрил его во всех регионах; в ЕС аналитика отправлялась только после согласия (при отказе события удалялись), поэтому сессии согласившихся сохранялись полностью.',
@@ -190,7 +190,7 @@ export const profile: Profile = {
               'Перевёл мониторинг ошибок с Bugsnag на Sentry и ускорил обнаружение регрессий в ключевых функциях.',
             ],
             en: [
-              'Led the migration of a 433K-line mixed-paradigm React codebase to strict Feature-Sliced Design on Vite, choosing a widely adopted standard so new engineers could navigate and extend it with minimal ramp-up.',
+              'Single-handedly migrated a 433K-line mixed-paradigm React codebase to strict Feature-Sliced Design on Vite, choosing a widely adopted standard so new engineers could navigate and extend it with minimal ramp-up.',
               'Built a Node.js + OpenAI API localization tool for 13 languages, cutting per-task translation time from 30 minutes to 2.',
               'Selected Statsig over GrowthBook and integrated it as the experimentation platform, enabling 100+ A/B tests on upsell flows, with Amplitude dashboards validating data integrity.',
               'Drove GDPR and CCPA compliance with the legal team across EU and US markets: picked TrustArc out of 5 consent management platforms to cover web and mobile, rolled it out in all regions, and gated EU analytics on consent (sent on opt-in, discarded on decline), so opt-in sessions were captured in full.',
@@ -267,13 +267,13 @@ export const profile: Profile = {
           highlights: {
             ru: [
               'Erinfo: сделал работу с камерой и распознавание лиц на React Native поверх Amazon Rekognition — в экстренной ситуации приложение опознавало пациента и отдавало его медицинские данные службам первой помощи.',
-              'Restaff: запустил кроссплатформенное десктопное приложение для учёта рабочего времени на Electron под Windows и macOS.',
+              'Restaff: запустил кроссплатформенное десктопное приложение для учёта рабочего времени на Electron под Windows и macOS, близкое по задачам к Hubstaff.',
               'Вёл коммерческие проекты на Vue, React и React Native для международных заказчиков с Upwork, работая асинхронно в разных часовых поясах.',
               'Внедрил Storybook для разработки компонентов и ускорил передачу макетов из дизайна в код.',
             ],
             en: [
               'Erinfo: built the camera flow and face recognition in React Native on top of Amazon Rekognition — in an emergency the app identified a patient and returned their medical data to first responders.',
-              'Restaff: shipped a cross-platform Electron desktop app for time tracking on Windows and macOS.',
+              'Restaff: shipped a cross-platform Electron desktop app for time tracking on Windows and macOS, similar in scope to Hubstaff.',
               'Delivered commercial projects in Vue, React and React Native for international Upwork clients, working asynchronously across time zones.',
               'Set up Storybook for component development, speeding up the design-to-development handoff.',
             ],
@@ -453,7 +453,7 @@ export const profile: Profile = {
         en: 'Almaty University of Power Engineering and Telecommunications',
       },
       degree: { ru: 'Магистратура', en: 'Master’s degree' },
-      field: { ru: 'Информационные системы', en: 'Information Systems' },
+      field: { ru: 'Информационные технологии', en: 'Information Technology' },
       start: '2015',
       end: '2017',
     },
@@ -464,7 +464,7 @@ export const profile: Profile = {
         en: 'Almaty University of Power Engineering and Telecommunications',
       },
       degree: { ru: 'Бакалавриат', en: 'Bachelor’s degree' },
-      field: { ru: 'Информационные системы', en: 'Information Systems' },
+      field: { ru: 'Информационные технологии', en: 'Information Technology' },
       start: '2011',
       end: '2015',
     },
