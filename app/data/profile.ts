@@ -74,24 +74,23 @@ export const profile: Profile = {
     },
     {
       id: 'migration',
-      value: { ru: '433 тыс.', en: '433K' },
-      label: { ru: 'строк кода переведено на FSD', en: 'lines of code migrated to FSD' },
+      value: '810',
+      label: { ru: 'legacy-файлов в одиночку заменил на FSD', en: 'legacy files replaced with FSD, solo' },
     },
   ],
 
   about: {
     ru: [
-      'Senior Frontend Engineer, 9 лет работаю над высоконагруженными веб-продуктами. Среди них Krisha.kz, крупнейший маркетплейс недвижимости Казахстана (~1,5 млн MAU), и EdTech-платформа на 13 языках для ЕС и США.',
-      'Пишу на React / Next.js и Vue 3 / Nuxt 3, всегда на TypeScript. Переводил легаси-кодовые базы на Feature-Sliced Design и SSR, строил дизайн-системы для всей компании в Storybook. На последнем месте руководил кросс-функциональной командой из 4 инженеров и сам продолжал писать продакшн-код.',
-      'Провёл 100+ A/B-тестов и внедрил управление согласиями по GDPR/CCPA в ЕС и США. Мои E2E-тесты на Playwright в CI остановили 2 релиза, которые сломали бы upsell-воронку, ключевую для выручки, ещё до того, как они дошли до пользователей. Ещё я выстроил работу команды с AI-агентами: общие Claude Code Skills и файлы инструкций, благодаря которым сгенерированный код соответствовал нашей архитектуре и стандартам ревью. В Kolesa Group получил награду Top Frontend 2023.',
+      'Senior Frontend Engineer с 9 годами опыта: React и Vue 3 / Nuxt 3 на TypeScript. На последнем месте руководил командой из 4 инженеров, работавшей над Finelo в Zimran (~500 тыс. MAU, 13 языков, ЕС и США), и сам писал продакшн-код.',
+      'В одиночку перевёл React-кодовую базу на Feature-Sliced Design, совместно руководил миграцией Krisha.kz (~1,5 млн MAU) на Nuxt 3 SSR, создал общую для компании UI-библиотеку на Vue, запустил 100+ A/B-тестов, внедрил управление согласиями под GDPR/CCPA и E2E-тесты в CI. Top Frontend 2023 в Kolesa Group.',
       'В разработку пришёл не сразу. Начинал эникейщиком в турфирме, потом работал в Service Desk «Казпочты» и собирался в системные администраторы. На курсах понял, что визуальная часть веба интересует меня больше, и перешёл во frontend.',
       'Ищу удалённую работу над продуктом, который действительно нужен людям, в команде, где есть у кого учиться.',
     ],
     en: [
-      'Senior Frontend Engineer and hands-on team lead with nine years of experience building high-load web products — from Kazakhstan’s largest real-estate marketplace, Krisha.kz (~1.5M MAU), to a 13-language EdTech platform for EU and US markets.',
-      'I did not start out in engineering. I was the IT generalist at a travel agency, then worked Service Desk at Kazpost, heading for a sysadmin career. A course along the way showed me I cared far more about the visual side of the web — so I moved into frontend.',
-      'Today I work in Vue 3 / Nuxt and React / TypeScript: migrating legacy codebases to scalable architectures (Feature-Sliced Design, SSR), building company-wide design systems, and wiring the process around data — A/B tests, error monitoring, E2E tests in CI and GDPR/CCPA consent. Most recently I led a team of 4 engineers and built AI tooling that cut localization from 30 minutes to 2.',
-      'I like owning frontend architecture end to end rather than a single screen, and growing the team around it.',
+      'Senior Frontend Engineer with 9 years of experience, working across React and Vue 3 / Nuxt 3 with TypeScript. Most recently a hands-on lead of 4 engineers on Finelo at Zimran (~500K MAU, 13 languages, EU and US).',
+      'Migrated a React codebase to Feature-Sliced Design solo, co-led a Nuxt 3 SSR migration at Krisha.kz (~1.5M MAU), built a company-wide Vue UI library, and shipped 100+ A/B tests, GDPR/CCPA consent management and CI-gated E2E testing. Top Frontend 2023 at Kolesa Group.',
+      'I did not start out in engineering. I was the IT generalist at a travel agency, then worked Service Desk at Kazpost, heading for a sysadmin career. A course along the way showed me I cared far more about the visual side of the web, so I moved into frontend.',
+      'Looking for remote work on a product people genuinely need, on a team with someone to learn from.',
     ],
   },
 
@@ -111,7 +110,7 @@ export const profile: Profile = {
     {
       id: 'frontend',
       title: { ru: 'Frontend', en: 'Frontend' },
-      items: ['Vue 3', 'Nuxt 3', 'React', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'SCSS Modules', 'Tailwind CSS'],
+      items: ['React', 'Next.js', 'Vue 3', 'Nuxt 3', 'Preact', 'TypeScript', 'JavaScript', 'HTML/CSS', 'SCSS', 'Tailwind CSS', 'Three.js'],
     },
     {
       id: 'state',
@@ -121,22 +120,22 @@ export const profile: Profile = {
     {
       id: 'architecture',
       title: { ru: 'Архитектура', en: 'Architecture' },
-      items: ['Feature-Sliced Design', 'SSR / SSG', 'Design Systems', 'Component Libraries', 'Storybook'],
+      items: ['Feature-Sliced Design', 'SSR / SSG', 'Web Performance', 'Design Systems', 'Component Libraries', 'Storybook'],
     },
     {
       id: 'quality',
       title: { ru: 'Тестирование и качество', en: 'Testing & quality' },
-      items: ['Playwright', 'Vitest', 'E2E Testing', 'Sentry', 'CI/CD'],
+      items: ['Playwright', 'Vitest', 'Jest', 'E2E Testing', 'ESLint', 'Biome', 'Sentry', 'CI/CD', 'Canary Releases'],
     },
     {
       id: 'tooling',
       title: { ru: 'Инструменты и инфраструктура', en: 'Tooling & infrastructure' },
-      items: ['Vite', 'Webpack', 'Node.js', 'Docker', 'Nginx', 'OpenResty', 'GitHub Actions', 'Vercel', 'AWS Route 53'],
+      items: ['Vite', 'Webpack', 'pnpm', 'Node.js', 'Docker', 'Nginx', 'OpenResty', 'GitHub Actions', 'Vercel', 'AWS Route 53'],
     },
     {
       id: 'product',
       title: { ru: 'Продукт и данные', en: 'Product & data' },
-      items: ['A/B Testing (Statsig)', 'Amplitude', 'REST', 'WebSockets'],
+      items: ['A/B Testing (Statsig)', 'Amplitude', 'i18n', 'REST', 'WebSockets'],
     },
     {
       id: 'compliance',
@@ -156,7 +155,7 @@ export const profile: Profile = {
       company: 'Zimran',
       note: 'EdTech',
       logo: '/logos/zimran.svg',
-      location: { ru: 'Лимасол, Кипр · On-site', en: 'Limassol, Cyprus · On-site' },
+      location: { ru: 'Удалённо (офис в Лимасоле)', en: 'Remote (Limassol HQ)' },
       roles: [
         {
           title: { ru: 'Web Team Lead', en: 'Web Team Lead' },
@@ -164,16 +163,20 @@ export const profile: Profile = {
           end: '2026-08',
           highlights: {
             ru: [
-              'Отвечал за frontend-архитектуру EdTech-платформы и при этом каждый день писал продакшн-код как тимлид.',
-              'Руководил кросс-функциональной командой из 4 инженеров (frontend + backend): код-ревью, 1:1, performance review и планы развития.',
-              'Определил технические требования к найму и провёл полный цикл собеседований frontend-кандидатов.',
-              'Закрепил командные договорённости в виде общих Claude Code Skills и файлов инструкций, чтобы код, написанный с помощью AI, соответствовал архитектуре проекта и стандартам ревью.',
+              'Отвечал за frontend-архитектуру Finelo, EdTech-платформы Zimran с ~500 тыс. MAU и 20+ тыс. DAU, и оставался главным контрибьютором по коду: 309 из 526 смёрженных PR с сентября 2024 по август 2026.',
+              'Руководил командой из 4 frontend- и backend-инженеров, которая выпускала 2–4 фичи в неделю; проводил код-ревью, 1:1 и performance review, составлял индивидуальные планы развития.',
+              'Определил планку найма во frontend и за время обеих ролей в Zimran провёл 80+ intro-звонков и 63 технических собеседования, нанял 3 инженеров. Ещё двоих привёл по рекомендации и менторил: они пришли на middle и выросли до senior.',
+              'Ввёл canary-релизы для изменений в upsell-воронке, ключевой для выручки: 10% пользователей, затем 50%, затем все, с 15-минутной паузой на наблюдение между шагами.',
+              'Сократил First Contentful Paint на мобильных на 60% в лабораторных замерах Lighthouse (4,9 → 2,0 с, без сторонних скриптов): вынес критический CSS в HTML и добавил статический лоадер.',
+              'Закрепил командные договорённости в общих агентах, slash-командах и memory-файлах для Claude Code и в spec-driven процессе на OpenSpec, чтобы AI писал код по архитектуре проекта.',
             ],
             en: [
-              'Owned frontend architecture for the EdTech web platform while shipping production code daily as a hands-on lead.',
-              'Led a cross-functional team of 4 engineers (frontend and backend): code review, 1:1s, performance reviews and growth plans.',
-              'Defined the technical hiring bar and ran the interview loop for frontend candidates.',
-              'Standardized team conventions as shared Claude Code Skills and instruction files, so AI-assisted code matched project architecture and review standards.',
+              'Owned frontend architecture for Finelo, Zimran’s EdTech web platform with ~500K MAU and 20K+ DAU, and remained its top code contributor (309 of 526 merged PRs from Sep 2024 to Aug 2026).',
+              'Led a team of 4 frontend and backend engineers that shipped 2–4 features a week; ran code reviews, 1:1s and performance reviews, and wrote individual development plans.',
+              'Defined the frontend hiring bar and, across both Zimran roles, ran 80+ intro calls and 63 technical interviews, hiring 3 engineers; also referred and coached 2 engineers who joined at mid-level and grew to senior.',
+              'Introduced canary releases for changes touching the revenue-critical upsell flow: 10% of users, then 50%, then 100%, with 15-minute bake periods between steps.',
+              'Cut mobile First Contentful Paint by 60% in Lighthouse lab runs (4.9 → 2.0 s, third-party scripts excluded) by inlining critical CSS and adding a static loader.',
+              'Codified team conventions into shared Claude Code agents, commands and memory files plus a spec-driven OpenSpec workflow, so AI-assisted code followed the project architecture.',
             ],
           },
         },
@@ -183,20 +186,22 @@ export const profile: Profile = {
           end: '2026-02',
           highlights: {
             ru: [
-              'В одиночку перевёл React-кодовую базу на 433 тыс. строк со смешанными подходами на строгий Feature-Sliced Design и Vite. Выбрал широко распространённый архитектурный стандарт, чтобы новые инженеры могли быстро разобраться в кодовой базе и развивать её.',
+              'В одиночку за 13 месяцев перевёл React-кодовую базу на строгий Feature-Sliced Design: заменил 810 из 811 legacy-файлов, а код за это время вырос с 48 до 125 тыс. строк TypeScript.',
+              'Заменил GrowthBook на Statsig как платформу экспериментов, что позволило запустить 100+ A/B-тестов в upsell-воронках; выигравшие варианты поднимали ARPU на $2–5 и повышали конверсию в upsell.',
+              'Обновил стек (React 17 → 19, Vite 5 → 7, Tailwind 3 → 4, Jest → Vitest, npm → pnpm, Bugsnag → Sentry) и убрал MUI и styled-components; время продакшн-сборки сократилось на 20%, хотя кода стало в 2,6 раза больше.',
+              'Вместе с юристами вёл внедрение GDPR и CCPA для ЕС и США: выбрал TrustArc из 5 рассмотренных платформ управления согласиями для веба и мобильного приложения и настроил запуск 7 SDK аналитики и мониторинга только после согласия пользователя.',
+              'Внедрил E2E-тесты на Playwright (55 тестов для мобильных и десктопа) и пайплайн GitHub Actions → Vercel, который ставил релизный тег только при зелёных тестах. Он остановил 2 релиза, ломавших upsell.',
               'Разработал инструмент локализации на Node.js и OpenAI API для 13 языков, который сократил время перевода одной задачи с 30 до 2 минут.',
-              'Выбрал Statsig вместо GrowthBook и внедрил его как платформу экспериментов. Это позволило запустить 100+ A/B-тестов в upsell-воронках, а корректность данных проверялась через дашборды в Amplitude.',
-              'Вместе с юристами вёл внедрение требований GDPR и CCPA на рынках ЕС и США: выбрал TrustArc из 5 платформ управления согласиями, чтобы покрыть веб и мобильное приложение, и внедрил его во всех регионах; в ЕС аналитика отправлялась только после согласия (при отказе события удалялись), поэтому сессии согласившихся сохранялись полностью.',
-              'Покрыл критичные бизнес-сценарии E2E-тестами на Playwright, которые запускаются на каждом релизе в CI. Они остановили 2 релиза, которые сломали бы upsell-воронку, ключевую для выручки.',
-              'Перевёл мониторинг ошибок с Bugsnag на Sentry, что ускорило обнаружение регрессий в ключевой функциональности.',
+              'Ввёл согласованные с командой правила ESLint, затем заменил Prettier на Biome и оставил ESLint только для границ импортов FSD и i18n. Полный прогон lint и форматирования ускорился с 26,9 до 9,9 с.',
             ],
             en: [
-              'Single-handedly migrated a 433K-line mixed-paradigm React codebase to strict Feature-Sliced Design on Vite, choosing a widely adopted standard so new engineers could navigate and extend it with minimal ramp-up.',
-              'Built a Node.js + OpenAI API localization tool for 13 languages, cutting per-task translation time from 30 minutes to 2.',
-              'Selected Statsig over GrowthBook and integrated it as the experimentation platform, enabling 100+ A/B tests on upsell flows, with Amplitude dashboards validating data integrity.',
-              'Drove GDPR and CCPA compliance with the legal team across EU and US markets: picked TrustArc out of 5 consent management platforms to cover web and mobile, rolled it out in all regions, and gated EU analytics on consent (sent on opt-in, discarded on decline), so opt-in sessions were captured in full.',
-              'Covered business-critical flows with Playwright E2E tests gating every release in CI — blocking 2 releases that would have broken the revenue-critical upsell flow.',
-              'Migrated error monitoring from Bugsnag to Sentry, speeding up detection of regressions in core features.',
+              'Single-handedly migrated the React codebase to strict Feature-Sliced Design over 13 months, replacing 810 of 811 legacy files as the codebase grew from 48K to 125K lines of TypeScript.',
+              'Replaced GrowthBook with Statsig as the experimentation platform, enabling 100+ A/B tests on upsell flows; winning variants lifted ARPU by $2–5 and improved upsell conversion.',
+              'Modernized the stack (React 17 → 19, Vite 5 → 7, Tailwind 3 → 4, Jest → Vitest, npm → pnpm, Bugsnag → Sentry) and removed MUI and styled-components, cutting production build time by 20% despite 2.6× more code.',
+              'Drove GDPR/CCPA compliance across the EU and US with the legal team: chose TrustArc out of 5 evaluated consent platforms for web and mobile, and gated 7 analytics and monitoring SDKs on user consent.',
+              'Introduced Playwright E2E tests (55 tests, mobile and desktop) and a GitHub Actions → Vercel pipeline that tagged a release only when the tests passed, blocking 2 releases that would have broken the upsell flow.',
+              'Built a Node.js + OpenAI API tool that localized the product into 13 languages and cut per-task translation time from 30 to 2 minutes.',
+              'Added ESLint rules the team agreed on, then replaced Prettier with Biome and scoped ESLint to FSD import boundaries and i18n checks, cutting the full lint and format check from 26.9 to 9.9 seconds.',
             ],
           },
         },
@@ -217,20 +222,22 @@ export const profile: Profile = {
           end: '2024-09',
           highlights: {
             ru: [
-              'Был одним из лидов миграции ключевых модулей Krisha.kz (~1,5 млн MAU) с монолита на PHP/jQuery на Vue 3 / Nuxt 3 SSR и сделал эталонную реализацию, на которую ориентировались остальные инженеры.',
+              'Совместно руководил миграцией ключевых модулей Krisha.kz (~1,5 млн MAU) с PHP/Twig/jQuery-монолита на Vue 3 / Nuxt 3 SSR и сделал эталонную реализацию, на которую ориентировались остальные инженеры. Новички больше не тратили месяцы на изучение устаревшего Twig.',
+              'Признан «Top Frontend 2023» в Kolesa Group.',
               'Создал общую для компании UI-библиотеку на Vue и Storybook на основе дизайн-системы в Figma. Она до сих пор служит единым источником правды для Krisha.kz и Kolesa.kz.',
-              'Сократил онбординг новых разработчиков с 2 дней до ~10 минут с помощью набора bash-скриптов для автоматизации (Docker, Nginx, LDAP).',
-              'Единственный разработчик webview для цифрового подписания договоров на недвижимость, встроенного в iOS- и Android-приложения. Проект помог Kolesa стать первой продуктовой компанией в Казахстане с собственным аккредитованным удостоверяющим центром.',
-              'Участвовал в product discovery и вместе с продактами и дизайнерами приоритизировал фичи по фреймворку RICE.',
-              'Признан «Top Frontend 2023».',
+              'Сократил настройку локального окружения для новых разработчиков с 2 дней до ~10 минут с помощью набора bash-скриптов (Docker, Nginx, LDAP).',
+              'В одиночку сделал webview для цифрового подписания договоров на недвижимость в iOS- и Android-приложениях. Это была часть проекта, с которым Kolesa стала первой продуктовой компанией в Казахстане с собственным аккредитованным удостоверяющим центром.',
+              'На этапе product discovery для «Krisha Агенты», инструментов для риелторов, предложил более дешёвый подход к отчётам: выпустили за 2 недели вместо оценённых 4–6. Вместе с продактами и дизайнерами приоритизировал фичи по RICE.',
+              'Сделал интерактивную игру для гостей Kolesa Conf 2023 и проводил её на стенде компании.',
             ],
             en: [
-              'Co-led the migration of Krisha.kz core modules (~1.5M MAU) from a PHP/jQuery monolith to Vue 3 / Nuxt 3 SSR, building the reference implementation other engineers followed.',
-              'Built the company-wide Vue + Storybook UI library from the Figma design system — still the single source of truth for Krisha.kz and Kolesa.kz.',
-              'Cut new-developer onboarding from 2 days to ~10 minutes with a bash automation suite covering Docker, Nginx and LDAP.',
-              'Sole developer on the digital real-estate contract-signing webview embedded in the iOS and Android apps — a project that helped Kolesa become the first product company in Kazakhstan to operate an accredited Certificate Authority.',
-              'Took part in product discovery and prioritized features with the RICE framework alongside product and design.',
-              'Recognized as “Top Frontend 2023”.',
+              'Co-led migration of Krisha.kz core modules (~1.5M MAU) from a PHP/Twig/jQuery monolith to Vue 3 / Nuxt 3 SSR and built the reference implementation other engineers followed, so new hires no longer spent months learning a legacy Twig stack.',
+              'Named Top Frontend 2023 at Kolesa Group.',
+              'Created the company-wide Vue + Storybook UI library from the Figma design system, still the single source of truth for Krisha.kz and Kolesa.kz.',
+              'Cut local dev-environment setup for new developers from 2 days to ~10 minutes with a bash automation suite covering Docker, Nginx and LDAP.',
+              'Built the digital real-estate contract-signing webview in the iOS and Android apps as the sole developer, part of the project that made Kolesa the first product company in Kazakhstan to operate an accredited certificate authority.',
+              'In product discovery for Krisha Agents, a toolset for realtors, proposed a cheaper reporting approach that shipped in 2 weeks instead of an estimated 4–6; prioritized features with product and design via RICE.',
+              'Built an interactive game for Kolesa Conf 2023 attendees and ran it at the company booth.',
             ],
           },
         },
@@ -240,15 +247,15 @@ export const profile: Profile = {
           end: '2022-07',
           highlights: {
             ru: [
-              'Разработал CRM.krisha.kz, SPA на Vue.js для работы с лидами, инструментов агентов и обработки звонков.',
-              'Реализовал автообзвон в реальном времени через WebSockets (Centrifugo). Операторы колл-центра стали быстрее обрабатывать лиды и превращать неполные заявки в структурированные записи.',
+              'Реализовал автообзвон в реальном времени через WebSockets (Centrifugo) для 4–6 операторов колл-центра, которые обрабатывали 100+ лидов в день. Они стали быстрее разбирать лиды и превращать неполные заявки в структурированные записи.',
+              'Разработал CRM.krisha.kz, SPA на Vue.js для работы с лидами, агентами и звонками.',
               'Сделал интерфейсы разделов «Новостройки», «Лидогенерация» и «Krisha Агенты» и проверил их многошаговые сценарии через A/B-тесты.',
-              'Перевёл сборку с Webpack 4 на 5, там, где это было уместно, внедрил Vite, настроил CI/CD на GitHub Actions и dev-окружение в Docker.',
+              'Перевёл сборку с Webpack 4 на 5, внедрил Vite в подходящих проектах, настроил CI/CD на GitHub Actions и dev-окружение в Docker.',
             ],
             en: [
-              'Built CRM.krisha.kz as a Vue.js SPA for lead management, agent tooling and call handling.',
-              'Implemented real-time autodialing over WebSockets (Centrifugo), helping call-center operators process leads faster and turn incomplete leads into structured records.',
-              'Delivered the New Flats, Lead Generation and Krisha Agents interfaces, validating multi-step flows through A/B testing.',
+              'Implemented real-time autodialing over WebSockets (Centrifugo) for 4–6 call-center operators handling 100+ leads a day, so they worked through leads faster and turned incomplete ones into structured records.',
+              'Developed CRM.krisha.kz as a Vue.js SPA for lead management, agent tooling and call handling.',
+              'Built interfaces for new-build listings, lead generation and Krisha Agents, validating multi-step flows via A/B tests.',
               'Migrated builds from Webpack 4 to 5, introduced Vite where appropriate, and set up GitHub Actions CI/CD with Dockerized dev environments.',
             ],
           },
@@ -267,16 +274,16 @@ export const profile: Profile = {
           end: '2019-05',
           highlights: {
             ru: [
-              'Реализовал работу с камерой и сценарий распознавания лиц для Erinfo (React Native). Интегрировал его с Amazon Rekognition, который идентифицировал пациентов и возвращал медицинские данные в экстренных ситуациях для служб первой помощи.',
-              'Запустил Restaff, кросс-платформенное Electron desktop-приложение для учёта рабочего времени под Windows и macOS, по объёму близкое к Hubstaff.',
-              'Делал коммерческие frontend-проекты на Vue, React и React Native для международных Upwork-клиентов и работал с ними асинхронно в разных часовых поясах.',
-              'Настроил Storybook для компонентной работы студии, что ускорило передачу макетов от дизайна в разработку.',
+              'Реализовал работу с камерой и сценарий распознавания лиц для Erinfo (React Native) на бэкенде Amazon Rekognition, который идентифицировал пациента и отдавал его медицинские данные службам первой помощи в экстренных ситуациях.',
+              'Запустил Restaff, Electron-приложение для учёта рабочего времени под Windows и macOS в духе Hubstaff.',
+              'Удалённо выполнил 10+ проектов для международных клиентов с Upwork на Vue, React, React Native и Electron: карту биткоин-банкоматов, IoT-дашборд для ветрогенераторов, парсер магазинов кроссовок и другие.',
+              'Сделал 3 редизайна anime.club подряд и настроил там Storybook, чтобы ускорить передачу макетов из дизайна в разработку.',
             ],
             en: [
-              'Erinfo: built the camera flow and face recognition in React Native on top of Amazon Rekognition — in an emergency the app identified a patient and returned their medical data to first responders.',
-              'Restaff: shipped a cross-platform Electron desktop app for time tracking on Windows and macOS, similar in scope to Hubstaff.',
-              'Delivered commercial projects in Vue, React and React Native for international Upwork clients, working asynchronously across time zones.',
-              'Set up Storybook for component development, speeding up the design-to-development handoff.',
+              'Built the camera and face-recognition flow for Erinfo (React Native) on an Amazon Rekognition backend that identified patients and returned their medical data to first responders in emergencies.',
+              'Shipped Restaff, a Hubstaff-style Electron desktop time-tracking app for Windows and macOS.',
+              'Delivered 10+ projects asynchronously for international Upwork clients in Vue, React, React Native and Electron, including a Bitcoin ATM map, a wind-turbine IoT dashboard and a sneaker-store scraper.',
+              'Implemented 3 successive redesigns of anime.club and set up Storybook there to speed up the handoff from design to development.',
             ],
           },
         },
@@ -333,6 +340,27 @@ export const profile: Profile = {
       ],
     },
     {
+      id: 'paper-borders',
+      title: 'Paper Borders',
+      period: '2026',
+      summary: {
+        ru: 'Браузерная пошаговая геополитическая стратегия на реальной карте мира.',
+        en: 'A browser-based, turn-based geopolitical strategy game on a real-world map.',
+      },
+      description: {
+        ru: 'Сайд-проект, который делаю вместе с партнёром: игрок управляет одной из 50 стран (война, дипломатия, внутренние реформы), а диалоги в игре работают на AI. Сделал интерактивную карту мира на Three.js и Preact, оптимизировал её под десктопные и мобильные браузеры и реализовал основной геймплей.',
+        en: 'A side project I am building with a partner: players lead one of 50 countries through war, diplomacy and internal reform, with AI-powered in-game conversations. I built the interactive world map in Three.js and Preact, optimized it for desktop and mobile browsers, and implemented core gameplay.',
+      },
+      impact: {
+        ru: 'В октябре 2026 запустили закрытую бету.',
+        en: 'Closed beta launched in October 2026.',
+      },
+      tags: ['Three.js', 'Preact', 'TypeScript'],
+      links: [
+        { label: { ru: 'Открыть сайт', en: 'Visit the site' }, href: 'https://paperborders.world', primary: true },
+      ],
+    },
+    {
       id: 'krisha-ssr',
       title: {
         ru: 'Krisha.kz на Vue 3 / Nuxt 3 SSR',
@@ -381,8 +409,8 @@ export const profile: Profile = {
     {
       id: 'fsd-migration',
       title: {
-        ru: 'Миграция 433K строк на Feature-Sliced Design',
-        en: 'Migrating 433K lines to Feature-Sliced Design',
+        ru: 'Миграция на Feature-Sliced Design',
+        en: 'Migrating to Feature-Sliced Design',
       },
       period: '2024 — 2026',
       summary: {
@@ -390,8 +418,8 @@ export const profile: Profile = {
         en: 'Bringing a large React codebase under one comprehensible architecture.',
       },
       description: {
-        ru: 'Кодовая база на 433 тыс. строк со смешанными подходами перешла на строгий Feature-Sliced Design поверх Vite. Стандарт выбрал осознанно: у него есть документация и опыт на рынке, поэтому новый инженер ориентируется в проекте почти сразу.',
-        en: 'A 433K-line mixed-paradigm codebase moved to strict Feature-Sliced Design on Vite. The standard was chosen deliberately: it is documented and widely known, so a new engineer can navigate the project almost immediately.',
+        ru: 'За 13 месяцев заменил 810 из 811 legacy-файлов React-кодовой базы и перевёл её на строгий Feature-Sliced Design, пока код вырос с 48 до 125 тыс. строк TypeScript. Стандарт выбрал осознанно: у него есть документация и опыт на рынке, поэтому новый инженер ориентируется в проекте почти сразу.',
+        en: 'Over 13 months I replaced 810 of 811 legacy files and moved the React codebase to strict Feature-Sliced Design while it grew from 48K to 125K lines of TypeScript. The standard was chosen deliberately: it is documented and widely known, so a new engineer can navigate the project almost immediately.',
       },
       impact: {
         ru: 'Онбординг новых инженеров перестал зависеть от того, кто им объясняет проект.',
@@ -501,7 +529,7 @@ export const profile: Profile = {
     {
       id: 'en',
       name: { ru: 'Английский', en: 'English' },
-      level: { ru: 'Профессиональный рабочий', en: 'Professional working' },
+      level: { ru: 'B2, рабочий', en: 'B2, professional working' },
       proficiency: 4,
     },
   ],
