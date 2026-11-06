@@ -357,7 +357,7 @@ export const profile: Profile = {
       },
       tags: ['Three.js', 'Preact', 'TypeScript'],
       links: [
-        { label: { ru: 'Открыть сайт', en: 'Visit the site' }, href: 'https://paperborders.world', primary: true },
+        { label: { ru: 'Открыть сайт', en: 'Visit the site' }, href: 'https://paperborders.world/?utm_source=bekstar.tech&utm_medium=portfolio&utm_campaign=projects', primary: true },
       ],
     },
     {
