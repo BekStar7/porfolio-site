@@ -110,7 +110,7 @@ export const profile: Profile = {
     {
       id: 'frontend',
       title: { ru: 'Frontend', en: 'Frontend' },
-      items: ['React', 'Next.js', 'Vue 3', 'Nuxt 3', 'Preact', 'TypeScript', 'JavaScript', 'HTML/CSS', 'SCSS', 'Tailwind CSS', 'Three.js'],
+      items: ['React', 'Vue 3', 'Nuxt 3', 'Preact', 'TypeScript', 'JavaScript', 'HTML/CSS', 'SCSS', 'Tailwind CSS', 'Three.js'],
     },
     {
       id: 'state',
@@ -140,7 +140,7 @@ export const profile: Profile = {
     {
       id: 'product',
       title: { ru: 'Продукт и данные', en: 'Product & data' },
-      items: ['A/B Testing (Statsig)', 'Amplitude', 'i18n', 'REST', 'GraphQL', 'WebSockets'],
+      items: ['A/B Testing (Statsig)', 'Amplitude', 'i18n', 'REST', 'GraphQL', 'WebSockets', 'WebRTC (JsSIP)'],
     },
     {
       id: 'compliance',
@@ -230,8 +230,9 @@ export const profile: Profile = {
               'Совместно руководил миграцией ключевых модулей Krisha.kz (~1,5 млн MAU) с PHP/Twig/jQuery-монолита на Vue 3 / Nuxt 3 SSR и сделал эталонную реализацию, на которую ориентировались остальные инженеры. Новички больше не тратили месяцы на изучение устаревшего Twig.',
               'Развивал общую для компании библиотеку компонентов на Vue 2/3 по дизайн-системе в Figma, которой пользуются Krisha.kz и Kolesa.kz: настроил Storybook и помог довести версию для Vue 3.',
               'Сократил настройку локального окружения для новых разработчиков с 2 дней до ~10 минут с помощью набора bash-скриптов (Docker, Nginx, LDAP).',
-              'В одиночку сделал webview для цифрового подписания договоров на недвижимость в iOS- и Android-приложениях. Это была часть проекта, с которым Kolesa стала первой продуктовой компанией в Казахстане с собственным аккредитованным удостоверяющим центром.',
-              'На этапе product discovery для «Krisha Агенты» (инструменты для риелторов) предложил более дешёвый подход к отчётам: выпустили за 2 недели вместо оценённых 4–6. С продактами и дизайнерами приоритизировал фичи по RICE.',
+              'Сделал браузерный софтфон для CRM.krisha.kz на WebRTC (JsSIP): риелторы «Krisha Агенты» принимают звонки клиентов прямо в CRM. Mute, рингтоны, push-уведомления, настройка STUN/TURN и логирование в Sentry.',
+              'В одиночку сделал webview подписания договоров на недвижимость для iOS и Android в проекте, с которым Kolesa стала первой продуктовой компанией Казахстана с аккредитованным удостоверяющим центром.',
+              'На этапе product discovery для «Krisha Агенты» (инструменты для риелторов) предложил более дешёвый подход к отчётам: выпустили за 2 недели вместо оценённых 4–6, фичи приоритизировали по RICE.',
               'Признан «Top Frontend 2023»; занял 2-е место на внутренних хакатонах 2023 (доработали UI-библиотеку) и 2024 (CRM для мероприятий на Vue 3, TypeScript и Vite).',
               'Сделал интерактивную игру для гостей Kolesa Conf 2023 и проводил её на стенде компании.',
             ],
@@ -239,8 +240,9 @@ export const profile: Profile = {
               'Co-led migration of Krisha.kz core modules (~1.5M MAU) from a PHP/Twig/jQuery monolith to Vue 3 / Nuxt 3 SSR and built the reference implementation other engineers followed, so new hires no longer spent months learning a legacy Twig stack.',
               'Co-maintained the company-wide Vue 2/3 component library built from the Figma design system and used across Krisha.kz and Kolesa.kz; set up its Storybook and helped finish the Vue 3 version.',
               'Cut local dev-environment setup for new developers from 2 days to ~10 minutes with a bash automation suite covering Docker, Nginx and LDAP.',
-              'Built the digital real-estate contract-signing webview in the iOS and Android apps as the sole developer, part of the project that made Kolesa the first product company in Kazakhstan to operate an accredited certificate authority.',
-              'Proposed a cheaper reporting approach for Krisha Agents, a realtor toolset, during product discovery and delivered it in 2 weeks instead of an estimated 4–6; prioritized features with product and design via RICE.',
+              'Built an in-browser softphone for CRM.krisha.kz on WebRTC (JsSIP), letting Krisha Agents realtors take client calls inside the CRM, with mute, ringtones, desktop notifications, STUN/TURN setup and Sentry logging.',
+              'Built the digital real-estate contract-signing webview for iOS and Android as the sole developer, part of the project that made Kolesa the first product company in Kazakhstan to operate an accredited certificate authority.',
+              'In product discovery for Krisha Agents, a toolset for realtors, proposed a cheaper reporting approach that shipped in 2 weeks instead of an estimated 4–6; features were prioritized via RICE.',
               'Named Top Frontend 2023 at Kolesa Group; took 2nd place at internal hackathons in 2023 (finishing the UI kit) and 2024 (an events CRM in Vue 3, TypeScript and Vite).',
               'Built an interactive game for Kolesa Conf 2023 attendees and ran it at the company booth.',
             ],
@@ -253,13 +255,13 @@ export const profile: Profile = {
           highlights: {
             ru: [
               'Разработал и вёл CRM.krisha.kz, SPA на Vue для лидов, агентов и звонков: около 75% коммитов за обе роли в Kolesa, включая автообзвон через WebSockets (Centrifugo) для 4–6 операторов со 100+ лидами в день.',
-              'Второй по числу коммитов из 61 разработчика в монорепозитории Krisha.kz; Vue и PHP/Twig.',
+              'Второй по числу коммитов из 61 разработчика в монорепозитории Krisha.kz (Vue-фронтенд и страницы на PHP/Twig).',
               'Сделал интерфейсы разделов «Новостройки», «Лидогенерация» и «Krisha Агенты» и проверил их многошаговые сценарии через A/B-тесты.',
               'Перевёл сборку на Webpack 5, настроил CI/CD на GitHub Actions и Docker.',
             ],
             en: [
               'Built and owned CRM.krisha.kz, a Vue SPA for leads, agents and calls, authoring about 75% of its commits across both Kolesa roles, including real-time autodialing over WebSockets (Centrifugo) for 4–6 operators handling 100+ leads a day.',
-              'Ranked #2 of 61 contributors by commits in the Krisha.kz monorepo, across the Vue frontend and PHP/Twig server-rendered pages.',
+              'Ranked #2 of 61 contributors by commits in the Krisha.kz monorepo (Vue frontend and PHP/Twig pages).',
               'Built interfaces for new-build listings, lead generation and Krisha Agents, validating multi-step flows via A/B tests.',
               'Migrated builds from Webpack 4 to 5 and set up GitHub Actions CI/CD with Dockerized dev environments.',
             ],
