@@ -6,6 +6,10 @@ const { tx, code } = useLocalized()
 const localePath = useLocalePath()
 const siteConfig = useSiteConfig()
 
+// Подсветка текущего раздела в шапке. Наблюдатель живёт вместе со страницей:
+// при смене языка разделы монтируются заново, и он подписывается уже на них.
+useActiveSectionObserver()
+
 const origin = computed(() => siteConfig.url.replace(/\/$/, ''))
 const canonical = computed(() => `${origin.value}${localePath('index')}`)
 const ogImage = computed(() => `${origin.value}/og-${code.value}.png`)

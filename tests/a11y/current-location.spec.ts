@@ -28,6 +28,60 @@ for (const locale of LOCALES) {
 }
 
 /**
+ * Раздел без пункта меню («Образование и языки») — не повод держать
+ * подсветку на предыдущем: «текущим» в навигации ничего не помечено.
+ */
+for (const locale of LOCALES) {
+  test.describe(`current section without a nav entry · ${locale.code}`, () => {
+    test.use({ locale: locale.language })
+
+    test('clears the current mark when the visible section has no nav link', async ({ page, baseURL }) => {
+      await openSurface(page, { locale, theme: 'light', viewport: DESKTOP }, baseURL!)
+
+      await page.evaluate(() => document.getElementById('experience')?.scrollIntoView({ block: 'center', behavior: 'instant' }))
+      await expect(page.locator('.header__link[aria-current]')).toHaveAttribute('href', '#experience')
+
+      await page.evaluate(() => document.getElementById('education')?.scrollIntoView({ block: 'center', behavior: 'instant' }))
+      await expect(page.locator('.header__link[aria-current]')).toHaveCount(0)
+    })
+  })
+}
+
+/**
+ * Шапка живёт в layout и переживает смену языка, а разделы страницы
+ * монтируются заново. Наблюдатель обязан переподписаться на новые узлы,
+ * иначе подсветка застывает на разделе, который был до переключения.
+ */
+for (const locale of LOCALES) {
+  test.describe(`current section after locale switch · ${locale.code}`, () => {
+    test.use({ locale: locale.language })
+
+    test('keeps tracking the visible section after switching the language', async ({ page, baseURL }) => {
+      await openSurface(page, { locale, theme: 'light', viewport: DESKTOP }, baseURL!)
+
+      await page.evaluate(() => document.getElementById('contact')?.scrollIntoView({ block: 'center', behavior: 'instant' }))
+      await expect(page.locator('.header__link[aria-current]')).toHaveAttribute('href', '#contact')
+
+      // Запоминаем узел раздела до переключения: новая страница заменит его.
+      await page.evaluate(() => {
+        (window as unknown as { __oldProjects: Element | null }).__oldProjects = document.getElementById('projects')
+      })
+      await page.locator('.locale-switcher__link:not([aria-current])').click()
+      await page.waitForFunction(() => {
+        const old = (window as unknown as { __oldProjects: Element | null }).__oldProjects
+        const now = document.getElementById('projects')
+        return now !== null && now !== old
+      })
+
+      await page.evaluate(() => document.getElementById('projects')?.scrollIntoView({ block: 'center', behavior: 'instant' }))
+      const current = page.locator('.header__link[aria-current]')
+      await expect(current).toHaveCount(1)
+      await expect(current).toHaveAttribute('href', '#projects')
+    })
+  })
+}
+
+/**
  * 5.8 — `active` стартует как `null` и на сервере, и на клиенте:
  * IntersectionObserver подключается только в `onMounted`, поэтому в момент,
  * когда гидратация завершается, разметка меню обязана совпадать с тем, что

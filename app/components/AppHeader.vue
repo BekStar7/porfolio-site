@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { profile } from '~/data/profile'
+import { NAV_SECTION_IDS as NAV_IDS } from '~/composables/useActiveSection'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { tx } = useLocalized()
 
-const NAV_IDS = ['about', 'experience', 'projects', 'skills', 'contact'] as const
-
-const { active } = useActiveSection([...NAV_IDS])
+// Наблюдает за разделами страница (index.vue), шапка только подсвечивает
+const { active } = useActiveSection()
 
 const route = useRoute()
 
