@@ -90,6 +90,10 @@ export default defineNuxtConfig({
       // sitemap и robots.txt регистрируют свои модули — здесь только страницы
       routes: ['/', '/en'],
       failOnError: false,
+      // /en пишется как en.html, а не en/index.html. Иначе хостинг отвечает
+      // на /en редиректом на /en/, хотя canonical, hreflang и sitemap
+      // указывают на /en без слэша.
+      autoSubfolderIndex: false,
     },
   },
 
