@@ -342,6 +342,15 @@ export const profile: Profile = {
       links: [
         { label: { ru: 'Открыть сайт', en: 'Visit the site' }, href: 'https://paperborders.world/?utm_source=bekstar.tech&utm_medium=portfolio&utm_campaign=projects', primary: true },
       ],
+      image: {
+        src: '/projects/paper-borders.webp',
+        width: 1200,
+        height: 750,
+        alt: {
+          ru: 'Ход в Paper Borders: карта Германии и Польши, армия из Берлина готовится атаковать Познань, игра показывает шанс победы 58% и ожидаемые потери.',
+          en: 'A turn in Paper Borders: a map of Germany and Poland where an army in Berlin is about to attack Poznań, with the game showing a 58% win chance and expected losses.',
+        },
+      },
     },
     {
       id: 'splitcheck',

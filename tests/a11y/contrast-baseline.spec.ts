@@ -4,9 +4,9 @@ import { openSurface } from '../support/harness'
 import { incompleteContrastComponents } from '../support/axe'
 
 /**
- * axe не умеет считать контраст поверх полупрозрачных слоёв: он не знает,
- * что окажется под `--accent-veil` или под свечением в hero, и помечает такие
- * узлы как `incomplete`, а не как нарушение. Именно для них написан
+ * axe не умеет считать контраст поверх полупрозрачных слоёв и псевдоэлементов:
+ * он не знает, что окажется под `--accent-veil` или под линией таймлайна, и
+ * помечает такие узлы как `incomplete`, а не как нарушение. Именно для них написан
  * `scripts/check-contrast.mjs` — он берёт токены из `main.css` и складывает
  * слои сам.
  *
@@ -22,53 +22,16 @@ import { incompleteContrastComponents } from '../support/axe'
  * предков и наложений.
  */
 const KNOWN_INCOMPLETE_CONTRAST: readonly string[] = [
-  // Свечение hero: `.hero__glow` (токен `--glow`) — радиальный градиент,
-  // лежащий поверх текста hero. Шапка липкая и полупрозрачная
-  // (`--bg-veil`, 0.72) плюс `backdrop-filter: blur(14px)`, поэтому сквозь неё
-  // видно то же свечение — её ссылки попадают сюда по той же причине.
-  '.header__link',
-  '.header__name',
-  '.hero__greeting',
-  '.hero__location',
-  '.hero__name',
-  '.hero__role',
-  '.hero__tagline',
-  '.locale-switcher__link',
-
-  // Карточка контактов: `.contact` красит себя
-  // `radial-gradient(… var(--accent-veil) …)` поверх `--surface`.
-  // Заголовок секции живёт внутри этой же карточки.
-  '.btn',
-  '.contact__lead',
-  '.contact__social-handle',
-  '.contact__social-name',
-  '.contact__where',
-  '.section__eyebrow',
-  '.section__head',
-
-  // Выделенный проект: `.project--featured` от 56rem получает
-  // `linear-gradient(… var(--accent-veil) …)` поверх `--surface`.
-  '.project__description',
-  '.project__impact',
-  '.project__period',
-  '.project__summary',
-  '.project__title',
-
-  // Таймлайн опыта: псевдоэлементы рисуют линию и точки
-  // (`.timeline__item::before`), маркер заметки (`.job__note::before`)
-  // и пункты списка (`.role__highlights > li::before`). Для axe непустой
-  // псевдоэлемент — повод отказаться от расчёта фона.
+  // Таймлайн опыта от 44rem: линия между логотипами рисуется
+  // псевдоэлементом (`.timeline__item::before`), а для axe непустой
+  // псевдоэлемент — повод отказаться от расчёта фона у всего, что над ним.
+  // На узком экране линии нет, и этот список там пуст.
+  '.app-link',
   '.job__company',
   '.job__location',
   '.job__note',
   '.role__duration',
-  '.role__highlights',
   '.role__period',
-  '.role__title',
-
-  // Утилитарный класс, встречается сразу в нескольких местах: внутри
-  // выделенного проекта (градиент) и внутри таймлайна (псевдоэлемент).
-  '.app-link',
 ]
 
 for (const surface of allSurfaces()) {

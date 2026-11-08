@@ -3,8 +3,8 @@
  * Проверка контраста по WCAG 2.2 AA.
  *
  * Токены читаются прямо из app/assets/css/main.css, поэтому проверка
- * не разъедется с реальной палитрой. Полупрозрачные слои (свечение в hero,
- * акцентная подложка карточек) накладываются на базовый фон — автоматические
+ * не разъедется с реальной палитрой. Полупрозрачные слои (акцентная подложка
+ * `--accent-veil` у активных и наведённых элементов) накладываются на базовый фон — автоматические
  * проверки вроде axe такие фоны вычислить не могут и помечают как «не определено».
  *
  * Запуск: pnpm check:contrast
@@ -42,19 +42,17 @@ function token(themeSelector, name) {
 const themes = {
   DARK: {
     selector: ":root[data-theme='dark'] {",
-    glowAlpha: 0.14,
     veilAlpha: 0.12,
   },
   LIGHT: {
     selector: ":root[data-theme='light'] {",
-    glowAlpha: 0.08,
     veilAlpha: 0.09,
   },
 }
 
 let failures = 0
 
-for (const [name, { selector, glowAlpha, veilAlpha }] of Object.entries(themes)) {
+for (const [name, { selector, veilAlpha }] of Object.entries(themes)) {
   const t = Object.fromEntries(
     ['bg', 'surface', 'surface-2', 'text', 'text-muted', 'text-subtle', 'accent', 'accent-contrast', 'border-interactive']
       .map(key => [key, token(selector, key)]),
@@ -64,7 +62,7 @@ for (const [name, { selector, glowAlpha, veilAlpha }] of Object.entries(themes))
     'фон страницы': t.bg,
     'карточка': t.surface,
     'вложенная плашка': t['surface-2'],
-    'hero + свечение': blend(t.accent, glowAlpha, t.bg),
+    'фон + акцент': blend(t.accent, veilAlpha, t.bg),
     'карточка + акцент': blend(t.accent, veilAlpha, t.surface),
   }
 

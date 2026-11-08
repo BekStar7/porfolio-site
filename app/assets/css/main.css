@@ -67,7 +67,6 @@
 
   --ring: #5cc8ff;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -12px rgb(0 0 0 / 0.65);
-  --glow: radial-gradient(60% 55% at 50% 0%, rgb(92 200 255 / 0.14), transparent 70%);
 }
 
 /* ---- Светлая тема ---- */
@@ -94,7 +93,6 @@
 
   --ring: #0a6e9e;
   --shadow: 0 1px 2px rgb(14 22 33 / 0.06), 0 12px 30px -14px rgb(14 22 33 / 0.22);
-  --glow: radial-gradient(60% 55% at 50% 0%, rgb(10 110 158 / 0.08), transparent 70%);
 }
 
 /* Если пользователь не выбирал тему вручную — идём за системной */
@@ -117,7 +115,6 @@
     --accent-veil: rgb(10 110 158 / 0.09);
     --ring: #0a6e9e;
     --shadow: 0 1px 2px rgb(14 22 33 / 0.06), 0 12px 30px -14px rgb(14 22 33 / 0.22);
-    --glow: radial-gradient(60% 55% at 50% 0%, rgb(10 110 158 / 0.08), transparent 70%);
   }
 }
 
@@ -193,7 +190,9 @@ h2 { font-size: var(--step-3); }
 h3 { font-size: var(--step-1); }
 h4 { font-size: var(--step-0); }
 
-p {
+/* Пункты списков — тот же текст, что и абзацы: без одиноких слов в последней строке */
+p,
+li {
   text-wrap: pretty;
 }
 
@@ -294,29 +293,7 @@ b {
 }
 
 .section__head {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
   margin-block-end: var(--space-xl);
-}
-
-.section__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6ch;
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.section__eyebrow::before {
-  content: '';
-  width: 1.75rem;
-  height: 2px;
-  border-radius: 2px;
-  background: currentColor;
 }
 
 /* =========================================================================

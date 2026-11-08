@@ -9,6 +9,7 @@
     "opensInNewTab": "откроется в новой вкладке",
     "mainNav": "Основная навигация",
     "socialLinks": "Профили и контакты",
+    "profiles": "Профили",
     "backToTop": "Наверх, к началу страницы",
     "sectionsNav": "Разделы страницы"
   },
@@ -31,7 +32,6 @@
     "current": "Текущий язык"
   },
   "hero": {
-    "greeting": "Привет, меня зовут",
     "ctaContact": "Связаться",
     "ctaProjects": "Посмотреть проекты",
     "statsLabel": "Ключевые цифры"
@@ -45,7 +45,8 @@
     "contact": "Контакты"
   },
   "about": {
-    "pressTitle": "Обо мне писали"
+    "pressTitle": "Обо мне писали",
+    "quoted": "«{text}»"
   },
   "experience": {
     "present": "по настоящее время",

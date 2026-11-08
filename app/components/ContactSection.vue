@@ -28,7 +28,6 @@ onBeforeUnmount(() => clearTimeout(resetTimer))
     <div class="container">
       <div class="contact card">
         <div class="section__head">
-          <p class="section__eyebrow" aria-hidden="true">06</p>
           <h2 id="contact-title">{{ t('sections.contact') }}</h2>
         </div>
 
@@ -76,9 +75,6 @@ onBeforeUnmount(() => clearTimeout(resetTimer))
 <style scoped>
 .contact {
   padding: clamp(1.5rem, 1rem + 3vw, 3rem);
-  background:
-    radial-gradient(90% 120% at 100% 0%, var(--accent-veil), transparent 60%),
-    var(--surface);
 }
 
 .contact__lead {

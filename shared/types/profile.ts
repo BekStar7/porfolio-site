@@ -72,6 +72,8 @@ export interface Project {
   links: { label: Localized; href: string; primary?: boolean }[]
   /** Ключевой результат — выводится отдельной строкой */
   impact?: Localized
+  /** Скриншот из `public/`. Размеры нужны, чтобы место под картинку резервировалось до загрузки */
+  image?: { src: string; width: number; height: number; alt: Localized }
 }
 
 /**

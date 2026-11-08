@@ -9,6 +9,7 @@
     "opensInNewTab": "opens in a new tab",
     "mainNav": "Main navigation",
     "socialLinks": "Profiles and contacts",
+    "profiles": "Profiles",
     "backToTop": "Back to top of page",
     "sectionsNav": "Page sections"
   },
@@ -31,7 +32,6 @@
     "current": "Current language"
   },
   "hero": {
-    "greeting": "Hi, my name is",
     "ctaContact": "Get in touch",
     "ctaProjects": "See projects",
     "statsLabel": "Key numbers"
@@ -45,7 +45,8 @@
     "contact": "Contact"
   },
   "about": {
-    "pressTitle": "In the press"
+    "pressTitle": "In the press",
+    "quoted": "“{text}”"
   },
   "experience": {
     "present": "Present",

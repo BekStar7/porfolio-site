@@ -9,7 +9,6 @@ const { tx } = useLocalized()
   <section id="about" class="section" tabindex="-1" aria-labelledby="about-title">
     <div class="container">
       <div class="section__head">
-        <p class="section__eyebrow" aria-hidden="true">01</p>
         <h2 id="about-title">{{ t('sections.about') }}</h2>
       </div>
 
@@ -41,7 +40,8 @@ const { tx } = useLocalized()
                 {{ item.outlet }} ·
                 <time :datetime="item.date">{{ item.date.slice(0, 4) }}</time>
               </p>
-              <p v-if="item.quote" class="press__quote">«{{ tx(item.quote) }}»</p>
+              <!-- Кавычки зависят от языка: «ёлочки» в русском, “лапки” в английском -->
+              <p v-if="item.quote" class="press__quote">{{ t('about.quoted', { text: tx(item.quote) }) }}</p>
             </article>
           </div>
         </div>

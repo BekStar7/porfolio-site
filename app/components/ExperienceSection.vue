@@ -19,7 +19,6 @@ function durationLabel(role: Role): string {
   <section id="experience" class="section experience" tabindex="-1" aria-labelledby="experience-title">
     <div class="container">
       <div class="section__head">
-        <p class="section__eyebrow" aria-hidden="true">02</p>
         <h2 id="experience-title">{{ t('sections.experience') }}</h2>
       </div>
 
@@ -135,15 +134,21 @@ function durationLabel(role: Role): string {
   list-style: none;
 }
 
+/*
+ * На телефоне рядом с логотипом стоит только шапка компании, а карточки
+ * должностей занимают всю ширину: колонка под логотип вместе с отступами
+ * карточки сужала текст до ~30 знаков в строке.
+ */
 .timeline__item {
   position: relative;
-  padding-inline-start: var(--logo-gutter);
 }
 
 /* Линия времени — чистое оформление, поэтому рисуется псевдоэлементом.
-   Тянется через весь промежуток до логотипа следующего места работы. */
+   Тянется через весь промежуток до логотипа следующего места работы.
+   Нужна только там, где есть колонка логотипов, — от 44rem. */
 .timeline__item::before {
   content: '';
+  display: none;
   position: absolute;
   inset-inline-start: calc(var(--logo) / 2 - 1px);
   inset-block: var(--logo) calc(-1 * var(--space-2xl));
@@ -151,8 +156,14 @@ function durationLabel(role: Role): string {
   background: var(--border);
 }
 
-.timeline__item:last-child::before {
-  display: none;
+@media (min-width: 44rem) {
+  .timeline__item {
+    padding-inline-start: var(--logo-gutter);
+  }
+
+  .timeline__item:not(:last-child)::before {
+    display: block;
+  }
 }
 
 .timeline__logo {
@@ -183,6 +194,13 @@ function durationLabel(role: Role): string {
   align-content: center;
   gap: 0.35rem var(--space-m);
   min-height: var(--logo);
+  padding-inline-start: var(--logo-gutter);
+}
+
+@media (min-width: 44rem) {
+  .job__head {
+    padding-inline-start: 0;
+  }
 }
 
 .job__company {
@@ -214,10 +232,16 @@ function durationLabel(role: Role): string {
 }
 
 .role {
-  padding: var(--space-l);
+  padding: var(--space-m);
   border: 1px solid var(--border);
   border-radius: var(--radius-m);
   background: var(--surface);
+}
+
+@media (min-width: 44rem) {
+  .role {
+    padding: var(--space-l);
+  }
 }
 
 .role__title {
@@ -249,9 +273,13 @@ function durationLabel(role: Role): string {
   color: var(--text-muted);
 }
 
+/* На широком экране пункты растягивались до ~100 знаков, и глаз терял начало
+   следующей строки. 60ch у Inter — это ~70–78 знаков реального текста:
+   пункты короче абзацев, им нужна мера чуть уже `--measure`. */
 .role__highlights > li {
   position: relative;
-  padding-inline-start: 1.5rem;
+  max-width: 60ch;
+  padding-inline-start: 1.25rem;
   line-height: 1.6;
 }
 

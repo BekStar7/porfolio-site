@@ -9,43 +9,60 @@ const { tx } = useLocalized()
   <section id="projects" class="section" tabindex="-1" aria-labelledby="projects-title">
     <div class="container">
       <div class="section__head">
-        <p class="section__eyebrow" aria-hidden="true">03</p>
         <h2 id="projects-title">{{ t('sections.projects') }}</h2>
       </div>
 
       <ul class="projects">
         <li v-for="(project, index) in profile.projects" :key="project.id">
-          <article class="project card" :class="{ 'project--featured': index === 0 }">
-            <div class="project__head">
-              <h3 class="project__title">{{ tx(project.title) }}</h3>
-              <p class="project__period">{{ project.period }}</p>
+          <article
+            class="project card"
+            :class="{ 'project--featured': index === 0, 'project--with-shot': project.image }"
+          >
+            <div class="project__body">
+              <div class="project__head">
+                <h3 class="project__title">{{ tx(project.title) }}</h3>
+                <p class="project__period">{{ project.period }}</p>
+              </div>
+
+              <p class="project__summary">{{ tx(project.summary) }}</p>
+              <p class="project__description">{{ tx(project.description) }}</p>
+
+              <p v-if="project.impact" class="project__impact">
+                <!-- Подпись читается скринридером, визуально её заменяет акцентная рамка -->
+                <span class="sr-only">{{ t('projects.impact') }}: </span>
+                {{ tx(project.impact) }}
+              </p>
+
+              <ul class="tag-list project__tags" :aria-label="t('projects.stack')">
+                <li v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</li>
+              </ul>
+
+              <div v-if="project.links.length" class="project__links">
+                <AppLink
+                  v-for="link in project.links"
+                  :key="link.href"
+                  class="btn"
+                  :class="link.primary ? 'btn--primary' : 'btn--ghost'"
+                  :href="link.href"
+                >
+                  {{ tx(link.label) }}
+                </AppLink>
+              </div>
+              <p v-else class="project__note">{{ t('projects.noLinks') }}</p>
             </div>
 
-            <p class="project__summary">{{ tx(project.summary) }}</p>
-            <p class="project__description">{{ tx(project.description) }}</p>
-
-            <p v-if="project.impact" class="project__impact">
-              <!-- Подпись читается скринридером, визуально её заменяет акцентная рамка -->
-              <span class="sr-only">{{ t('projects.impact') }}: </span>
-              {{ tx(project.impact) }}
-            </p>
-
-            <ul class="tag-list project__tags" :aria-label="t('projects.stack')">
-              <li v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</li>
-            </ul>
-
-            <div v-if="project.links.length" class="project__links">
-              <AppLink
-                v-for="link in project.links"
-                :key="link.href"
-                class="btn"
-                :class="link.primary ? 'btn--primary' : 'btn--ghost'"
-                :href="link.href"
-              >
-                {{ tx(link.label) }}
-              </AppLink>
-            </div>
-            <p v-else class="project__note">{{ t('projects.noLinks') }}</p>
+            <!-- В DOM после текста: заголовок карточки читается первым.
+                 Визуально на узком экране скриншот стоит сверху. -->
+            <img
+              v-if="project.image"
+              class="project__shot"
+              :src="project.image.src"
+              :width="project.image.width"
+              :height="project.image.height"
+              :alt="tx(project.image.alt)"
+              loading="lazy"
+              decoding="async"
+            >
           </article>
         </li>
       </ul>
@@ -66,14 +83,29 @@ const { tx } = useLocalized()
 .project {
   display: flex;
   flex-direction: column;
-  gap: var(--space-s);
+  gap: var(--space-l);
   height: 100%;
   padding: var(--space-l);
-  transition: border-color var(--transition), transform var(--transition);
 }
 
-.project:hover {
-  border-color: var(--border-strong);
+/* Карточка не ссылка — поэтому без hover: интерактивны только кнопки внутри */
+
+.project__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+/* Скриншот работы: на узком экране — над текстом, чтобы его видели первым */
+.project__shot {
+  order: -1;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-s);
+  /* Контур отделяет тёмный кадр игры от карточки в обеих темах */
+  box-shadow: 0 0 0 1px var(--border);
+  background: var(--surface-2);
 }
 
 @media (min-width: 56rem) {
@@ -83,7 +115,18 @@ const { tx } = useLocalized()
 
   .project--featured {
     border-color: var(--border-strong);
-    background: linear-gradient(180deg, var(--accent-veil), transparent 45%), var(--surface);
+  }
+
+  /* Выделенный проект со скриншотом: текст слева, кадр справа */
+  .project--featured.project--with-shot {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .project--featured .project__shot {
+    order: 0;
   }
 
   .project--featured .project__title {

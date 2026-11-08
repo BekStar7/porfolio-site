@@ -9,7 +9,6 @@ const { tx } = useLocalized()
   <section id="skills" class="section" tabindex="-1" aria-labelledby="skills-title">
     <div class="container">
       <div class="section__head">
-        <p class="section__eyebrow" aria-hidden="true">04</p>
         <h2 id="skills-title">{{ t('sections.skills') }}</h2>
       </div>
 

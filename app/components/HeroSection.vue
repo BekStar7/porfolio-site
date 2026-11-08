@@ -3,20 +3,21 @@ import { profile } from '~/data/profile'
 
 const { t } = useI18n()
 const { tx } = useLocalized()
+
+/**
+ * Профили, которые рекрутер забирает первым делом. Почту здесь не повторяем:
+ * к ней ведёт основная кнопка, а в контактах есть и mailto, и копирование.
+ */
+const profileLinks = profile.socials.filter(social => social.href.startsWith('http'))
 </script>
 
 <template>
   <section class="hero" aria-labelledby="hero-title">
-    <!-- Декоративное свечение: вне дерева доступности и не влияет на контраст текста -->
-    <div class="hero__glow" aria-hidden="true" />
-
-    <div class="container hero__inner">
+    <div class="container">
       <p class="hero__status">
         <span class="hero__dot" aria-hidden="true" />
         {{ tx(profile.availability) }}
       </p>
-
-      <p class="hero__greeting">{{ t('hero.greeting') }}</p>
 
       <h1 id="hero-title" class="hero__title">
         <span class="hero__name">{{ tx(profile.name) }}</span>
@@ -36,6 +37,15 @@ const { tx } = useLocalized()
           <AppIcon name="arrowRight" :size="18" />
         </a>
         <a class="btn btn--ghost" href="#projects">{{ t('hero.ctaProjects') }}</a>
+
+        <ul class="hero__profiles" :aria-label="t('a11y.profiles')">
+          <li v-for="social in profileLinks" :key="social.id">
+            <AppLink class="hero__profile" :href="social.href">
+              <AppIcon :name="social.icon as never" :size="18" />
+              {{ social.label }}
+            </AppLink>
+          </li>
+        </ul>
       </div>
 
       <ul class="stats" :aria-label="t('hero.statsLabel')">
@@ -54,18 +64,6 @@ const { tx } = useLocalized()
   /* Нижний отступ даёт следующая секция — иначе просвет удваивается */
   padding-block: clamp(3.5rem, 2rem + 8vw, 7rem) 0;
   overflow: clip;
-}
-
-.hero__glow {
-  position: absolute;
-  inset: -20% 0 auto;
-  height: 42rem;
-  background: var(--glow);
-  pointer-events: none;
-}
-
-.hero__inner {
-  position: relative;
 }
 
 .hero__status {
@@ -88,17 +86,11 @@ const { tx } = useLocalized()
   box-shadow: 0 0 0 3px var(--accent-veil);
 }
 
-.hero__greeting {
-  margin-block-start: var(--space-xl);
-  color: var(--text-subtle);
-  font-size: var(--step-0);
-}
-
 .hero__title {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  margin-block-start: var(--space-2xs);
+  margin-block-start: var(--space-xl);
 }
 
 .hero__name {
@@ -132,13 +124,38 @@ const { tx } = useLocalized()
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--space-s);
   margin-block-start: var(--space-xl);
 }
 
+/* Профили — вторичное действие: текстовые ссылки рядом с кнопками, без рамок */
+.hero__profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-m);
+  margin: 0;
+  padding: 0 var(--space-xs);
+  list-style: none;
+}
+
+.hero__profile {
+  /* Цель нажатия 44 px в высоту, хотя видна только подпись */
+  min-height: 2.75rem;
+  color: var(--text-muted);
+  font-size: var(--step-0);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero__profile:hover {
+  color: var(--accent);
+}
+
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  /* Четыре цифры: 2×2 на телефоне вместо столбика, в ряд с планшета */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   margin-block-start: var(--space-2xl);
   padding: 0;
@@ -153,8 +170,18 @@ const { tx } = useLocalized()
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-  padding: var(--space-l) var(--space-m);
+  padding: var(--space-m) var(--space-s);
   background: var(--surface);
+}
+
+@media (min-width: 48rem) {
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .stats__item {
+    padding: var(--space-l) var(--space-m);
+  }
 }
 
 .stats__value {

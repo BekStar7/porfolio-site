@@ -55,6 +55,13 @@ const switchLocalePath = useSwitchLocalePath()
   transition: color var(--transition), background-color var(--transition);
 }
 
+/* На сенсорном экране промах переключает язык всей страницы — цель выше */
+@media (pointer: coarse) {
+  .locale-switcher__link {
+    min-height: 2.5rem;
+  }
+}
+
 .locale-switcher__link:hover {
   color: var(--text);
   background: var(--surface-2);

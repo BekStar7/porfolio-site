@@ -222,10 +222,20 @@ for (const viewport of VIEWPORTS) {
       expect(await icons.count(), 'no icons found — the check would be vacuous')
         .toBeGreaterThan(0)
 
-      // Ни одной графической роли в дереве: значит, ни одна иконка не
-      // объявлена как изображение.
-      const graphical = [...new Set(flattenAria(await ariaTree(page)).map(node => node.role))]
-        .filter(role => role === 'img' || role === 'image' || role.startsWith('graphics'))
+      // Информативные картинки (скриншоты проектов) — единственная графика,
+      // которой место в дереве: у них есть alt, и он становится их именем.
+      const informative = await page.locator('img[alt]:not([alt=""])')
+        .evaluateAll(images => images.map(image => (image as HTMLImageElement).alt))
+      for (const alt of informative) {
+        await expect(page.getByRole('img', { name: alt, exact: true })).toHaveCount(1)
+      }
+
+      // Любая другая графическая роль в дереве значит, что иконка или
+      // декоративная картинка объявлена как изображение.
+      const graphical = [...new Set(flattenAria(await ariaTree(page))
+        .filter(node => node.role === 'img' || node.role === 'image' || node.role.startsWith('graphics'))
+        .filter(node => !informative.includes(node.name ?? ''))
+        .map(node => node.role))]
       expect(graphical, 'decorative graphics must not be exposed').toEqual([])
 
       // Каждая иконка помечена скрытой и невыводима из фокуса: в SVG за это
