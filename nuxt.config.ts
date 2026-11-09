@@ -46,10 +46,10 @@ export default defineNuxtConfig({
     // Нужен, чтобы canonical и hreflang были абсолютными URL
     baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://bekstar.tech',
     strategy: 'prefix_except_default',
-    defaultLocale: 'ru',
+    defaultLocale: 'en',
     locales: [
-      { code: 'ru', language: 'ru-RU', name: 'Русский', file: 'ru.json', dir: 'ltr' },
       { code: 'en', language: 'en-US', name: 'English', file: 'en.json', dir: 'ltr' },
+      { code: 'ru', language: 'ru-RU', name: 'Русский', file: 'ru.json', dir: 'ltr' },
     ],
     langDir: 'locales',
     defaultLocaleRouteNameSuffix: 'default',
@@ -58,7 +58,7 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
       alwaysRedirect: false,
-      fallbackLocale: 'ru',
+      fallbackLocale: 'en',
     },
   },
 
@@ -88,11 +88,11 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       // sitemap и robots.txt регистрируют свои модули — здесь только страницы
-      routes: ['/', '/en'],
+      routes: ['/', '/ru'],
       failOnError: false,
-      // /en пишется как en.html, а не en/index.html. Иначе хостинг отвечает
-      // на /en редиректом на /en/, хотя canonical, hreflang и sitemap
-      // указывают на /en без слэша.
+      // /ru пишется как ru.html, а не ru/index.html. Иначе хостинг отвечает
+      // на /ru редиректом на /ru/, хотя canonical, hreflang и sitemap
+      // указывают на /ru без слэша.
       autoSubfolderIndex: false,
     },
   },

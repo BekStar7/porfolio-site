@@ -34,8 +34,8 @@ export interface ViewportSurface {
 }
 
 export const LOCALES: readonly LocaleSurface[] = [
-  { code: 'ru', language: 'ru-RU', path: '/', isDefault: true },
-  { code: 'en', language: 'en-US', path: '/en', isDefault: false },
+  { code: 'en', language: 'en-US', path: '/', isDefault: true },
+  { code: 'ru', language: 'ru-RU', path: '/ru', isDefault: false },
 ]
 
 export const THEMES: readonly ThemeName[] = ['light', 'dark']

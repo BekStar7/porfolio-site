@@ -186,7 +186,7 @@ for (const locale of LOCALES) {
 
       // Переход через роутер, а не кликом: pointerdown не должен участвовать,
       // иначе тест не отличит закрытие по маршруту от закрытия по клику.
-      const target = locale.code === 'ru' ? '/en' : '/'
+      const target = locale.isDefault ? '/ru' : '/'
       await page.evaluate((path) => {
         const app = (document.querySelector('#__nuxt') as unknown as { __vue_app__: { config: { globalProperties: { $router: { push: (p: string) => Promise<void> } } } } }).__vue_app__
         return app.config.globalProperties.$router.push(path)
