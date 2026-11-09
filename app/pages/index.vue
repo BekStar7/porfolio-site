@@ -75,7 +75,8 @@ const jsonLd = computed(() => ({
       description: t('meta.description'),
       inLanguage: language.value,
       isPartOf: { '@id': `${origin.value}/#website` },
-      about: { '@id': `${origin.value}/#person` },
+      // Google требует mainEntity у ProfilePage: это человек, которому посвящена страница
+      mainEntity: { '@id': `${origin.value}/#person` },
       primaryImageOfPage: ogImage.value,
     },
     {
