@@ -1,4 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
+
+async function readClientAsset(dirs: { dir: string, baseURL?: string }[], href: string): Promise<string | null> {
+  for (const { dir, baseURL = '/' } of dirs) {
+    if (!href.startsWith(baseURL)) continue
+    const css = await readFile(join(dir, href.slice(baseURL.length)), 'utf8').catch(() => null)
+    if (css !== null) return css
+  }
+  return null
+}
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-09-01',
   devtools: { enabled: true },
@@ -53,13 +65,12 @@ export default defineNuxtConfig({
     ],
     langDir: 'locales',
     defaultLocaleRouteNameSuffix: 'default',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
-      alwaysRedirect: false,
-      fallbackLocale: 'en',
-    },
+    // Без автопереноса по языку браузера. Сайт статический, поэтому перенос
+    // шёл уже в браузере: русскоязычный посетитель получал английский HTML,
+    // Vue перерисовывал его на русский (ошибка гидратации), а Lighthouse и
+    // Google видели canonical одной страницы на адресе другой. Язык выбирают
+    // URL и переключатель в шапке.
+    detectBrowserLanguage: false,
   },
 
   fonts: {
@@ -94,6 +105,27 @@ export default defineNuxtConfig({
       // на /ru редиректом на /ru/, хотя canonical, hreflang и sitemap
       // указывают на /ru без слэша.
       autoSubfolderIndex: false,
+    },
+  },
+
+  hooks: {
+    /**
+     * Встраиваем глобальный CSS прямо в пререндеренный HTML. Стили компонентов
+     * Nuxt встраивает сам, а `main.css` уходит отдельным <link> и блокирует
+     * первую отрисовку: браузер ждёт файл, и только из него узнаёт о шрифтах.
+     * Файлы маленькие (≈4 КБ gzip), лишний запрос стоит дороже.
+     * Во время пререндера клиентские файлы ещё не скопированы в .output,
+     * поэтому читаем их из исходных папок publicAssets.
+     */
+    'nitro:init'(nitro) {
+      nitro.hooks.hook('prerender:generate', async (route) => {
+        if (typeof route.contents !== 'string' || !route.fileName?.endsWith('.html')) return
+        const links = [...route.contents.matchAll(/<link rel="stylesheet" href="(\/_nuxt\/[^"]+\.css)"[^>]*>/g)]
+        for (const [tag, href] of links) {
+          const css = await readClientAsset(nitro.options.publicAssets, href!)
+          if (css !== null) route.contents = route.contents.replace(tag, `<style>${css}</style>`)
+        }
+      })
     },
   },
 

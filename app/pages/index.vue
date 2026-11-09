@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { profile } from '~/data/profile'
+import type { MaybeLocalized } from '~~/shared/types/profile'
 
 const { t } = useI18n()
 const { tx, code } = useLocalized()
@@ -46,15 +47,22 @@ const currentEmployers = computed(() =>
     .filter(job => job.roles.some(role => role.end === null))
     .map(job => ({
       '@type': 'Organization',
-      name: job.company,
+      name: en(job.company),
       ...(job.href ? { url: job.href } : {}),
     })),
 )
+
+const en = <T,>(value: MaybeLocalized<T>) => inLocale(value, 'en')
 
 /**
  * Структурированные данные Schema.org.
  * Person + ProfilePage — та разметка, по которой поисковики строят карточку
  * человека; sameAs связывает сайт с GitHub и LinkedIn.
+ *
+ * WebSite и Person — одни и те же сущности на обеих страницах (общий @id),
+ * поэтому описаны одинаково, по-английски; русское имя — в alternateName.
+ * На языке страницы только ProfilePage: он описывает конкретную страницу,
+ * и его язык указан в inLanguage.
  */
 const jsonLd = computed(() => ({
   '@context': 'https://schema.org',
@@ -63,8 +71,9 @@ const jsonLd = computed(() => ({
       '@type': 'WebSite',
       '@id': `${origin.value}/#website`,
       url: `${origin.value}/`,
-      name: tx(profile.name),
-      inLanguage: language.value,
+      name: en(profile.name),
+      alternateName: profile.name.ru,
+      inLanguage: ['en-US', 'ru-RU'],
       publisher: { '@id': `${origin.value}/#person` },
     },
     {
@@ -82,15 +91,16 @@ const jsonLd = computed(() => ({
     {
       '@type': 'Person',
       '@id': `${origin.value}/#person`,
-      name: tx(profile.name),
-      url: canonical.value,
-      image: ogImage.value,
-      jobTitle: tx(profile.role),
-      description: tx(profile.about)[0],
+      name: en(profile.name),
+      alternateName: profile.name.ru,
+      url: `${origin.value}/`,
+      image: `${origin.value}/og-en.png`,
+      jobTitle: en(profile.role),
+      description: en(profile.about)[0],
       email: `mailto:${profile.email}`,
       address: {
         '@type': 'PostalAddress',
-        addressLocality: tx(profile.location).split(',')[0]?.trim(),
+        addressLocality: en(profile.location).split(',')[0]?.trim(),
         addressCountry: 'KZ',
       },
       sameAs: profile.socials
@@ -101,14 +111,14 @@ const jsonLd = computed(() => ({
         '@type': 'Language',
         name: item.name.en,
       })),
-      alumniOf: [...new Set(profile.education.map(entry => tx(entry.institution)))]
+      alumniOf: [...new Set(profile.education.map(entry => en(entry.institution)))]
         .map(name => ({ '@type': 'CollegeOrUniversity', name })),
       hasOccupation: {
         '@type': 'Occupation',
-        name: tx(profile.role),
+        name: en(profile.role),
         occupationLocation: {
           '@type': 'City',
-          name: tx(profile.location).split(',')[0]?.trim(),
+          name: en(profile.location).split(',')[0]?.trim(),
         },
         skills: profile.skills.flatMap(group => group.items).join(', '),
       },

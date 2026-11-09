@@ -11,6 +11,14 @@ function isLocalized<T>(value: MaybeLocalized<T>): value is Localized<T> {
 }
 
 /**
+ * Значение на заданном языке. Нужен там, где язык не зависит от страницы,
+ * например в микроразметке: сущности (человек, сайт) описаны по-английски.
+ */
+export function inLocale<T>(value: MaybeLocalized<T>, code: LocaleCode): T {
+  return isLocalized(value) ? value[code] : value
+}
+
+/**
  * Достаёт из контента значение на текущем языке.
  * Значения без переводов (имена собственные) возвращаются как есть.
  */
@@ -20,7 +28,7 @@ export function useLocalized() {
   const code = computed<LocaleCode>(() => (locale.value === 'en' ? 'en' : 'ru'))
 
   function tx<T>(value: MaybeLocalized<T>): T {
-    return isLocalized(value) ? value[code.value] : value
+    return inLocale(value, code.value)
   }
 
   return { code, tx }

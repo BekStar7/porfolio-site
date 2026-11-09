@@ -26,9 +26,9 @@ export async function seedTheme(page: Page, theme: ThemeName): Promise<void> {
 }
 
 /**
- * `detectBrowserLanguage` с `redirectOn: 'root'` может увести с `/` на `/ru`.
- * Заранее выставленная кука говорит, что выбор уже сделан — это снимает
- * редирект, а не соревнуется с ним.
+ * Автоперенос по языку браузера выключен (`detectBrowserLanguage: false`),
+ * но кука страхует тесты, если его когда-нибудь включат обратно: она говорит,
+ * что выбор уже сделан, и снимает редирект с `/`.
  */
 export async function pinLocale(
   context: BrowserContext,
