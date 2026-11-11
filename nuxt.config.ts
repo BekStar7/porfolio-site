@@ -27,7 +27,8 @@ export default defineNuxtConfig({
   // Базовый URL сайта. Переопределяется переменной NUXT_PUBLIC_SITE_URL.
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://bekstar.tech',
-    name: 'Portfolio',
+    // Имя сайта, которое Google показывает над ссылкой в выдаче
+    name: 'Bexultan Karabayev',
   },
 
   app: {
@@ -41,6 +42,7 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
       ],
       script: [
         {
