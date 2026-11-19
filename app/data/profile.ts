@@ -171,15 +171,15 @@ export const profile: Profile = {
               'Отвечал за frontend-архитектуру Finelo, EdTech-платформы Zimran с ~500 тыс. MAU и 20+ тыс. DAU, и оставался главным контрибьютором по коду: около 60% принятых PR во frontend-репозитории за обе роли в Zimran.',
               'Руководил командой из 4 frontend- и backend-инженеров, которая выпускала 2–4 фичи в неделю; проводил код-ревью, 1:1 и performance review, составлял индивидуальные планы развития.',
               'Сформировал критерии найма во frontend и за время обеих ролей в Zimran провёл 80+ intro-звонков и 63 технических собеседования, нанял 3 инженеров. Отдельно привёл ещё двоих по рекомендации и был их наставником: они пришли на middle и выросли до senior.',
-              'Ввёл canary-релизы для изменений в upsell-воронке, ключевой для выручки: 10% пользователей, затем 50%, затем все, с 15-минутной паузой на наблюдение между шагами.',
+              'По итогам post-mortem ввёл canary-релизы для upsell-воронки: 10% пользователей, затем 50%, затем все, с паузой 15 минут между шагами.',
               'Сократил First Contentful Paint на мобильных на ~60% в лабораторных замерах Lighthouse (4,9 → 2,0 с, без сторонних скриптов): вынес критический CSS в HTML и добавил статический лоадер.',
-              'Закрепил командные договорённости в агентах и memory-файлах Claude Code: замечаний на ревью AI-PR стало ~1–3 вместо ~10–15.',
+              'Закрепил командные договорённости в агентах и memory-файлах для Claude Code: число замечаний на ревью к PR с AI-кодом сократилось с ~10–15 до ~1–3 на PR.',
             ],
             en: [
               'Owned frontend architecture for Finelo, Zimran’s EdTech web platform with ~500K MAU and 20K+ DAU, and remained its top code contributor (about 60% of merged PRs in the frontend repository across both Zimran roles).',
               'Led a team of 4 frontend and backend engineers that shipped 2–4 features a week; ran code reviews, 1:1s and performance reviews, and wrote individual development plans.',
               'Defined the frontend hiring bar and, across both Zimran roles, ran 80+ intro calls and 63 technical interviews, hiring 3 engineers; separately referred and mentored 2 more engineers who joined at mid-level and grew to senior.',
-              'Introduced canary releases for changes touching the revenue-critical upsell flow: 10% of users, then 50%, then 100%, with 15-minute bake periods between steps.',
+              'Introduced canary releases for the revenue-critical upsell flow after a production post-mortem: 10% of users, then 50%, then 100%, with 15-minute bake periods.',
               'Cut mobile First Contentful Paint by ~60% in Lighthouse lab runs (4.9 → 2.0 s, third-party scripts excluded) by inlining critical CSS and adding a static loader.',
               'Codified team conventions into Claude Code agents and memory files, cutting review comments on AI-assisted PRs from ~10–15 to ~1–3 per PR.',
             ],
@@ -196,7 +196,7 @@ export const profile: Profile = {
               'Обновил стек (React 17 → 19, Vite 5 → 7, Tailwind 3 → 4, Jest → Vitest, npm → pnpm, Bugsnag → Sentry) и убрал устаревшие зависимости (MUI, styled-components, Recoil); время продакшн-сборки сократилось на 20%, хотя кода стало в 2,5 раза больше.',
               'Вместе с юристами вёл внедрение GDPR и CCPA для ЕС и США: выбрал TrustArc из 5 рассмотренных платформ управления согласиями для веба и мобильного приложения и настроил запуск 7 SDK аналитики и мониторинга только после согласия пользователя.',
               'Внедрил E2E-тесты на Playwright (55 тестов для мобильных и десктопа) и пайплайн GitHub Actions → Vercel, который ставил релизный тег только при зелёных тестах. Пайплайн остановил 2 релиза, ломавших upsell.',
-              'Разработал инструмент локализации на Node.js и OpenAI API для 13 языков, который сократил время перевода одной задачи с 30 до 2 минут.',
+              'Разработал инструмент на Node.js и OpenAI API, автоматизировавший локализацию на 13 языков: время перевода одной задачи сократилось с 30 до 2 минут.',
               'Заменил Prettier на Biome и оставил ESLint только для границ импортов FSD и i18n: полный прогон lint и форматирования ускорился с ~27 до ~10 с.',
             ],
             en: [
@@ -228,7 +228,7 @@ export const profile: Profile = {
           highlights: {
             ru: [
               'Совместно руководил миграцией ключевых модулей Krisha.kz (~1,5 млн MAU) с PHP/Twig/jQuery-монолита на Vue 3 / Nuxt 3 SSR и сделал эталонную реализацию для команды: новички больше не тратили месяцы на устаревший Twig.',
-              'Совместно развивал общую для компании библиотеку компонентов на Vue 2/3 по дизайн-системе в Figma, которой пользовались Krisha.kz и Kolesa.kz: настроил Storybook и помог довести версию для Vue 3.',
+              'Совместно развивал библиотеку компонентов на Vue 2/3 по дизайн-системе в Figma для 3 продуктовых команд (Krisha.kz, Kolesa.kz, Avtoelon.kz): настроил Storybook, помог довести версию для Vue 3.',
               'Сократил настройку локального окружения для новых разработчиков с 2 дней до ~10 минут с помощью набора bash-скриптов (Docker, Nginx, LDAP).',
               'Сделал браузерный софтфон для CRM.krisha.kz на WebRTC (JsSIP), чтобы риелторы «Krisha Агенты» принимали звонки прямо в CRM: mute, рингтоны, уведомления на рабочем столе, STUN/TURN и логи в Sentry.',
               'В одиночку сделал webview подписания договоров на недвижимость для iOS и Android в проекте, с которым Kolesa стала первой продуктовой компанией Казахстана с аккредитованным удостоверяющим центром.',
@@ -237,7 +237,7 @@ export const profile: Profile = {
             ],
             en: [
               'Co-led migration of Krisha.kz core modules (~1.5M MAU) from a PHP/Twig/jQuery monolith to Vue 3 / Nuxt 3 SSR and built the reference implementation other engineers followed, so new hires no longer spent months learning a legacy Twig stack.',
-              'Co-maintained the company-wide Vue 2/3 component library built from the Figma design system and used across Krisha.kz and Kolesa.kz; set up its Storybook and helped finish the Vue 3 version.',
+              'Co-maintained the company-wide Vue 2/3 component library built from the Figma design system and used by 3 product teams (Krisha.kz, Kolesa.kz, Avtoelon.kz); set up its Storybook and helped finish the Vue 3 version.',
               'Reduced local dev-environment setup for new developers from 2 days to ~10 minutes with a bash automation suite covering Docker, Nginx and LDAP.',
               'Built an in-browser softphone for CRM.krisha.kz on WebRTC (JsSIP), letting Krisha Agents realtors take client calls inside the CRM, with mute, ringtones, desktop notifications, STUN/TURN setup and Sentry logging.',
               'Built the digital real-estate contract-signing webview in the iOS and Android apps as the sole developer, part of the project that made Kolesa the first product company in Kazakhstan to operate an accredited certificate authority.',
@@ -260,7 +260,7 @@ export const profile: Profile = {
             en: [
               'Created and maintained CRM.krisha.kz, a Vue SPA for leads, agents and calls, authoring about 75% of its commits across both Kolesa roles, including real-time autodialing over WebSockets (Centrifugo) for 4–6 operators handling 100+ leads a day.',
               'Ranked #2 of 61 contributors by commits in the Krisha.kz monorepo (Vue frontend and PHP/Twig pages).',
-              'Spearheaded the frontend of two Krisha.kz B2B products built from scratch, new-build listings and Krisha Agents, plus lead generation, validating multi-step flows via A/B tests.',
+              'Led the frontend of two Krisha.kz B2B products built from scratch, new-build listings and Krisha Agents, plus lead generation, validating multi-step flows via A/B tests.',
               'Migrated builds from Webpack 4 to 5 and set up GitHub Actions CI/CD with Dockerized dev environments.',
             ],
           },
@@ -335,8 +335,8 @@ export const profile: Profile = {
         en: 'A side project I am building with a partner: players lead one of 50 countries through war, diplomacy and internal reform, with AI-powered in-game conversations. I engineered the interactive world map in Three.js and Preact, optimized it for desktop and mobile browsers, and implemented core gameplay.',
       },
       impact: {
-        ru: 'В октябре 2026 запустили закрытую бету.',
-        en: 'Closed beta launched in October 2026.',
+        ru: 'Закрытая бета с октября 2026: 265 игроков за первые 30 дней.',
+        en: 'Closed beta since October 2026: 265 players in the first 30 days.',
       },
       tags: ['Three.js', 'Preact', 'TypeScript'],
       links: [
@@ -414,8 +414,8 @@ export const profile: Profile = {
         en: 'Co-maintained the company-wide Vue 2/3 component library built from the Figma design system: set up its Storybook and helped finish the Vue 3 version.',
       },
       impact: {
-        ru: 'Библиотекой пользуются Krisha.kz и Kolesa.kz.',
-        en: 'Used across Krisha.kz and Kolesa.kz.',
+        ru: 'Библиотекой пользуются 3 продуктовые команды: Krisha.kz, Kolesa.kz, Avtoelon.kz.',
+        en: 'Used by 3 product teams: Krisha.kz, Kolesa.kz and Avtoelon.kz.',
       },
       tags: ['Vue', 'Storybook', 'Design Systems', 'Figma'],
       links: [],
